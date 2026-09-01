@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LiaSpa Private</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+
+  <section id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+      <div class="brand-mark">
+        <span>✦</span>
+        <h1>LiaSpa</h1>
+      </div>
+
+      <p class="brand-subtitle">PRIVATE MANAGEMENT</p>
+
+      <div class="login-line"></div>
+
+      <h2>Bienvenida</h2>
+
+      <p class="login-text">
+        Seleccioná tu perfil para ingresar al sistema interno.
+      </p>
+
+      <div id="profileSelector" class="profile-selector"></div>
+
+      <button id="loginButton" class="primary-btn">
+        Ingresar <span>→</span>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- APP -->
+
+  <section id="appScreen" class="app hidden">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-brand">
+
+        <div class="brand-mark">
+          <span>✦</span>
+          <h1>LiaSpa</h1>
+        </div>
+
+        <p>PRIVATE MANAGEMENT</p>
+
+      </div>
+
+
+      <nav class="nav">
+
+        <button class="nav-item active" data-page="dashboard">
+          <span>⌂</span>
+          Inicio
+        </button>
+
+        <button class="nav-item" data-page="agenda">
+          <span>◫</span>
+          Agenda
+        </button>
+
+        <button class="nav-item admin-only" data-page="team">
+          <span>♧</span>
+          Equipo
+        </button>
+
+        <button class="nav-item admin-only" data-page="history">
+          <span>◷</span>
+          Historial
+        </button>
+
+        <button class="nav-item" data-page="profile">
+          <span>◉</span>
+          Mi perfil
+        </button>
+
+      </nav>
+
+
+      <div class="sidebar-bottom">
+
+        <div id="currentUserCard" class="current-user-card"></div>
+
+        <button id="logoutButton" class="logout-btn">
+          Cerrar sesión
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+      <header class="topbar">
+
+        <div>
+          <p id="topGreeting" class="eyebrow">LIA SPA PRIVATE</p>
+          <h1 id="pageTitle">Inicio</h1>
+        </div>
+
+        <div id="todayDate" class="today-date"></div>
+
+      </header>
+
+
+      <!-- DASHBOARD -->
+
+      <section id="dashboardPage" class="page active-page">
+
+        <div id="welcomeBox" class="welcome-box"></div>
+
+        <div id="statsGrid" class="stats-grid"></div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AGENDA</p>
+            <h2>Próximos turnos</h2>
+          </div>
+
+          <button class="secondary-btn go-agenda">
+            Ver agenda →
+          </button>
+        </div>
+
+        <div id="upcomingAppointments" class="appointment-list"></div>
+
+      </section>
+
+
+      <!-- AGENDA -->
+
+      <section id="agendaPage" class="page">
+
+        <div class="agenda-toolbar">
+
+          <div class="date-control">
+
+            <button id="prevDay">←</button>
+
+            <div>
+              <p class="eyebrow">AGENDA DEL DÍA</p>
+              <h2 id="selectedDateLabel"></h2>
+            </div>
+
+            <button id="nextDay">→</button>
+
+          </div>
+
+          <button id="newAppointmentBtn" class="primary-btn">
+            + Nuevo turno
+          </button>
+
+        </div>
+
+
+        <div id="employeeFilter" class="employee-filter"></div>
+
+        <div id="agendaContainer" class="agenda-container"></div>
+
+      </section>
+
+
+      <!-- TEAM -->
+
+      <section id="teamPage" class="page">
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EQUIPO</p>
+            <h2>Profesionales LiaSpa</h2>
+          </div>
+        </div>
+
+        <div id="teamGrid" class="team-grid"></div>
+
+      </section>
+
+
+      <!-- HISTORY -->
+
+      <section id="historyPage" class="page">
+
+        <div class="section-heading">
+
+          <div>
+            <p class="eyebrow">ACTIVIDAD</p>
+            <h2>Historial de movimientos</h2>
+          </div>
+
+        </div>
+
+        <div id="historyList" class="history-list"></div>
+
+      </section>
+
+
+      <!-- PROFILE -->
+
+      <section id="profilePage" class="page">
+
+        <div id="profileContent"></div>
+
+      </section>
+
+    </main>
+
+
+    <!-- MOBILE NAV -->
+
+    <nav class="mobile-nav">
+
+      <button class="mobile-nav-item active" data-page="dashboard">
+        <span>⌂</span>
+        Inicio
+      </button>
+
+      <button class="mobile-nav-item" data-page="agenda">
+        <span>◫</span>
+        Agenda
+      </button>
+
+      <button class="mobile-nav-item admin-only" data-page="history">
+        <span>◷</span>
+        Actividad
+      </button>
+
+      <button class="mobile-nav-item" data-page="profile">
+        <span>◉</span>
+        Perfil
+      </button>
+
+    </nav>
+
+
+  </section>
+
+
+  <!-- MODAL NUEVO TURNO -->
+
+  <div id="appointmentModal" class="modal hidden">
+
+    <div class="modal-overlay"></div>
+
+    <div class="modal-card">
+
+      <button id="closeModal" class="modal-close">×</button>
+
+      <p class="eyebrow">AGENDA LIA SPA</p>
+
+      <h2>Nuevo turno</h2>
+
+      <form id="appointmentForm">
+
+        <div class="form-grid">
+
+          <label>
+            Profesional
+
+            <select id="appointmentEmployee" required></select>
+          </label>
+
+          <label>
+            Cliente
+
+            <input
+              id="appointmentClient"
+              type="text"
+              placeholder="Nombre del cliente"
+              required
+            >
+          </label>
+
+          <label>
+            Fecha
+
+            <input
+              id="appointmentDate"
+              type="date"
+              required
+            >
+          </label>
+
+          <label>
+            Hora
+
+            <select id="appointmentTime" required></select>
+          </label>
+
+          <label>
+            Servicio
+
+            <input
+              id="appointmentService"
+              type="text"
+              placeholder="Ej: Manicuría"
+            >
+          </label>
+
+          <label>
+            Importe
+
+            <input
+              id="appointmentAmount"
+              type="number"
+              min="0"
+              placeholder="Ej: 25000"
+              required
+            >
+          </label>
+
+        </div>
+
+        <label class="full-label">
+          Notas
+
+          <textarea
+            id="appointmentNotes"
+            placeholder="Información adicional..."
+          ></textarea>
+        </label>
+
+        <div id="availabilityMessage" class="availability-message"></div>
+
+        <button type="submit" class="primary-btn full-btn">
+          Guardar turno →
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- MODAL DETALLE -->
+
+  <div id="detailModal" class="modal hidden">
+
+    <div class="modal-overlay"></div>
+
+    <div id="detailContent" class="modal-card detail-card"></div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div id="toast" class="toast"></div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
