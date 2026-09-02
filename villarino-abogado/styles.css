@@ -166,7 +166,12 @@ blockquote em {
   display: flex;
   align-items: center;
   background:
-    linear-gradient(90deg, rgba(10,10,9,.94) 0%, rgba(10,10,9,.72) 48%, rgba(10,10,9,.28) 100%),
+    linear-gradient(
+      90deg,
+      rgba(10,10,9,.94) 0%,
+      rgba(10,10,9,.72) 48%,
+      rgba(10,10,9,.28) 100%
+    ),
     url("https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=2200&q=90")
     center / cover;
   color: white;
@@ -177,7 +182,11 @@ blockquote em {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg, rgba(10,10,9,.4), transparent 40%);
+    linear-gradient(
+      0deg,
+      rgba(10,10,9,.4),
+      transparent 40%
+    );
   pointer-events: none;
 }
 
@@ -765,6 +774,13 @@ blockquote {
   transition: .35s ease;
 }
 
+.whatsapp-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+  color: white;
+}
+
 .whatsapp span {
   position: absolute;
   right: 70px;
@@ -1057,6 +1073,11 @@ blockquote {
     height: 55px;
     right: 18px;
     bottom: 18px;
+  }
+
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
   }
 
   .whatsapp span {
