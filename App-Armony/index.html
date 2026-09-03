@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#151515">
+<title>Armony Control — Gestión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="login" class="login">
+  <div class="login-card">
+    <div class="brand"><span>A</span><div>ARMONY<small>ESTÉTICA INTEGRAL</small></div></div>
+    <p class="eyebrow">PANEL PRIVADO</p>
+    <h1>Bienvenida a<br><em>Armony Control.</em></h1>
+    <p class="muted">Gestioná tu agenda, clientes y caja desde un solo lugar.</p>
+    <form id="loginForm">
+      <label>Usuario<input id="user" value="admin" autocomplete="username"></label>
+      <label>Contraseña<input id="pass" type="password" value="armonya2026" autocomplete="current-password"></label>
+      <button>Ingresar al panel <span>→</span></button>
+      <small id="error"></small>
+    </form>
+    <p class="demo">Demo: admin / armony2026</p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+  <aside>
+    <div class="side-brand"><b>A</b><div>ARMONY<small>CONTROL</small></div></div>
+    <nav>
+      <button class="active" data-page="dashboard">⌂ <span>Resumen</span></button>
+      <button data-page="agenda">◷ <span>Agenda</span></button>
+      <button data-page="clients">◯ <span>Clientes</span></button>
+      <button data-page="team">♙ <span>Equipo</span></button>
+      <button data-page="cash">◈ <span>Caja</span></button>
+      <button data-page="services">✦ <span>Servicios</span></button>
+    </nav>
+    <div class="side-bottom">
+      <div class="online"><i></i> Sistema online</div>
+      <button id="logout">↪ Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <span class="eyebrow">MIÉRCOLES · 24 JUN 2026</span>
+        <h2 id="pageTitle">Resumen</h2>
+      </div>
+      <div class="head-actions">
+        <button class="icon">⌕</button><button class="avatar">A</button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="page active-page">
+      <div class="welcome">
+        <div><span>BUEN DÍA, ARMONY</span><h1>Todo bajo control.</h1><p>Esto está pasando hoy en tu centro.</p></div>
+        <button class="primary" data-page="agenda">+ Nuevo turno</button>
+      </div>
+      <div class="stats">
+        <article><small>TURNOS HOY</small><strong>14</strong><span class="up">↑ 12% vs. semana anterior</span></article>
+        <article><small>INGRESOS HOY</small><strong>$184.500</strong><span class="up">↑ 8,4%</span></article>
+        <article><small>OCUPACIÓN</small><strong>87%</strong><span>De 16 horarios disponibles</span></article>
+        <article><small>PENDIENTE COBRAR</small><strong>$42.000</strong><span>3 movimientos</span></article>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-head"><div><small>AGENDA</small><h3>Próximos turnos</h3></div><button data-page="agenda">Ver agenda →</button></div>
+          <div class="appointments">
+            <div><time>10:30</time><div><b>María González</b><small>Limpieza facial · Camila</small></div><em>Confirmado</em></div>
+            <div><time>11:30</time><div><b>Lucía Fernández</b><small>Radiofrecuencia · Sofía</small></div><em>Confirmado</em></div>
+            <div><time>13:00</time><div><b>Carolina Díaz</b><small>Drenaje linfático · Camila</small></div><em>Seña</em></div>
+            <div><time>15:30</time><div><b>Julieta Pérez</b><small>Masaje · Valentina</small></div><em>Pendiente</em></div>
+          </div>
+        </div>
+        <div class="panel dark">
+          <small>RENDIMIENTO</small><h3>Este mes</h3>
+          <div class="big">$2.485.000</div><p>Facturación acumulada</p>
+          <div class="bars"><i style="height:45%"></i><i style="height:58%"></i><i style="height:51%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:83%"></i><i style="height:94%"></i></div>
+          <div class="bar-label"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Hoy</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><small>OPERACIÓN</small><h3>Resumen del equipo</h3></div></div>
+        <div class="team-row"><b>Camila</b><span>6 turnos</span><strong>$86.000</strong><i>92%</i></div>
+        <div class="team-row"><b>Sofía</b><span>5 turnos</span><strong>$72.500</strong><i>84%</i></div>
+        <div class="team-row"><b>Valentina</b><span>3 turnos</span><strong>$26.000</strong><i>81%</i></div>
+      </div>
+    </section>
+
+    <section id="agenda" class="page">
+      <div class="section-top"><div><span class="eyebrow">GESTIÓN</span><h1>Agenda</h1></div><button class="primary" id="newTurn">+ Nuevo turno</button></div>
+      <div class="calendar-head"><button>‹</button><b>Miércoles 24 de junio</b><button>›</button><select><option>Todos los profesionales</option><option>Camila</option><option>Sofía</option></select></div>
+      <div class="day">
+        <div class="slot"><time>09:00</time><div class="empty">Disponible</div></div>
+        <div class="slot"><time>10:30</time><div class="booking"><b>María González</b><small>Limpieza facial · Camila</small><span>Confirmado</span></div></div>
+        <div class="slot"><time>11:30</time><div class="booking pink"><b>Lucía Fernández</b><small>Radiofrecuencia · Sofía</small><span>Confirmado</span></div></div>
+        <div class="slot"><time>13:00</time><div class="booking"><b>Carolina Díaz</b><small>Drenaje linfático · Camila</small><span>Seña $10.000</span></div></div>
+        <div class="slot"><time>14:00</time><div class="empty">Disponible</div></div>
+        <div class="slot"><time>15:30</time><div class="booking pink"><b>Julieta Pérez</b><small>Masaje · Valentina</small><span>Pendiente</span></div></div>
+        <div class="slot"><time>17:00</time><div class="empty">Disponible</div></div>
+      </div>
+    </section>
+
+    <section id="clients" class="page">
+      <div class="section-top"><div><span class="eyebrow">CRM</span><h1>Clientes</h1></div><button class="primary">+ Nueva clienta</button></div>
+      <div class="search"><input placeholder="⌕  Buscar por nombre o teléfono..."></div>
+      <div class="client-grid">
+        <article><div class="client-avatar">MG</div><b>María González</b><small>Última visita · 18 Jun</small><span>7 visitas · $185.000</span></article>
+        <article><div class="client-avatar">LF</div><b>Lucía Fernández</b><small>Última visita · 21 Jun</small><span>4 visitas · $120.000</span></article>
+        <article><div class="client-avatar">CD</div><b>Carolina Díaz</b><small>Última visita · 24 Jun</small><span>9 visitas · $264.000</span></article>
+        <article><div class="client-avatar">JP</div><b>Julieta Pérez</b><small>Última visita · 10 Jun</small><span>3 visitas · $76.000</span></article>
+      </div>
+    </section>
+
+    <section id="team" class="page">
+      <div class="section-top"><div><span class="eyebrow">PERSONAL</span><h1>Equipo</h1></div><button class="primary">+ Agregar profesional</button></div>
+      <div class="people">
+        <article><div class="person">C</div><h3>Camila</h3><small>Estética integral</small><b>6 turnos hoy</b><span>92% ocupación</span></article>
+        <article><div class="person">S</div><h3>Sofía</h3><small>Tratamientos faciales</small><b>5 turnos hoy</b><span>84% ocupación</span></article>
+        <article><div class="person">V</div><h3>Valentina</h3><small>Masajes</small><b>3 turnos hoy</b><span>81% ocupación</span></article>
+      </div>
+    </section>
+
+    <section id="cash" class="page">
+      <div class="section-top"><div><span class="eyebrow">FINANZAS</span><h1>Caja</h1></div><button class="primary">+ Registrar movimiento</button></div>
+      <div class="cash-total"><small>CIERRE DEL DÍA</small><strong>$184.500</strong><span>+8,4% respecto al promedio</span></div>
+      <div class="cash-grid">
+        <div class="panel"><small>INGRESOS</small><h3>$224.500</h3><p>14 servicios cobrados</p></div>
+        <div class="panel"><small>EGRESOS</small><h3>$40.000</h3><p>2 movimientos</p></div>
+        <div class="panel"><small>NETO</small><h3>$184.500</h3><p>Resultado del día</p></div>
+      </div>
+      <div class="panel"><div class="panel-head"><h3>Movimientos</h3></div><div class="team-row"><b>María González · Limpieza</b><span>Transferencia</span><strong>+$25.000</strong></div><div class="team-row"><b>Lucía Fernández · Radiofrecuencia</b><span>Mercado Pago</span><strong>+$35.000</strong></div><div class="team-row"><b>Compra insumos</b><span>Efectivo</span><strong>−$20.000</strong></div></div>
+    </section>
+
+    <section id="services" class="page">
+      <div class="section-top"><div><span class="eyebrow">CATÁLOGO</span><h1>Servicios</h1></div><button class="primary">+ Nuevo servicio</button></div>
+      <div class="service-grid">
+        <article><span>FACIAL</span><h3>Limpieza facial</h3><b>$25.000</b><small>60 min · 3 profesionales</small></article>
+        <article><span>FACIAL</span><h3>Radiofrecuencia</h3><b>$35.000</b><small>45 min · 2 profesionales</small></article>
+        <article><span>CORPORAL</span><h3>Drenaje linfático</h3><b>$20.000</b><small>60 min · 3 profesionales</small></article>
+        <article><span>BIENESTAR</span><h3>Masaje</h3><b>$22.000</b><small>60 min · 2 profesionales</small></article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="modal" class="modal hidden">
+ <div class="modal-card"><button id="close">×</button><span class="eyebrow">NUEVO TURNO</span><h2>Crear reserva</h2><input placeholder="Nombre de la clienta"><select><option>Elegir servicio</option><option>Limpieza facial</option><option>Radiofrecuencia</option><option>Drenaje linfático</option><option>Masaje</option></select><select><option>Profesional</option><option>Camila</option><option>Sofía</option><option>Valentina</option></select><input type="date"><input type="time"><button class="primary" id="save">Guardar turno</button></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
