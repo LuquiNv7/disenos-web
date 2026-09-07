@@ -1,92 +1,1708 @@
-# PHŌNE - Landing Page Premium & Orientada a Conversión (Meta Ads)
-Esta es una landing page de alta gama desarrollada específicamente para tráfico proveniente de **Meta Ads**, orientada a maximizar la tasa de conversión mediante una propuesta visual confiable, moderna, minimalista y de precio ultra competitivo para celulares Apple iPhone y Samsung en Argentina.
----
-## 📁 Estructura del Proyecto
-```
-phone-landing-page/
-├── index.html            # Estructura semántica HTML5 orientada a conversión
-├── styles.css            # Sistema de diseño CSS modular (Variables CSS, Responsive Mobile-First, Dark Luxury)
-├── script.js            # Lógica interactiva (Filtros, Menú Mobile, Modal de WhatsApp, Scroll)
-├── README.md             # Guía completa de uso, despliegue y personalización
-└── assets/               # Renders de productos en alta resolución
-    ├── hero-phones.png   # Composición principal para el Hero
-    ├── iphone-17.png     # Render iPhone 17
-    ├── iphone-17-pro.png # Render iPhone 17 Pro
-    ├── iphone-17-promax.png# Render iPhone 17 Pro Max
-    └── samsung-a57.png   # Render Samsung Galaxy A57
-```
----
-## 🚀 1. Cómo Ejecutar Localmente
-### Opción A: Abrir directamente en el navegador (Sin dependencias)
-1. Navegá a la carpeta `phone-landing-page`.
-2. Hacé doble clic sobre `index.html` (o abrile con Chrome, Edge, Firefox, Safari).
-3. ¡Listo! Todo funciona sin necesidad de servidores o compilación.
-### Opción B: Ejecutar con un servidor local de desarrollo (Recomendado para testing)
-Podés usar cualquier extensión como **Live Server** en VS Code o ejecutar por consola:
-```bash
-# Con npx serve
-npx -y serve .
-# O con python
-python -m http.server 8000
-```
-Luego abrí `http://localhost:8000` en tu navegador.
----
-## 🌐 2. Cómo Subirlo a GitHub Pages (Paso a Paso)
-Para publicar la página gratis en internet con HTTPS en menos de 3 minutos:
-1. **Crear un repositorio en GitHub**:
-   - Ingresá a [GitHub](https://github.com/) y creá un nuevo repositorio público (ejemplo: `phone-store-landing`).
-2. **Inicializar y subir el código desde tu terminal**:
-   ```bash
-   cd C:\Users\Administrador\.gemini\antigravity\scratch\phone-landing-page
-   git init
-   git add .
-   git commit -m "Initial commit - PHŌNE High Conversion Landing Page"
-   git branch -M main
-   git remote add origin https://github.com/TU_USUARIO/phone-store-landing.git
-   git push -u origin main
-   ```
-3. **Activar GitHub Pages**:
-   - Ingresá a tu repositorio en GitHub -> **Settings** -> **Pages**.
-   - En **Source**, seleccioná la rama `main` y la carpeta `/ (root)`.
-   - Hacé clic en **Save**.
-   - En 1-2 minutos la web estará en vivo en: `https://TU_USUARIO.github.io/phone-store-landing/`
----
-## ✏️ 3. Guía de Modificación y Reemplazo
-### A. Reemplazar Imágenes de Productos
-Las imágenes se encuentran guardadas en la carpeta `assets/`.
-Para reemplazar una imagen por la fotografía real del producto del cliente:
-1. Guardá la nueva imagen en `assets/` (ej: `assets/mi-iphone-17.png`).
-2. Abrí `index.html` y buscá la card del producto correspondiente.
-3. Actualizá la etiqueta `src`:
-   ```html
-   <img src="assets/mi-iphone-17.png" alt="iPhone 17" class="product-image">
-   ```
-4. También podés actualizar el atributo `data-img` en el botón `COMPRAR AHORA` para que se refleje en el modal de WhatsApp.
-### B. Modificar Precios y Productos
-En `index.html`, cada producto tiene una tarjeta `<article class="product-card">`. Podés cambiar:
-- **Nombre**: `<h3 class="product-name">iPhone 17 Pro</h3>`
-- **Precio Anterior (Tachado)**: `<span class="price-previous">$2.900.000</span>`
-- **Precio Actual**: `<span class="price-current">$1.300.000</span>`
-- **Especificaciones**:
-  ```html
-  <ul class="product-specs">
-    <li>Chip A19 Pro</li>
-    <li>Cámara Pro 48MP</li>
-  </ul>
-  ```
-### C. Conectar WhatsApp Real del Cliente
-En `script.js`, dentro de la función `initPurchaseModal()`, buscá la línea:
-```javascript
-const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
-```
-Para agregar el número de teléfono directo del cliente (ejemplo: `5491112345678`), reemplazala por:
-```javascript
-const phoneNumber = '5491112345678'; // Número de Argentina sin + ni espacios
-const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMsg}`;
-```
----
-## 🎨 4. Adaptación Futura a Tiendanube
-Esta landing page está maquetada utilizando estándares limpios de HTML, CSS modular y JS. 
-Para integrarla o clonar el diseño dentro de Tiendanube en el futuro:
-1. **Edición CSS en Tiendanube**: Podés copiar las reglas de `styles.css` en la sección de *Edición de CSS avanzado* del panel de Tiendanube.
-2. **Plantilla Personalizada (FTP / Layout)**: Podés asociar las clases `.product-card`, `.price-previous`, `.price-current` y `.btn-gold` a las variables de Liquid de Tiendanube (`{{ product.name }}`, `{{ product.price | price_format }}`, etc.).
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHŌNE | Celulares Apple iPhone y Samsung al Mejor Precio</title>
+  <meta name="description" content="Encontrá tu próximo iPhone o Samsung con precios más bajos de lo habitual. Envíos a todo el país, pago en efectivo o transferencia bancaria.">
+  <meta name="keywords" content="iPhone 17, iPhone 17 Pro, iPhone 17 Pro Max, Samsung Galaxy A57, celulares Argentina, precio oferta iPhone, compra directa">
+
+  <!-- Google Fonts: Manrope & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       PHŌNE - LANDING PAGE PREMIUM & CONVERSION DESIGN SYSTEM
+       Theme: Dark Luxury, Champagne Gold Accent, High Contrast Typography
+       ========================================================================== */
+
+    :root {
+      --bg-main: #08080A;
+      --bg-card: #111116;
+      --bg-card-hover: #16161D;
+      --bg-glass: rgba(18, 18, 24, 0.88);
+
+      --accent-gold: #D4AF37;
+      --accent-gold-light: #E5C158;
+      --accent-gold-dark: #A88620;
+      --accent-gold-glow: rgba(212, 175, 55, 0.25);
+      --gold-gradient: linear-gradient(135deg, #FFF0BD 0%, #D4AF37 50%, #9A7718 100%);
+
+      --text-primary: #FFFFFF;
+      --text-secondary: #9E9EB0;
+      --text-muted: #6C6C7D;
+      --text-strikethrough: #7E7E8E;
+
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 55, 0.35);
+
+      --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      --container-max: 1240px;
+      --header-height: 80px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    ul { list-style: none; }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+    }
+
+    /* Container & Common Classes */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .text-center { text-align: center; }
+
+    .gold-gradient-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      transition: all var(--transition-smooth);
+      white-space: nowrap;
+    }
+
+    .btn-sm { padding: 10px 20px; font-size: 0.85rem; }
+    .btn-lg { padding: 16px 36px; font-size: 1.05rem; }
+    .btn-xl { padding: 18px 44px; font-size: 1.15rem; }
+    .btn-block { width: 100%; }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #E5C158 0%, #D4AF37 60%, #B89325 100%);
+      color: #000000;
+      box-shadow: 0 4px 20px var(--accent-gold-glow);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
+      background: linear-gradient(135deg, #F0D370 0%, #E5C158 60%, #C5A059 100%);
+    }
+
+    .btn-gold-outline {
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-gold);
+      background: transparent;
+    }
+
+    .btn-gold-outline:hover {
+      background: rgba(212, 175, 55, 0.1);
+      color: #FFFFFF;
+      border-color: var(--accent-gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Section Headers */
+    .section-header { margin-bottom: 50px; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      z-index: 1000;
+      transition: all var(--transition-smooth);
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-header.scrolled {
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .header-container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo { display: flex; flex-direction: column; }
+
+    .logo-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .logo-subtitle {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .nav-link:hover { color: var(--accent-gold); }
+
+    .header-actions { display: flex; align-items: center; gap: 16px; }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+    }
+
+    .mobile-toggle .bar {
+      width: 100%;
+      height: 2px;
+      background-color: #FFFFFF;
+      border-radius: 2px;
+    }
+
+    /* Mobile Drawer */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(8, 8, 10, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 2000;
+      transition: right var(--transition-smooth);
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .mobile-menu-overlay.open { right: 0; }
+
+    .mobile-menu-content {
+      width: 85%;
+      max-width: 380px;
+      height: 100%;
+      background: var(--bg-card);
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border-left: 1px solid var(--border-subtle);
+    }
+
+    .mobile-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-size: 2rem;
+      color: var(--text-secondary);
+    }
+
+    .mobile-brand { margin-bottom: 40px; }
+
+    .mobile-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: auto;
+    }
+
+    .mobile-nav-link {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .mobile-nav-link:hover { color: var(--accent-gold); }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      padding-top: calc(var(--header-height) + 40px);
+      padding-bottom: 80px;
+      overflow: hidden;
+      background: radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .badge-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent-gold);
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .hero-trust-bar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .trust-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-gold);
+    }
+
+    .trust-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border-subtle);
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      transition: transform var(--transition-smooth);
+    }
+
+    .hero-image-wrapper:hover {
+      transform: scale(1.02);
+      border-color: var(--border-gold);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* Benefits Bar */
+    .benefits-bar {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 36px 0;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .benefit-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .benefit-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .benefit-icon-wrapper svg { width: 24px; height: 24px; }
+
+    .benefit-info h3 {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .benefit-info p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Products Section */
+    .products-section {
+      padding: 100px 0;
+      background: var(--bg-main);
+    }
+
+    .product-tabs {
+      display: inline-flex;
+      gap: 8px;
+      background: var(--bg-card);
+      padding: 6px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-subtle);
+      margin-top: 24px;
+    }
+
+    .tab-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--accent-gold);
+      color: #000000;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-smooth);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-gold);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--accent-gold-glow);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(8, 8, 10, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-gold);
+      color: var(--accent-gold);
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      z-index: 10;
+    }
+
+    .product-image-container {
+      width: 100%;
+      height: 240px;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .product-image {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: transform var(--transition-smooth);
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.06);
+    }
+
+    .product-details {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-brand {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--accent-gold);
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .product-specs { margin-bottom: 20px; }
+
+    .product-specs li {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+    }
+
+    .product-specs li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-gold);
+    }
+
+    /* Pricing */
+    .product-pricing {
+      margin-top: auto;
+      margin-bottom: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .price-previous-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .price-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .price-previous {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-strikethrough);
+      text-decoration: line-through;
+    }
+
+    .price-current-box {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .price-label-current {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+    }
+
+    .price-current {
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    .price-demo-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .demo-disclaimer-box {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 20px;
+    }
+
+    /* Differentiator Section */
+    .differentiator-section {
+      padding: 100px 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .differentiator-header {
+      max-width: 680px;
+      margin-bottom: 60px;
+    }
+
+    .section-subtitle-large {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 16px;
+    }
+
+    .differentiator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    .diff-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      transition: all var(--transition-smooth);
+    }
+
+    .diff-card:hover {
+      border-color: var(--border-gold);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-4px);
+    }
+
+    .diff-number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .diff-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .diff-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* How to buy */
+    .how-to-buy-section {
+      padding: 100px 0;
+      background: var(--bg-main);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all var(--transition-smooth);
+    }
+
+    .step-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-4px);
+    }
+
+    .step-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+      color: #000000;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 16px var(--accent-gold-glow);
+    }
+
+    .step-card h3 {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Final CTA */
+    .final-cta-section {
+      padding: 80px 0;
+      background: var(--bg-main);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #14141A 0%, #0C0C10 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 70px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-gold-glow);
+    }
+
+    .cta-title {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .cta-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #040405;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 70px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1.5fr;
+      gap: 40px;
+      padding-bottom: 50px;
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 16px;
+      max-width: 340px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.85rem; color: var(--text-secondary); }
+    .footer-links a:hover { color: #FFFFFF; }
+
+    .footer-contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-list svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-gold);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 24px 0;
+    }
+
+    .footer-bottom-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-smooth);
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      width: 100%;
+      max-width: 480px;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.9);
+      transform: translateY(20px);
+      transition: transform var(--transition-smooth);
+    }
+
+    .modal-backdrop.active .modal-box { transform: translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+    }
+
+    .modal-close:hover { color: #FFFFFF; }
+
+    .modal-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--accent-gold);
+    }
+
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-top: 4px;
+      margin-bottom: 20px;
+    }
+
+    .modal-product-summary {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 20px;
+    }
+
+    .modal-img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+    }
+
+    .modal-price-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .modal-price-val {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      display: block;
+      line-height: 1.1;
+    }
+
+    .modal-price-note {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .modal-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .modal-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .modal-feature-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-gold);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 1024px) {
+      .hero-title { font-size: 2.8rem; }
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .differentiator-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .main-nav, .header-actions .btn-sm { display: none; }
+      .mobile-toggle { display: flex; }
+
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .hero-title { font-size: 2.2rem; }
+      .hero-description { font-size: 1rem; }
+      .hero-cta-group { flex-direction: column; width: 100%; }
+      .hero-cta-group .btn { width: 100%; }
+
+      .products-grid { grid-template-columns: 1fr; }
+      .differentiator-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; gap: 16px; }
+      .section-title { font-size: 1.9rem; }
+      .cta-title { font-size: 2rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom-flex { flex-direction: column; gap: 12px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 1.85rem; }
+      .logo-title { font-size: 1.3rem; }
+      .modal-box { padding: 24px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER STICKY -->
+  <header class="site-header" id="header">
+    <div class="header-container">
+      <a href="#" class="brand-logo">
+        <span class="logo-title">PHŌNE</span>
+        <span class="logo-subtitle">CELULARES AL MEJOR PRECIO</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list">
+          <li><a href="#productos" class="nav-link">PRODUCTOS</a></li>
+          <li><a href="#productos" class="nav-link" data-filter="iphone">IPHONE</a></li>
+          <li><a href="#productos" class="nav-link" data-filter="samsung">SAMSUNG</a></li>
+          <li><a href="#productos" class="nav-link">OFERTAS</a></li>
+          <li><a href="#como-comprar" class="nav-link">CÓMO COMPRAR</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#productos" class="btn btn-gold-outline btn-sm">VER OFERTAS</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE OVERLAY MENU -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-content">
+      <button class="mobile-close" id="mobileClose" aria-label="Cerrar menú">&times;</button>
+      <div class="mobile-brand">
+        <span class="logo-title">PHŌNE</span>
+        <span class="logo-subtitle">CELULARES AL MEJOR PRECIO</span>
+      </div>
+      <ul class="mobile-nav-list">
+        <li><a href="#productos" class="mobile-nav-link">PRODUCTOS</a></li>
+        <li><a href="#productos" class="mobile-nav-link" data-filter="iphone">IPHONE</a></li>
+        <li><a href="#productos" class="mobile-nav-link" data-filter="samsung">SAMSUNG</a></li>
+        <li><a href="#diferencial" class="mobile-nav-link">¿POR QUÉ PHŌNE?</a></li>
+        <li><a href="#como-comprar" class="mobile-nav-link">CÓMO COMPRAR</a></li>
+      </ul>
+      <div class="mobile-menu-cta">
+        <a href="#productos" class="btn btn-gold btn-block">VER OFERTAS</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge-gold">
+            <span class="badge-dot"></span> PRECIO ESPECIAL ONLINE
+          </div>
+          <h1 class="hero-title">
+            EL CELULAR QUE QUERÉS.<br>
+            <span class="gold-gradient-text">AL PRECIO QUE BUSCÁS.</span>
+          </h1>
+          <p class="hero-description">
+            iPhone y Samsung seleccionados, con precios competitivos y envíos a todo el país.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#productos" class="btn btn-gold btn-lg">VER OFERTAS</a>
+            <a href="#productos" class="btn btn-glass btn-lg" data-filter="iphone">VER IPHONE</a>
+          </div>
+          <div class="hero-trust-bar">
+            <div class="trust-item">
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Precios más bajos</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+              <span>Envíos a todo el país</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img src="assets/hero-phones.png" 
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\' viewBox=\'0 0 600 400\' fill=\'%23111116\'><rect width=\'600\' height=\'400\' fill=\'%23111116\'/><rect x=\'180\' y=\'60\' width=\'110\' height=\'240\' rx=\'20\' fill=\'%231a1a24\' stroke=\'%23D4AF37\' stroke-width=\'2\'/><rect x=\'310\' y=\'90\' width=\'110\' height=\'240\' rx=\'20\' fill=\'%2322222e\' stroke=\'%23ffffff\' stroke-opacity=\'0.2\' stroke-width=\'2\'/><text x=\'300\' y=\'360\' fill=\'%23D4AF37\' font-family=\'sans-serif\' font-size=\'16\' font-weight=\'bold\' text-anchor=\'middle\'>IPHONE &amp; SAMSUNG PREMIUM</text></svg>';" 
+                 alt="iPhone y Samsung Celulares Premium" class="hero-image">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BARRA DE BENEFICIOS -->
+    <section class="benefits-bar" id="beneficios">
+      <div class="container">
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="benefit-info">
+              <h3>PRECIO COMPETITIVO</h3>
+              <p>Precios más bajos de lo habitual.</p>
+            </div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div class="benefit-info">
+              <h3>ENVÍOS A TODO EL PAÍS</h3>
+              <p>Recibí tu equipo donde estés.</p>
+            </div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+            </div>
+            <div class="benefit-info">
+              <h3>PAGO SIMPLE</h3>
+              <p>Efectivo o transferencia.</p>
+            </div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="benefit-info">
+              <h3>COMPRA DIRECTA</h3>
+              <p>Elegí tu equipo y consultá disponibilidad.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PRODUCTOS -->
+    <section class="products-section" id="productos">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">CATÁLOGO SELECCIONADO</span>
+          <h2 class="section-title">ELEGÍ TU PRÓXIMO EQUIPO.</h2>
+          <p class="section-subtitle">Nuestros modelos destacados.</p>
+          
+          <div class="product-tabs" id="productTabs">
+            <button class="tab-btn active" data-category="todos">TODOS</button>
+            <button class="tab-btn" data-category="iphone">IPHONE</button>
+            <button class="tab-btn" data-category="samsung">SAMSUNG</button>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          
+          <!-- CARD 1: iPhone 17 -->
+          <article class="product-card" data-category="iphone">
+            <div class="product-badge">OFERTA ONLINE</div>
+            <div class="product-image-container">
+              <img src="assets/iphone-17.png" 
+                   onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\' fill=\'%23111116\'><rect width=\'300\' height=\'300\' fill=\'%23111116\'/><rect x=\'100\' y=\'40\' width=\'100\' height=\'200\' rx=\'18\' fill=\'%231e1e28\' stroke=\'%23D4AF37\' stroke-width=\'2\'/><circle cx=\'150\' cy=\'70\' r=\'8\' fill=\'%23D4AF37\'/><text x=\'150\' y=\'265\' fill=\'%23ffffff\' font-family=\'sans-serif\' font-size=\'14\' font-weight=\'bold\' text-anchor=\'middle\'>iPhone 17</text></svg>';"
+                   alt="iPhone 17" class="product-image">
+            </div>
+            <div class="product-details">
+              <span class="product-brand">APPLE</span>
+              <h3 class="product-name">iPhone 17</h3>
+              <ul class="product-specs">
+                <li>Chip A19 Bionic</li>
+                <li>Pantalla Super Retina XDR</li>
+                <li>Sistema Avanzado de Cámaras</li>
+              </ul>
+              
+              <div class="product-pricing">
+                <div class="price-previous-box">
+                  <span class="price-label">ANTES</span>
+                  <span class="price-previous">$2.400.000</span>
+                </div>
+                <div class="price-current-box">
+                  <span class="price-label-current">AHORA</span>
+                  <span class="price-current">$1.300.000</span>
+                </div>
+                <span class="price-demo-tag">Precio demo</span>
+              </div>
+
+              <button class="btn btn-gold btn-block buy-btn" 
+                      data-product="iPhone 17" 
+                      data-price="$1.300.000" 
+                      data-img="assets/iphone-17.png">
+                COMPRAR AHORA
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 2: iPhone 17 Pro -->
+          <article class="product-card" data-category="iphone">
+            <div class="product-badge">MÁS VENDIDO</div>
+            <div class="product-image-container">
+              <img src="assets/iphone-17-pro.png" 
+                   onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\' fill=\'%23111116\'><rect width=\'300\' height=\'300\' fill=\'%23111116\'/><rect x=\'100\' y=\'40\' width=\'100\' height=\'200\' rx=\'18\' fill=\'%23252533\' stroke=\'%23D4AF37\' stroke-width=\'2\'/><circle cx=\'135\' cy=\'65\' r=\'10\' fill=\'%23D4AF37\'/><circle cx=\'165\' cy=\'65\' r=\'10\' fill=\'%23D4AF37\'/><circle cx=\'150\' cy=\'90\' r=\'10\' fill=\'%23D4AF37\'/><text x=\'150\' y=\'265\' fill=\'%23ffffff\' font-family=\'sans-serif\' font-size=\'14\' font-weight=\'bold\' text-anchor=\'middle\'>iPhone 17 Pro</text></svg>';"
+                   alt="iPhone 17 Pro" class="product-image">
+            </div>
+            <div class="product-details">
+              <span class="product-brand">APPLE</span>
+              <h3 class="product-name">iPhone 17 Pro</h3>
+              <ul class="product-specs">
+                <li>Chip A19 Pro Titanium</li>
+                <li>Cámara Pro 48MP Tri-Lens</li>
+                <li>Pantalla ProMotion 120Hz</li>
+              </ul>
+
+              <div class="product-pricing">
+                <div class="price-previous-box">
+                  <span class="price-label">ANTES</span>
+                  <span class="price-previous">$2.900.000</span>
+                </div>
+                <div class="price-current-box">
+                  <span class="price-label-current">AHORA</span>
+                  <span class="price-current">$1.300.000</span>
+                </div>
+                <span class="price-demo-tag">Precio demo</span>
+              </div>
+
+              <button class="btn btn-gold btn-block buy-btn" 
+                      data-product="iPhone 17 Pro" 
+                      data-price="$1.300.000" 
+                      data-img="assets/iphone-17-pro.png">
+                COMPRAR AHORA
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 3: iPhone 17 Pro Max -->
+          <article class="product-card" data-category="iphone">
+            <div class="product-badge">MÁXIMA GAMA</div>
+            <div class="product-image-container">
+              <img src="assets/iphone-17-promax.png" 
+                   onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\' fill=\'%23111116\'><rect width=\'300\' height=\'300\' fill=\'%23111116\'/><rect x=\'95\' y=\'30\' width=\'110\' height=\'220\' rx=\'20\' fill=\'%23181822\' stroke=\'%23D4AF37\' stroke-width=\'2.5\'/><circle cx=\'130\' cy=\'60\' r=\'12\' fill=\'%23D4AF37\'/><circle cx=\'165\' cy=\'60\' r=\'12\' fill=\'%23D4AF37\'/><circle cx=\'148\' cy=\'90\' r=\'12\' fill=\'%23D4AF37\'/><text x=\'150\' y=\'275\' fill=\'%23ffffff\' font-family=\'sans-serif\' font-size=\'14\' font-weight=\'bold\' text-anchor=\'middle\'>iPhone 17 Pro Max</text></svg>';"
+                   alt="iPhone 17 Pro Max" class="product-image">
+            </div>
+            <div class="product-details">
+              <span class="product-brand">APPLE</span>
+              <h3 class="product-name">iPhone 17 Pro Max</h3>
+              <ul class="product-specs">
+                <li>Pantalla 6.9" Super Retina XDR</li>
+                <li>Chip A19 Pro con GPU 6-Core</li>
+                <li>Batería de Ultra Larga Duración</li>
+              </ul>
+
+              <div class="product-pricing">
+                <div class="price-previous-box">
+                  <span class="price-label">ANTES</span>
+                  <span class="price-previous">$3.400.000</span>
+                </div>
+                <div class="price-current-box">
+                  <span class="price-label-current">AHORA</span>
+                  <span class="price-current">$1.300.000</span>
+                </div>
+                <span class="price-demo-tag">Precio demo</span>
+              </div>
+
+              <button class="btn btn-gold btn-block buy-btn" 
+                      data-product="iPhone 17 Pro Max" 
+                      data-price="$1.300.000" 
+                      data-img="assets/iphone-17-promax.png">
+                COMPRAR AHORA
+              </button>
+            </div>
+          </article>
+
+          <!-- CARD 4: Samsung Galaxy A57 -->
+          <article class="product-card" data-category="samsung">
+            <div class="product-badge">DESTACADO SAMSUNG</div>
+            <div class="product-image-container">
+              <img src="assets/samsung-a57.png" 
+                   onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\' viewBox=\'0 0 300 300\' fill=\'%23111116\'><rect width=\'300\' height=\'300\' fill=\'%23111116\'/><rect x=\'100\' y=\'40\' width=\'100\' height=\'200\' rx=\'16\' fill=\'%231e2430\' stroke=\'%23D4AF37\' stroke-width=\'2\'/><circle cx=\'125\' cy=\'65\' r=\'8\' fill=\'%23D4AF37\'/><circle cx=\'125\' cy=\'90\' r=\'8\' fill=\'%23D4AF37\'/><circle cx=\'125\' cy=\'115\' r=\'8\' fill=\'%23D4AF37\'/><text x=\'150\' y=\'265\' fill=\'%23ffffff\' font-family=\'sans-serif\' font-size=\'14\' font-weight=\'bold\' text-anchor=\'middle\'>Samsung Galaxy A57</text></svg>';"
+                   alt="Samsung Galaxy A57" class="product-image">
+            </div>
+            <div class="product-details">
+              <span class="product-brand">SAMSUNG</span>
+              <h3 class="product-name">Samsung Galaxy A57</h3>
+              <ul class="product-specs">
+                <li>Almacenamiento 256GB</li>
+                <li>Pantalla AMOLED 120Hz</li>
+                <li>Cámara 50MP con OIS</li>
+              </ul>
+
+              <div class="product-pricing">
+                <div class="price-previous-box">
+                  <span class="price-label">ANTES</span>
+                  <span class="price-previous">$1.900.000</span>
+                </div>
+                <div class="price-current-box">
+                  <span class="price-label-current">AHORA</span>
+                  <span class="price-current">$1.300.000</span>
+                </div>
+                <span class="price-demo-tag">Precio demo</span>
+              </div>
+
+              <button class="btn btn-gold btn-block buy-btn" 
+                      data-product="Samsung Galaxy A57" 
+                      data-price="$1.300.000" 
+                      data-img="assets/samsung-a57.png">
+                COMPRAR AHORA
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="demo-disclaimer-box">
+          <p>* Los precios e imágenes de esta presentación son ilustrativos y corresponden a una versión demostrativa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DIFERENCIAL -->
+    <section class="differentiator-section" id="diferencial">
+      <div class="container">
+        <div class="differentiator-header">
+          <span class="section-tag">¿POR QUÉ PAGAR DE MÁS?</span>
+          <h2 class="section-title">PRECIOS MÁS BAJOS.<br>SIN COMPLICACIONES.</h2>
+          <p class="section-subtitle-large">
+            Buscamos ofrecer equipos de primera línea a precios competitivos, para que puedas comprar mejor sin pagar de más.
+          </p>
+        </div>
+
+        <div class="differentiator-grid">
+          <div class="diff-card">
+            <div class="diff-number">01</div>
+            <h3>PRECIO COMPETITIVO</h3>
+            <p>Accedé a valores más bajos de lo habitual en equipos seleccionados de última generación.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">02</div>
+            <h3>ENVÍOS A TODO EL PAÍS</h3>
+            <p>Recibí tu celular de manera segura en cualquier punto de Argentina con seguimiento directo.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">03</div>
+            <h3>PAGO EN EFECTIVO O TRANSFERENCIA</h3>
+            <p>Operaciones transparentes y ágiles adaptadas a tus medios de pago habituales.</p>
+          </div>
+
+          <div class="diff-card">
+            <div class="diff-number">04</div>
+            <h3>ATENCIÓN DIRECTA</h3>
+            <p>Atención inmediata para consultar disponibilidad y coordinar tu entrega sin demoras.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CÓMO COMPRAR -->
+    <section class="how-to-buy-section" id="como-comprar">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">PASO A PASO</span>
+          <h2 class="section-title">CÓMO COMPRAR</h2>
+          <p class="section-subtitle">Proceso rápido, directo y transparente.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-badge">01</div>
+            <h3>ELEGÍ TU EQUIPO</h3>
+            <p>Explorá nuestro catálogo de iPhone o Samsung y seleccioná el modelo que buscás.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">02</div>
+            <h3>CONSULTÁ DISPONIBILIDAD</h3>
+            <p>Hacé clic en comprar para comunicarte directamente y confirmar el stock del producto.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">03</div>
+            <h3>ELEGÍ TU FORMA DE PAGO</h3>
+            <p>Aboná en efectivo o mediante transferencia bancaria de forma rápida y directa.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">04</div>
+            <h3>RECIBÍ TU CELULAR</h3>
+            <p>Coordinamos el despacho para que recibas tu nuevo smartphone en todo el país.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <h2 class="cta-title">¿BUSCÁS UN CELULAR?</h2>
+          <p class="cta-subtitle">Encontrá tu próximo equipo al mejor precio.</p>
+          <div class="cta-action">
+            <a href="#productos" class="btn btn-gold btn-xl">VER OFERTAS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <a href="#" class="brand-logo">
+          <span class="logo-title">PHŌNE</span>
+          <span class="logo-subtitle">CELULARES AL MEJOR PRECIO</span>
+        </a>
+        <p class="footer-desc">
+          Especialistas en iPhone y Samsung con los mejores precios del mercado. Envíos a todo el país.
+        </p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4 class="footer-heading">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#productos" data-filter="iphone">iPhone</a></li>
+          <li><a href="#productos" data-filter="samsung">Samsung</a></li>
+          <li><a href="#productos">Ofertas</a></li>
+          <li><a href="#como-comprar">Cómo comprar</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact-col">
+        <h4 class="footer-heading">Contacto & Atención</h4>
+        <ul class="footer-contact-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+            <span>Instagram: @tienda.phone.arg</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>WhatsApp Directo</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>contacto@phone.com.ar</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-flex">
+        <p>© 2026 PHŌNE Argentina. Todos los derechos reservados.</p>
+        <p>Sitio web demo preparado para conversión de Meta Ads.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PURCHASE INQUIRY MODAL -->
+  <div class="modal-backdrop" id="purchaseModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-header">
+        <span class="modal-tag">COMPRA DIRECTA</span>
+        <h3 class="modal-title" id="modalProductName">iPhone 17 Pro</h3>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-product-summary">
+          <img src="assets/iphone-17-pro.png" id="modalProductImg" alt="Producto" class="modal-img"
+               onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' fill=\'%23111116\'><rect width=\'100\' height=\'100\' fill=\'%23111116\'/><rect x=\'30\' y=\'10\' width=\'40\' height=\'80\' rx=\'6\' fill=\'%231a1a24\' stroke=\'%23D4AF37\' stroke-width=\'1.5\'/></svg>';">
+          <div class="modal-price-box">
+            <span class="modal-price-label">PRECIO OFERTA</span>
+            <span class="modal-price-val" id="modalProductPrice">$1.300.000</span>
+            <span class="modal-price-note">Efectivo o Transferencia Bancaria</span>
+          </div>
+        </div>
+
+        <div class="modal-features">
+          <div class="modal-feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Envíos a todo el país</span>
+          </div>
+          <div class="modal-feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Atención personal inmediata</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-gold btn-block btn-lg" id="modalWhatsappBtn">
+            CONSULTAR DISPONIBILIDAD POR WHATSAPP
+          </button>
+          <button class="btn btn-glass btn-block" id="modalCancelBtn">
+            VOLVER AL CATÁLOGO
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Sticky Header
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 30) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // 2. Mobile Menu
+      const mobileToggle = document.getElementById('mobileToggle');
+      const mobileClose = document.getElementById('mobileClose');
+      const mobileOverlay = document.getElementById('mobileMenuOverlay');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (mobileToggle && mobileOverlay) {
+        mobileToggle.addEventListener('click', () => mobileOverlay.classList.add('open'));
+        if (mobileClose) mobileClose.addEventListener('click', () => mobileOverlay.classList.remove('open'));
+        mobileOverlay.addEventListener('click', (e) => {
+          if (e.target === mobileOverlay) mobileOverlay.classList.remove('open');
+        });
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileOverlay.classList.remove('open');
+            const cat = link.getAttribute('data-filter');
+            if (cat) filterProducts(cat);
+          });
+        });
+      }
+
+      // 3. Category Filter
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.getAttribute('data-category');
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterProducts(category);
+        });
+      });
+
+      function filterProducts(category) {
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (category === 'todos' || cardCat === category) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      // 4. WhatsApp Modal
+      const modal = document.getElementById('purchaseModal');
+      const modalClose = document.getElementById('modalClose');
+      const modalCancelBtn = document.getElementById('modalCancelBtn');
+      const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
+      const modalName = document.getElementById('modalProductName');
+      const modalPrice = document.getElementById('modalProductPrice');
+      const modalImg = document.getElementById('modalProductImg');
+      const buyBtns = document.querySelectorAll('.buy-btn');
+
+      let currentProduct = { name: '', price: '' };
+
+      buyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pName = btn.getAttribute('data-product') || 'Equipo';
+          const pPrice = btn.getAttribute('data-price') || '$1.300.000';
+          const pImg = btn.getAttribute('data-img') || '';
+
+          currentProduct = { name: pName, price: pPrice };
+          if (modalName) modalName.textContent = pName;
+          if (modalPrice) modalPrice.textContent = pPrice;
+          if (modalImg && pImg) modalImg.src = pImg;
+
+          modal.classList.add('active');
+        });
+      });
+
+      const closeModal = () => modal.classList.remove('active');
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeModal);
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      if (modalWhatsappBtn) {
+        modalWhatsappBtn.addEventListener('click', () => {
+          const msg = `¡Hola! Vengo de la web de PHŌNE. Quisiera consultar disponibilidad del *${currentProduct.name}* publicado a *${currentProduct.price}*.`;
+          window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+          closeModal();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
