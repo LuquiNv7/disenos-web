@@ -1,5 +1,6 @@
 /* ==========================================================================
-   AA BARBERÍA - ABEL ACOSTA | LUXURY MOBILE APP STYLESHEET
+   DOUBLE A BARBERÍA - ABEL ACOSTA | LUXURY MOBILE APP STYLESHEET
+   Typography: Bodoni Moda (Logo & Titles) + Montserrat (Body)
    Colors: Obsidian Black (#0a0a0a), Metallic Gold (#d4af37)
    ========================================================================== */
 
@@ -8,7 +9,7 @@
   --bg-card: #141414;
   --bg-card-hover: #1f1f1f;
   --bg-input: #1a1a1a;
-  --border-gold: rgba(212, 175, 55, 0.3);
+  --border-gold: rgba(212, 175, 55, 0.35);
   --border-subtle: rgba(255, 255, 255, 0.08);
   
   --gold-primary: #d4af37;
@@ -39,7 +40,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -111,17 +112,27 @@ body {
   gap: 10px;
 }
 
+.header-crown-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.header-crown-logo i {
+  font-size: 14px;
+}
+
 .brand-initials {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 16px;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  border: 1px solid var(--gold-primary);
-  border-radius: var(--radius-sm);
-  padding: 2px 8px;
-  box-shadow: var(--gold-glow);
 }
 
 .brand-text {
@@ -130,18 +141,18 @@ body {
 }
 
 .brand-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1.5px;
+  font-family: 'Bodoni Moda', serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 2px;
   color: var(--text-primary);
 }
 
 .brand-subtitle {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--gold-primary);
   letter-spacing: 1px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .user-badge-header {
@@ -224,17 +235,17 @@ body {
 
 /* Section Title */
 .section-title-wrap h2 {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  font-weight: 700;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 24px;
+  font-weight: 800;
   color: var(--gold-primary);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .section-title-wrap h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 17px;
-  font-weight: 600;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
@@ -410,30 +421,42 @@ body {
   margin-bottom: 22px;
 }
 
-.luxury-emblem {
-  font-family: 'Cinzel', serif;
-  font-size: 32px;
-  font-weight: 800;
-  width: 68px;
-  height: 68px;
-  margin: 0 auto 12px;
-  border-radius: 50%;
-  background: var(--bg-main);
-  border: 2px solid var(--gold-primary);
+.logo-crown-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.crown-icon {
+  font-size: 38px;
+  color: #ffffff;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
+  margin-bottom: 4px;
+}
+
+.double-a-logo {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.double-a-logo span {
+  font-family: 'Bodoni Moda', serif;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  box-shadow: var(--gold-glow);
 }
 
 .auth-title {
-  font-family: 'Cinzel', serif;
-  font-size: 24px;
-  letter-spacing: 2px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 18px;
+  letter-spacing: 4px;
   color: var(--text-primary);
+  margin-top: 4px;
 }
 
 .auth-subtitle {
@@ -453,22 +476,6 @@ body {
 
 .auth-form.active {
   display: flex !important;
-}
-
-.quick-admin-note {
-  margin-top: 14px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--gold-primary);
-  background: rgba(212, 175, 55, 0.08);
-  border: 1px dashed var(--border-gold);
-  padding: 8px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
-
-.quick-admin-note:hover {
-  background: rgba(212, 175, 55, 0.15);
 }
 
 /* ================= TURNOS & BOOKING ================= */
@@ -679,7 +686,7 @@ body {
 }
 
 .banner-pagado-giant .pagado-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 22px;
   font-weight: 800;
   letter-spacing: 2px;
@@ -726,14 +733,14 @@ body {
 }
 
 .vip-logo {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 24px;
   font-weight: 800;
   color: var(--gold-primary);
 }
 
 .vip-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 20px;
   color: var(--text-primary);
   margin-top: 14px;
@@ -766,7 +773,7 @@ body {
 .gauge-number {
   font-size: 42px;
   font-weight: 800;
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -842,7 +849,7 @@ body {
   font-weight: 800;
   letter-spacing: 1px;
   color: var(--gold-primary);
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
 }
 
 .copy-btn {
@@ -1164,3 +1171,4 @@ body {
 .text-center { text-align: center; }
 .text-sm { font-size: 12px; }
 .text-muted { color: var(--text-muted); }
+
