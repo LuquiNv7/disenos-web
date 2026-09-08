@@ -1,1016 +1,1004 @@
 /* ==========================================================================
-   AA BARBERÍA - ABEL ACOSTA | LOGIC & LOCALSTORAGE CONTROLLER
+   AA BARBERÍA - ABEL ACOSTA | LUXURY MOBILE APP STYLESHEET
+   Colors: Obsidian Black (#0a0a0a), Metallic Gold (#d4af37)
    ========================================================================== */
-// --- INITIAL DATA SEEDING ---
-const DEFAULT_DATA = {
-  admin: {
-    username: "admin",
-    password: "admin123"
-  },
-  prices: {
-    corte: 18000,
-    color: 50000
-  },
-  users: [
-    {
-      id: "u_carlos",
-      name: "Carlos Pérez",
-      username: "carlosperez",
-      phone: "9115551234",
-      password: "123",
-      hasMembership: true,
-      membershipCutsLeft: 3,
-      membershipExpiry: "2026-10-01"
-    },
-    {
-      id: "u_lucas",
-      name: "Lucas Gómez",
-      username: "lucasgomez",
-      phone: "9115559876",
-      password: "123",
-      hasMembership: false,
-      membershipCutsLeft: 0,
-      membershipExpiry: null
-    }
-  ],
-  appointments: [
-    {
-      id: "app_1",
-      clientId: "u_carlos",
-      clientName: "Carlos Pérez",
-      clientPhone: "9115551234",
-      service: "Corte",
-      price: 18000,
-      date: getTodayString(),
-      time: "15:00",
-      status: "Pendiente",
-      paid: false,
-      usedMembership: true,
-      createdAt: Date.now() - 3600000
-    },
-    {
-      id: "app_2",
-      clientId: "u_lucas",
-      clientName: "Lucas Gómez",
-      clientPhone: "9115559876",
-      service: "Color",
-      price: 50000,
-      date: getTodayString(),
-      time: "17:30",
-      status: "Finalizado",
-      paid: true,
-      usedMembership: false,
-      createdAt: Date.now() - 86400000
-    }
-  ],
-  movements: [
-    {
-      id: "mov_1",
-      date: getTodayString(),
-      type: "ingreso",
-      category: "Colores",
-      amount: 50000,
-      description: "Color cliente Lucas Gómez",
-      createdAt: Date.now() - 86400000
-    },
-    {
-      id: "mov_2",
-      date: getTodayString(),
-      type: "ingreso",
-      category: "Membresías",
-      amount: 60000,
-      description: "Venta Membresía Carlos Pérez",
-      createdAt: Date.now() - 172800000
-    },
-    {
-      id: "mov_3",
-      date: getTodayString(),
-      type: "egreso",
-      category: "Insumos Barbería",
-      amount: 15000,
-      description: "Compra navajas y toallas",
-      createdAt: Date.now() - 200000000
-    }
-  ]
-};
-// State variables
-let DB = {};
-let currentUser = null;
-let selectedBookingTime = null;
-let adminTurnosFilter = "hoy";
-let editingMovId = null;
-// Initialize on DOM Ready
-document.addEventListener("DOMContentLoaded", () => {
-  initStorage();
-  checkSession();
-  setupDatePickers();
-});
-// Helper for today date string YYYY-MM-DD
-function getTodayString() {
-  const d = new Date();
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-// Storage setup
-function initStorage() {
-  const stored = localStorage.getItem("aa_barberia_db");
-  if (!stored) {
-    DB = DEFAULT_DATA;
-    saveDB();
-  } else {
-    try {
-      DB = JSON.parse(stored);
-      // Ensure fallbacks
-      if (!DB.admin) DB.admin = DEFAULT_DATA.admin;
-      if (!DB.prices) DB.prices = DEFAULT_DATA.prices;
-      if (!DB.users) DB.users = DEFAULT_DATA.users;
-      if (!DB.appointments) DB.appointments = DEFAULT_DATA.appointments;
-      if (!DB.movements) DB.movements = DEFAULT_DATA.movements;
-    } catch (e) {
-      DB = DEFAULT_DATA;
-      saveDB();
-    }
-  }
-}
-function saveDB() {
-  localStorage.setItem("aa_barberia_db", JSON.stringify(DB));
-}
-// Session Management
-function checkSession() {
-  const sess = localStorage.getItem("aa_barberia_session");
-  if (sess) {
-    try {
-      currentUser = JSON.parse(sess);
-      showApp();
-    } catch (e) {
-      showAuth();
-    }
-  } else {
-    showAuth();
-  }
-}
-function showAuth() {
-  document.getElementById("main-header").classList.add("hidden");
-  document.getElementById("bottom-nav").classList.add("hidden");
+:root {
+  --bg-main: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #1f1f1f;
+  --bg-input: #1a1a1a;
+  --border-gold: rgba(212, 175, 55, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.08);
   
-  // Hide all main content views, show auth view
-  document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
-  document.getElementById("view-auth").classList.remove("hidden");
-}
-function showApp() {
-  document.getElementById("main-header").classList.remove("hidden");
-  document.getElementById("bottom-nav").classList.remove("hidden");
-  document.getElementById("view-auth").classList.add("hidden");
-  // Set Header User Info
-  const headerName = document.getElementById("user-header-name");
-  const headerRole = document.getElementById("user-header-role");
+  --gold-primary: #d4af37;
+  --gold-light: #f5e6ad;
+  --gold-dark: #aa7c11;
+  --gold-gradient: linear-gradient(135deg, #f5e6ad 0%, #d4af37 50%, #aa7c11 100%);
+  --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.25);
   
-  if (currentUser.role === "admin") {
-    headerName.textContent = "Abel Acosta";
-    headerRole.textContent = "Barbero (Admin)";
-  } else {
-    headerName.textContent = currentUser.name;
-    headerRole.textContent = "Cliente VIP";
-  }
-  // Bind logout
-  document.getElementById("logout-btn").onclick = handleLogout;
-  // Render prices across UI
-  renderPricesUI();
-  // Render Navigation Bar for Role
-  renderBottomNav();
-  // Default tab based on role
-  if (currentUser.role === "admin") {
-    switchTab("admin-caja");
-  } else {
-    switchTab("client-turnos");
-  }
-}
-// Switch Login / Register Tabs
-function switchAuthMode(mode) {
-  const loginBtn = document.getElementById("tab-login-btn");
-  const regBtn = document.getElementById("tab-register-btn");
-  const loginForm = document.getElementById("form-login");
-  const regForm = document.getElementById("form-register");
-  if (mode === "login") {
-    loginBtn.classList.add("active");
-    regBtn.classList.remove("active");
-    loginForm.classList.remove("hidden-form");
-    regForm.classList.add("hidden-form");
-  } else {
-    regBtn.classList.add("active");
-    loginBtn.classList.remove("active");
-    regForm.classList.remove("hidden-form");
-    loginForm.classList.add("hidden-form");
-  }
-}
-function fillAdminCredentials() {
-  document.getElementById("login-username").value = "admin";
-  document.getElementById("login-password").value = DB.admin.password || "admin123";
-  showToast("Credenciales de Barbero cargadas", "success");
-}
-// Authentication Handlers
-function handleLogin(e) {
-  e.preventDefault();
-  const userVal = document.getElementById("login-username").value.trim().toLowerCase();
-  const passVal = document.getElementById("login-password").value.trim();
-  // Check Admin
-  if (userVal === DB.admin.username.toLowerCase() && passVal === DB.admin.password) {
-    currentUser = { id: "admin", name: "Abel Acosta", role: "admin" };
-    localStorage.setItem("aa_barberia_session", JSON.stringify(currentUser));
-    showToast("¡Bienvenido, Abel!", "success");
-    showApp();
-    return;
-  }
-  // Check Client
-  const foundClient = DB.users.find(
-    u => (u.username.toLowerCase() === userVal || u.phone === userVal) && u.password === passVal
-  );
-  if (foundClient) {
-    currentUser = { ...foundClient, role: "client" };
-    localStorage.setItem("aa_barberia_session", JSON.stringify(currentUser));
-    showToast(`¡Hola, ${foundClient.name}!`, "success");
-    showApp();
-  } else {
-    showToast("Usuario o contraseña incorrectos", "error");
-  }
-}
-function handleRegister(e) {
-  e.preventDefault();
-  const name = document.getElementById("reg-name").value.trim();
-  const username = document.getElementById("reg-username").value.trim().toLowerCase();
-  const phone = document.getElementById("reg-phone").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
-  if (username === "admin") {
-    showToast("Ese usuario está reservado para el administrador", "error");
-    return;
-  }
-  const exists = DB.users.some(u => u.username.toLowerCase() === username || u.phone === phone);
-  if (exists) {
-    showToast("Ya existe un cliente con ese usuario o teléfono", "error");
-    return;
-  }
-  const newUser = {
-    id: "u_" + Date.now(),
-    name,
-    username,
-    phone,
-    password,
-    hasMembership: false,
-    membershipCutsLeft: 0,
-    membershipExpiry: null
-  };
-  DB.users.push(newUser);
-  saveDB();
-  currentUser = { ...newUser, role: "client" };
-  localStorage.setItem("aa_barberia_session", JSON.stringify(currentUser));
-  showToast("¡Registro exitoso!", "success");
-  showApp();
-}
-function handleLogout() {
-  currentUser = null;
-  localStorage.removeItem("aa_barberia_session");
-  showToast("Sesión cerrada", "info");
-  showAuth();
-}
-// --- NAVIGATION & VIEWS CONTROLLER ---
-function renderBottomNav() {
-  const container = document.getElementById("nav-items-container");
-  container.innerHTML = "";
-  if (currentUser.role === "client") {
-    container.innerHTML = `
-      <button class="nav-item" onclick="switchTab('client-turnos')" id="nav-client-turnos">
-        <i class="fa-solid fa-calendar-check"></i>
-        <span>Turnos</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('client-membresia')" id="nav-client-membresia">
-        <i class="fa-solid fa-crown"></i>
-        <span>Membresía</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('client-precios')" id="nav-client-precios">
-        <i class="fa-solid fa-tags"></i>
-        <span>Precios</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('client-historial')" id="nav-client-historial">
-        <i class="fa-solid fa-clock-rotate-left"></i>
-        <span>Historial</span>
-      </button>
-    `;
-  } else {
-    // Admin Tabs
-    container.innerHTML = `
-      <button class="nav-item" onclick="switchTab('admin-caja')" id="nav-admin-caja">
-        <i class="fa-solid fa-cash-register"></i>
-        <span>Caja</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('admin-turnos')" id="nav-admin-turnos">
-        <i class="fa-solid fa-calendar-days"></i>
-        <span>Turnos</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('admin-membresias')" id="nav-admin-membresias">
-        <i class="fa-solid fa-users"></i>
-        <span>Clientes</span>
-      </button>
-      <button class="nav-item" onclick="switchTab('admin-precios')" id="nav-admin-precios">
-        <i class="fa-solid fa-sliders"></i>
-        <span>Ajustes</span>
-      </button>
-    `;
-  }
-}
-function switchTab(tabId) {
-  // Hide all sections
-  document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
   
-  // Deactivate nav buttons
-  document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
-  // Activate view
-  const targetView = document.getElementById(`view-${tabId}`);
-  if (targetView) targetView.classList.remove("hidden");
-  // Activate nav button
-  const targetNav = document.getElementById(`nav-${tabId}`);
-  if (targetNav) targetNav.classList.add("active");
-  // Trigger view renderers
-  if (tabId === "client-turnos") {
-    renderClientTurnos();
-    renderClientMembershipBanner();
-  } else if (tabId === "client-membresia") {
-    renderClientMembership();
-  } else if (tabId === "client-precios") {
-    renderPricesUI();
-  } else if (tabId === "client-historial") {
-    renderClientHistory();
-  } else if (tabId === "admin-caja") {
-    renderAdminCaja();
-  } else if (tabId === "admin-turnos") {
-    renderAdminTurnos();
-  } else if (tabId === "admin-membresias") {
-    renderAdminClientsList();
-  } else if (tabId === "admin-precios") {
-    loadAdminPriceInputs();
+  --status-pending: #f59e0b;
+  --status-completed: #10b981;
+  --status-paid: #3b82f6;
+  --status-cancelled: #ef4444;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --nav-height: 65px;
+  --header-height: 64px;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  background-color: #030303;
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+/* Container simulating iPhone screen on desktop, full size on mobile */
+.iphone-container {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 920px;
+  background-color: var(--bg-main);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), 0 0 0 12px #1c1c1e;
+  border-radius: 40px;
+  overflow: hidden;
+}
+@media (max-width: 480px) {
+  .iphone-container {
+    max-width: 100%;
+    height: 100vh;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
-// --- CLIENT FUNCTIONALITIES ---
-function renderPricesUI() {
-  const cortePrice = DB.prices.corte || 18000;
-  const colorPrice = DB.prices.color || 50000;
-  const comboPrice = cortePrice + colorPrice;
-  // Format currency
-  const formatMoney = num => "$" + Number(num).toLocaleString("es-AR");
-  document.getElementById("service-price-corte").textContent = formatMoney(cortePrice);
-  document.getElementById("service-price-color").textContent = formatMoney(colorPrice);
-  document.getElementById("service-price-combo").textContent = formatMoney(comboPrice);
-  const dCorte = document.getElementById("display-price-corte");
-  const dColor = document.getElementById("display-price-color");
-  if (dCorte) dCorte.textContent = formatMoney(cortePrice);
-  if (dColor) dColor.textContent = formatMoney(colorPrice);
+/* ================= HEADER ================= */
+.main-header {
+  height: var(--header-height);
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-top: env(safe-area-inset-top);
 }
-function setupDatePickers() {
-  const dateInput = document.getElementById("booking-date");
-  if (dateInput) {
-    const today = getTodayString();
-    dateInput.min = today;
-    dateInput.value = today;
-  }
-  const movDate = document.getElementById("mov-fecha");
-  if (movDate) {
-    movDate.value = getTodayString();
-  }
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-function selectServiceOption(labelElem, serviceName) {
-  document.querySelectorAll(".service-option").forEach(opt => opt.classList.remove("active"));
-  labelElem.classList.add("active");
-  const radio = labelElem.querySelector('input[type="radio"]');
-  if (radio) radio.checked = true;
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-function loadAvailableSlots() {
-  const dateInput = document.getElementById("booking-date");
-  const grid = document.getElementById("slots-grid");
-  selectedBookingTime = null;
-  document.getElementById("confirm-booking-btn").disabled = true;
-  if (!dateInput.value) {
-    grid.innerHTML = `<p class="empty-text">Selecciona una fecha válida.</p>`;
-    return;
-  }
-  const chosenDate = new Date(dateInput.value + "T00:00:00");
-  const dayOfWeek = chosenDate.getDay(); // 0: Sunday, 1: Mon, ..., 6: Sat
-  if (dayOfWeek === 0) {
-    grid.innerHTML = `<p class="empty-text text-red"><i class="fa-solid fa-store-slash"></i> La barbería abre de Lunes a Sábado. Domingos cerrado.</p>`;
-    return;
-  }
-  // Generate 30-min slots from 10:00 to 20:00
-  const slots = [];
-  for (let hour = 10; hour < 20; hour++) {
-    const hStr = String(hour).padStart(2, '0');
-    slots.push(`${hStr}:00`);
-    slots.push(`${hStr}:30`);
-  }
-  // Filter out occupied slots
-  const takenTimes = DB.appointments
-    .filter(a => a.date === dateInput.value && a.status !== "Cancelado")
-    .map(a => a.time);
-  // Check if chosen date is Today to filter past times
-  const todayStr = getTodayString();
-  const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  grid.innerHTML = "";
-  slots.forEach(slot => {
-    const [sh, sm] = slot.split(":").map(Number);
-    const slotMinutes = sh * 60 + sm;
-    let isPast = false;
-    if (dateInput.value === todayStr && slotMinutes <= currentMinutes) {
-      isPast = true;
-    }
-    const isTaken = takenTimes.includes(slot);
-    const btn = document.createElement("button");
-    btn.className = "slot-btn";
-    btn.textContent = slot;
-    if (isTaken || isPast) {
-      btn.classList.add("occupied");
-      btn.disabled = true;
-      btn.title = isTaken ? "Horario ocupado" : "Horario pasado";
-    } else {
-      btn.onclick = () => selectSlot(btn, slot);
-    }
-    grid.appendChild(btn);
-  });
+.brand-initials {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 20px;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 1px solid var(--gold-primary);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  box-shadow: var(--gold-glow);
 }
-function selectSlot(btnElem, timeStr) {
-  document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("selected"));
-  btnElem.classList.add("selected");
-  selectedBookingTime = timeStr;
-  document.getElementById("confirm-booking-btn").disabled = false;
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
-function confirmBooking() {
-  if (!selectedBookingTime) {
-    showToast("Por favor selecciona un horario disponible", "error");
-    return;
-  }
-  const dateValue = document.getElementById("booking-date").value;
-  const serviceRadio = document.querySelector('input[name="booking-service"]:checked');
-  const serviceName = serviceRadio ? serviceRadio.value : "Corte";
-  let price = DB.prices.corte;
-  if (serviceName === "Color") price = DB.prices.color;
-  if (serviceName === "Corte + Color") price = DB.prices.corte + DB.prices.color;
-  // Refresh client user from DB
-  const clientUser = DB.users.find(u => u.id === currentUser.id) || currentUser;
-  const hasValidMembership = clientUser.hasMembership && clientUser.membershipCutsLeft > 0 && serviceName.includes("Corte");
-  const newApp = {
-    id: "app_" + Date.now(),
-    clientId: currentUser.id,
-    clientName: currentUser.name,
-    clientPhone: currentUser.phone || "Sin teléfono",
-    service: serviceName,
-    price: price,
-    date: dateValue,
-    time: selectedBookingTime,
-    status: "Pendiente",
-    paid: false,
-    usedMembership: hasValidMembership,
-    createdAt: Date.now()
-  };
-  DB.appointments.push(newApp);
-  saveDB();
-  showToast("¡Turno agendado con éxito!", "success");
-  // Clear selection
-  selectedBookingTime = null;
-  document.getElementById("confirm-booking-btn").disabled = true;
-  loadAvailableSlots();
-  renderClientTurnos();
+.brand-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
 }
-function renderClientMembershipBanner() {
-  const banner = document.getElementById("client-membership-banner");
-  const countText = document.getElementById("banner-cuts-count");
-  
-  const clientUser = DB.users.find(u => u.id === currentUser.id);
-  if (clientUser && clientUser.hasMembership && clientUser.membershipCutsLeft > 0) {
-    banner.classList.remove("hidden");
-    countText.textContent = `Te quedan ${clientUser.membershipCutsLeft} cortes este mes.`;
-  } else {
-    banner.classList.add("hidden");
-  }
+.brand-subtitle {
+  font-size: 10px;
+  color: var(--gold-primary);
+  letter-spacing: 1px;
+  font-weight: 500;
 }
-function renderClientTurnos() {
-  const container = document.getElementById("client-active-turnos-list");
-  container.innerHTML = "";
-  const myTurnos = DB.appointments
-    .filter(a => a.clientId === currentUser.id && a.status === "Pendiente")
-    .sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time));
-  if (myTurnos.length === 0) {
-    container.innerHTML = `<div class="card text-center text-muted">No tienes turnos pendientes próximos.</div>`;
-    return;
-  }
-  myTurnos.forEach(t => {
-    const card = document.createElement("div");
-    card.className = "turno-card gold-highlight";
-    card.innerHTML = `
-      <div class="turno-header">
-        <div class="turno-date-time">
-          <i class="fa-solid fa-clock"></i>
-          <span>${formatDateDisplay(t.date)} - ${t.time} hs</span>
-        </div>
-        <span class="badge badge-pending">PENDIENTE</span>
-      </div>
-      <div class="turno-body">
-        <span>Servicio: <strong>${t.service}</strong></span>
-        <span>Precio: <strong>${t.usedMembership ? "Membresía VIP" : "$" + Number(t.price).toLocaleString("es-AR")}</strong></span>
-      </div>
-      <div class="turno-actions">
-        <button class="btn btn-outline btn-sm btn-full" onclick="cancelClientTurno('${t.id}')">
-          <i class="fa-solid fa-xmark text-red"></i> Cancelar Reserva
-        </button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+.user-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-function cancelClientTurno(id) {
-  if (confirm("¿Estás seguro de cancelar este turno?")) {
-    const idx = DB.appointments.findIndex(a => a.id === id);
-    if (idx !== -1) {
-      DB.appointments[idx].status = "Cancelado";
-      saveDB();
-      showToast("Turno cancelado", "info");
-      renderClientTurnos();
-      loadAvailableSlots();
-    }
-  }
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-function renderClientMembership() {
-  const clientUser = DB.users.find(u => u.id === currentUser.id) || currentUser;
-  const cutsLeftElem = document.getElementById("vip-cuts-left");
-  const statusTextElem = document.getElementById("vip-status-text");
-  cutsLeftElem.textContent = clientUser.membershipCutsLeft || 0;
-  if (clientUser.hasMembership && clientUser.membershipCutsLeft > 0) {
-    statusTextElem.textContent = "ACTIVA";
-    statusTextElem.className = "status-active";
-  } else {
-    statusTextElem.textContent = "INACTIVA";
-    statusTextElem.className = "status-inactive";
-  }
+.user-header-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
-function requestMembership() {
-  openModal(`
-    <div class="text-center">
-      <i class="fa-solid fa-crown text-gold" style="font-size:48px; margin-bottom:12px;"></i>
-      <h3 style="font-family:'Cinzel',serif; color:var(--gold-primary); font-size:20px;">Membresía Mensual VIP</h3>
-      <p style="font-size:13px; color:var(--text-secondary); margin-top:8px;">
-        Accede a 4 cortes de cabello al mes por un precio promocional único.
-      </p>
-      <div class="alias-box mt-3 text-center" style="flex-direction:column; gap:4px;">
-        <span class="text-sm text-muted">Alias para transferencia:</span>
-        <strong class="alias-text" style="font-size:22px;">Abelacostaok</strong>
-      </div>
-      <p class="text-sm text-muted mt-2">Envía el comprobante de transferencia al barbero Abel Acosta para activar o renovar tu membresía.</p>
-      <a href="https://wa.me/91125287420?text=Hola%20Abel!%20Quiero%20activar/renovar%20mi%20Membres%C3%ADa%20VIP" target="_blank" class="btn btn-gold btn-full mt-3">
-        <i class="fa-brands fa-whatsapp"></i> Avisar a Abel por WhatsApp
-      </a>
-    </div>
-  `);
+.user-header-role {
+  font-size: 10px;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
-function renderClientHistory() {
-  const container = document.getElementById("client-history-list");
-  container.innerHTML = "";
-  const historyTurnos = DB.appointments
-    .filter(a => a.clientId === currentUser.id && a.status !== "Pendiente")
-    .sort((a,b) => (b.date + b.time).localeCompare(a.date + a.time));
-  if (historyTurnos.length === 0) {
-    container.innerHTML = `<div class="card text-center text-muted">Aún no posees historial de cortes finalizados.</div>`;
-    return;
-  }
-  historyTurnos.forEach(t => {
-    const card = document.createElement("div");
-    card.className = "turno-card";
-    let statusBadge = "";
-    if (t.status === "Finalizado") {
-      statusBadge = `<span class="badge badge-completed">FINALIZADO</span>`;
-    } else {
-      statusBadge = `<span class="badge badge-cancelled">CANCELADO</span>`;
-    }
-    let pagadoBannerHTML = "";
-    if (t.status === "Finalizado" && t.paid) {
-      pagadoBannerHTML = `
-        <div class="banner-pagado-giant">
-          <div class="pagado-title">PAGADO</div>
-          <i class="fa-solid fa-circle-check"></i>
-        </div>
-      `;
-    }
-    card.innerHTML = `
-      <div class="turno-header">
-        <div class="turno-date-time">
-          <i class="fa-solid fa-calendar-check"></i>
-          <span>${formatDateDisplay(t.date)} - ${t.time} hs</span>
-        </div>
-        ${statusBadge}
-      </div>
-      <div class="turno-body">
-        <span>Servicio: <strong>${t.service}</strong></span>
-        <span>Precio: <strong>${t.usedMembership ? "Membresía VIP" : "$" + Number(t.price).toLocaleString("es-AR")}</strong></span>
-      </div>
-      ${pagadoBannerHTML}
-    `;
-    container.appendChild(card);
-  });
+.logout-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-function copyAlias() {
-  const alias = "Abelacostaok";
-  navigator.clipboard.writeText(alias).then(() => {
-    showToast("¡Alias Abelacostaok copiado al portapapeles!", "success");
-  }).catch(() => {
-    showToast("Alias: Abelacostaok", "info");
-  });
+.logout-btn:active {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--status-cancelled);
+  border-color: var(--status-cancelled);
 }
-// --- ADMIN FUNCTIONALITIES (CAJA, TURNOS, CLIENTES, PRECIOS) ---
-// 1. CAJA DE MOVIMIENTOS
-function renderAdminCaja() {
-  updateCajaMetrics();
-  renderAdminCajaList();
+/* ================= MAIN CONTENT ================= */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: calc(var(--nav-height) + 24px + env(safe-area-inset-bottom));
+  scrollbar-width: none;
 }
-function updateCajaMetrics() {
-  const todayStr = getTodayString();
-  const currentMonthStr = todayStr.substring(0, 7); // YYYY-MM
-  let hoyIngresos = 0;
-  let mesIngresos = 0;
-  let mesEgresos = 0;
-  let totalBalance = 0;
-  DB.movements.forEach(m => {
-    const amt = Number(m.amount) || 0;
-    if (m.type === "ingreso") {
-      totalBalance += amt;
-      if (m.date === todayStr) hoyIngresos += amt;
-      if (m.date.startsWith(currentMonthStr)) mesIngresos += amt;
-    } else if (m.type === "egreso") {
-      totalBalance -= amt;
-      if (m.date.startsWith(currentMonthStr)) mesEgresos += amt;
-    }
-  });
-  const fmt = num => "$" + Number(num).toLocaleString("es-AR");
-  document.getElementById("metric-ingresos-hoy").textContent = fmt(hoyIngresos);
-  document.getElementById("metric-ingresos-mes").textContent = fmt(mesIngresos);
-  document.getElementById("metric-egresos-mes").textContent = fmt(mesEgresos);
-  document.getElementById("metric-balance-total").textContent = fmt(totalBalance);
+.main-content::-webkit-scrollbar {
+  display: none;
 }
-function handleSaveMovimiento(e) {
-  e.preventDefault();
-  const tipo = document.getElementById("mov-tipo").value;
-  const monto = Number(document.getElementById("mov-monto").value);
-  const categoria = document.getElementById("mov-categoria").value;
-  const fecha = document.getElementById("mov-fecha").value;
-  const descripcion = document.getElementById("mov-descripcion").value.trim();
-  if (editingMovId) {
-    const idx = DB.movements.findIndex(m => m.id === editingMovId);
-    if (idx !== -1) {
-      DB.movements[idx] = { ...DB.movements[idx], tipo, monto, categoria, fecha, descripcion, amount: monto };
-      showToast("Movimiento actualizado", "success");
-    }
-    editingMovId = null;
-  } else {
-    const newMov = {
-      id: "mov_" + Date.now(),
-      date: fecha,
-      type: tipo,
-      category: categoria,
-      amount: monto,
-      description: descripcion,
-      createdAt: Date.now()
-    };
-    DB.movements.push(newMov);
-    showToast("Movimiento registrado", "success");
-  }
-  saveDB();
-  document.getElementById("form-caja-movimiento").reset();
-  document.getElementById("mov-fecha").value = getTodayString();
-  renderAdminCaja();
+.view-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeIn 0.25s ease-in-out;
 }
-function renderAdminCajaList() {
-  const container = document.getElementById("caja-movements-list");
-  container.innerHTML = "";
-  const searchText = (document.getElementById("filter-mov-search").value || "").toLowerCase();
-  const tipoFilter = document.getElementById("filter-mov-tipo").value;
-  let filtered = DB.movements.filter(m => {
-    const matchesSearch = m.description.toLowerCase().includes(searchText) || m.category.toLowerCase().includes(searchText);
-    const matchesTipo = tipoFilter === "todos" || m.type === tipoFilter;
-    return matchesSearch && matchesTipo;
-  });
-  filtered.sort((a,b) => (b.date + b.createdAt).localeCompare(a.date + a.createdAt));
-  if (filtered.length === 0) {
-    container.innerHTML = `<div class="text-center text-muted py-3">No hay movimientos registrados.</div>`;
-    return;
-  }
-  filtered.forEach(m => {
-    const item = document.createElement("div");
-    item.className = "movement-item";
-    const isIngreso = m.type === "ingreso";
-    const amountColorClass = isIngreso ? "text-green" : "text-red";
-    const sign = isIngreso ? "+" : "-";
-    item.innerHTML = `
-      <div class="movement-info">
-        <span class="mov-desc">${m.description}</span>
-        <span class="mov-meta">${formatDateDisplay(m.date)} • Categoría: <strong>${m.category}</strong></span>
-      </div>
-      <div class="mov-amount-wrap">
-        <span class="mov-amount ${amountColorClass}">${sign}$${Number(m.amount).toLocaleString("es-AR")}</span>
-        <div class="mov-actions">
-          <button class="icon-btn" onclick="editMovimiento('${m.id}')" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
-          <button class="icon-btn delete" onclick="deleteMovimiento('${m.id}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
-        </div>
-      </div>
-    `;
-    container.appendChild(item);
-  });
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-function editMovimiento(id) {
-  const mov = DB.movements.find(m => m.id === id);
-  if (!mov) return;
-  editingMovId = id;
-  document.getElementById("mov-tipo").value = mov.type;
-  document.getElementById("mov-monto").value = mov.amount;
-  document.getElementById("mov-categoria").value = mov.category;
-  document.getElementById("mov-fecha").value = mov.date;
-  document.getElementById("mov-descripcion").value = mov.description;
-  showToast("Modificando movimiento...", "info");
+.hidden {
+  display: none !important;
 }
-function deleteMovimiento(id) {
-  if (confirm("¿Deseas eliminar este movimiento de la caja?")) {
-    DB.movements = DB.movements.filter(m => m.id !== id);
-    saveDB();
-    showToast("Movimiento eliminado", "info");
-    renderAdminCaja();
-  }
+/* Section Title */
+.section-title-wrap h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.5px;
 }
-// 2. GESTIÓN DE TURNOS BARBERO
-function setAdminTurnosFilter(filter) {
-  adminTurnosFilter = filter;
-  document.querySelectorAll("#view-admin-turnos .segment-btn").forEach(b => b.classList.remove("active"));
-  document.getElementById(`admin-turnos-filter-${filter}`).classList.add("active");
-  renderAdminTurnos();
+.section-title-wrap h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
-function renderAdminTurnos() {
-  const container = document.getElementById("admin-turnos-list");
-  container.innerHTML = "";
-  const todayStr = getTodayString();
-  
-  let list = DB.appointments;
-  if (adminTurnosFilter === "hoy") {
-    list = list.filter(a => a.date === todayStr);
-  } else if (adminTurnosFilter === "semana") {
-    // Upcoming 7 days
-    const nextWeek = new Date();
-    nextWeek.setDate(nextWeek.getDate() + 7);
-    const nextWeekStr = nextWeek.toISOString().split("T")[0];
-    list = list.filter(a => a.date >= todayStr && a.date <= nextWeekStr);
-  }
-  list.sort((a,b) => (a.date + a.time).localeCompare(b.date + b.time));
-  if (list.length === 0) {
-    container.innerHTML = `<div class="card text-center text-muted">No hay turnos registrados en este filtro.</div>`;
-    return;
-  }
-  list.forEach(t => {
-    const card = document.createElement("div");
-    card.className = "turno-card";
-    let badgeClass = "badge-pending";
-    if (t.status === "Finalizado") badgeClass = "badge-completed";
-    if (t.status === "Cancelado") badgeClass = "badge-cancelled";
-    let pagadoBadge = t.paid ? `<span class="badge badge-paid">PAGADO</span>` : "";
-    card.innerHTML = `
-      <div class="turno-header">
-        <div class="turno-date-time">
-          <i class="fa-solid fa-user"></i>
-          <span>${t.clientName} (${t.clientPhone})</span>
-        </div>
-        <div>
-          ${pagadoBadge}
-          <span class="badge ${badgeClass}">${t.status}</span>
-        </div>
-      </div>
-      <div class="turno-body mt-2">
-        <span>Fecha: <strong>${formatDateDisplay(t.date)} - ${t.time} hs</strong></span>
-        <span>Servicio: <strong>${t.service}</strong></span>
-      </div>
-      <div class="turno-body">
-        <span>Precio: <strong>${t.usedMembership ? "Membresía VIP" : "$" + Number(t.price).toLocaleString("es-AR")}</strong></span>
-      </div>
-      ${t.status === "Pendiente" ? `
-        <div class="turno-actions">
-          <button class="btn btn-success btn-sm" onclick="adminFinalizarTurno('${t.id}')">
-            <i class="fa-solid fa-check"></i> Finalizar
-          </button>
-          <button class="btn btn-gold btn-sm" onclick="adminTogglePagado('${t.id}')">
-            <i class="fa-solid fa-dollar-sign"></i> ${t.paid ? "Desmarcar Pago" : "Marcar Pagado"}
-          </button>
-          <button class="btn btn-danger btn-sm" onclick="adminCancelarTurno('${t.id}')">
-            <i class="fa-solid fa-xmark"></i> Cancelar
-          </button>
-        </div>
-      ` : `
-        <div class="turno-actions">
-          <button class="btn btn-gold btn-sm" onclick="adminTogglePagado('${t.id}')">
-            <i class="fa-solid fa-dollar-sign"></i> ${t.paid ? "Desmarcar Pago" : "Marcar Pagado"}
-          </button>
-        </div>
-      `}
-    `;
-    container.appendChild(card);
-  });
+.section-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
 }
-function adminFinalizarTurno(id) {
-  const turno = DB.appointments.find(a => a.id === id);
-  if (!turno) return;
-  turno.status = "Finalizado";
-  turno.paid = true;
-  // Deduct membership cut if client has active membership
-  const clientUser = DB.users.find(u => u.id === turno.clientId);
-  let deductedNote = "";
-  
-  if (clientUser && clientUser.hasMembership && clientUser.membershipCutsLeft > 0) {
-    clientUser.membershipCutsLeft -= 1;
-    deductedNote = ` (Se descontó 1 corte de membresía. Restantes: ${clientUser.membershipCutsLeft})`;
-  } else if (!turno.usedMembership) {
-    // Log income in Caja automatically
-    DB.movements.push({
-      id: "mov_" + Date.now(),
-      date: getTodayString(),
-      type: "ingreso",
-      category: turno.service.includes("Color") ? "Colores" : "Cortes",
-      amount: turno.price,
-      description: `Pago ${turno.service} - Cliente ${turno.clientName}`,
-      createdAt: Date.now()
-    });
-  }
-  saveDB();
-  showToast(`Turno finalizado y pagado${deductedNote}`, "success");
-  renderAdminTurnos();
+/* ================= CARDS & UTILITIES ================= */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
 }
-function adminTogglePagado(id) {
-  const turno = DB.appointments.find(a => a.id === id);
-  if (!turno) return;
-  turno.paid = !turno.paid;
-  saveDB();
-  showToast(`Estado de pago actualizado: ${turno.paid ? "PAGADO" : "PENDIENTE DE PAGO"}`, "info");
-  renderAdminTurnos();
+.card.gold-border {
+  border-color: var(--border-gold);
+  box-shadow: var(--gold-glow);
 }
-function adminCancelarTurno(id) {
-  if (confirm("¿Cancelar este turno?")) {
-    const turno = DB.appointments.find(a => a.id === id);
-    if (turno) {
-      turno.status = "Cancelado";
-      saveDB();
-      showToast("Turno cancelado", "info");
-      renderAdminTurnos();
-    }
-  }
+/* Form inputs & Controls */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-// 3. CLIENTES & MEMBRESÍAS
-function renderAdminClientsList() {
-  const container = document.getElementById("admin-clients-list");
-  container.innerHTML = "";
-  const searchText = (document.getElementById("filter-clients-search").value || "").toLowerCase();
-  const filtered = DB.users.filter(u => 
-    u.name.toLowerCase().includes(searchText) || 
-    (u.phone && u.phone.includes(searchText)) ||
-    u.username.toLowerCase().includes(searchText)
-  );
-  if (filtered.length === 0) {
-    container.innerHTML = `<div class="card text-center text-muted">No se encontraron clientes.</div>`;
-    return;
-  }
-  filtered.forEach(u => {
-    const card = document.createElement("div");
-    card.className = "client-card";
-    const hasMem = u.hasMembership && u.membershipCutsLeft > 0;
-    const badgeHTML = hasMem 
-      ? `<span class="badge badge-completed"><i class="fa-solid fa-crown"></i> VIP (${u.membershipCutsLeft} cortes)</span>`
-      : `<span class="badge badge-cancelled">SIN MEMBRESÍA</span>`;
-    card.innerHTML = `
-      <div class="client-header">
-        <div>
-          <span class="client-name">${u.name}</span>
-          <div class="client-phone">Tel: ${u.phone} | User: @${u.username}</div>
-        </div>
-        ${badgeHTML}
-      </div>
-      <div class="turno-actions mt-2">
-        <button class="btn btn-gold btn-sm" onclick="adminRenewMembership('${u.id}')">
-          <i class="fa-solid fa-plus-circle"></i> Activar / Renovar (4 Cortes)
-        </button>
-        <button class="btn btn-outline btn-sm" onclick="adminViewClientHistory('${u.id}')">
-          <i class="fa-solid fa-clock-rotate-left"></i> Ver Historial
-        </button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-function adminRenewMembership(userId) {
-  const client = DB.users.find(u => u.id === userId);
-  if (!client) return;
-  client.hasMembership = true;
-  client.membershipCutsLeft = 4;
-  client.membershipExpiry = "2026-12-31";
-  // Automatically register membership sale in Caja
-  DB.movements.push({
-    id: "mov_" + Date.now(),
-    date: getTodayString(),
-    type: "ingreso",
-    category: "Membresías",
-    amount: 60000,
-    description: `Venta Membresía VIP 4 Cortes - Cliente ${client.name}`,
-    createdAt: Date.now()
-  });
-  saveDB();
-  showToast(`Membresía renovada para ${client.name} (4 cortes asignados)`, "success");
-  renderAdminClientsList();
+.form-group label i {
+  color: var(--gold-primary);
 }
-function adminViewClientHistory(userId) {
-  const client = DB.users.find(u => u.id === userId);
-  const turnos = DB.appointments.filter(a => a.clientId === userId);
-  let turnosHTML = turnos.length === 0 
-    ? `<p class="text-muted text-center py-2">Sin turnos registrados.</p>`
-    : turnos.map(t => `
-        <div class="movement-item mt-1">
-          <div>
-            <strong>${t.service}</strong> (${formatDateDisplay(t.date)} - ${t.time} hs)
-          </div>
-          <span class="badge ${t.status === 'Finalizado' ? 'badge-completed' : 'badge-pending'}">${t.status}</span>
-        </div>
-      `).join("");
-  openModal(`
-    <h3 style="font-family:'Cinzel',serif; color:var(--gold-primary);">Historial: ${client.name}</h3>
-    <div class="mt-3" style="max-height:260px; overflow-y:auto;">
-      ${turnosHTML}
-    </div>
-  `);
+.form-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
 }
-// 4. PRECIOS Y AJUSTES ADMIN
-function loadAdminPriceInputs() {
-  document.getElementById("admin-price-corte").value = DB.prices.corte || 18000;
-  document.getElementById("admin-price-color").value = DB.prices.color || 50000;
+.form-input:focus {
+  border-color: var(--gold-primary);
 }
-function handleUpdatePrices(e) {
-  e.preventDefault();
-  const corteVal = Number(document.getElementById("admin-price-corte").value);
-  const colorVal = Number(document.getElementById("admin-price-color").value);
-  if (corteVal <= 0 || colorVal <= 0) {
-    showToast("Ingresa precios válidos mayores a 0", "error");
-    return;
-  }
-  DB.prices.corte = corteVal;
-  DB.prices.color = colorVal;
-  saveDB();
-  renderPricesUI();
-  showToast("Tarifas actualizadas correctamente en tiempo real", "success");
+.form-row {
+  display: flex;
+  gap: 10px;
 }
-function handleChangeAdminPass(e) {
-  e.preventDefault();
-  const currPass = document.getElementById("admin-pass-current").value;
-  const newPass = document.getElementById("admin-pass-new").value;
-  if (currPass !== DB.admin.password) {
-    showToast("La contraseña actual es incorrecta", "error");
-    return;
-  }
-  DB.admin.password = newPass;
-  saveDB();
-  showToast("Contraseña de Barbero cambiada con éxito", "success");
-  document.getElementById("form-change-admin-pass").reset();
+.col-6 {
+  flex: 1;
 }
-// --- UTILITY FUNCTIONS & MODALS ---
-function formatDateDisplay(dateStr) {
-  if (!dateStr) return "";
-  const parts = dateStr.split("-");
-  if (parts.length !== 3) return dateStr;
-  return `${parts[2]}/${parts[1]}/${parts[0]}`;
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 13px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
 }
-function showToast(msg, type = "info") {
-  const toast = document.getElementById("toast");
-  const toastMsg = document.getElementById("toast-msg");
-  const toastIcon = document.getElementById("toast-icon");
-  toastMsg.textContent = msg;
-  
-  if (type === "success") {
-    toastIcon.className = "fa-solid fa-circle-check text-green";
-  } else if (type === "error") {
-    toastIcon.className = "fa-solid fa-circle-exclamation text-red";
-  } else {
-    toastIcon.className = "fa-solid fa-circle-info text-gold";
-  }
-  toast.classList.remove("hidden");
-  setTimeout(() => {
-    toast.classList.add("hidden");
-  }, 3000);
+.btn-full {
+  width: 100%;
 }
-function openModal(contentHTML) {
-  const backdrop = document.getElementById("modal-backdrop");
-  const body = document.getElementById("modal-body");
-  body.innerHTML = contentHTML;
-  backdrop.classList.remove("hidden");
+.btn-gold {
+  background: var(--gold-gradient);
+  color: #000;
+  box-shadow: var(--gold-glow);
+  font-weight: 700;
 }
-function closeModal(e) {
-  if (e.target.id === "modal-backdrop") {
-    closeModalForce();
-  }
+.btn-gold:active {
+  transform: scale(0.98);
+  opacity: 0.9;
 }
-function closeModalForce() {
-  document.getElementById("modal-backdrop").classList.add("hidden");
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
 }
+.btn-outline:active {
+  background: rgba(212, 175, 55, 0.1);
+}
+.btn-sm {
+  padding: 7px 12px;
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+}
+.btn-success {
+  background: #10b981;
+  color: #fff;
+}
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+/* Segmented Control */
+.segmented-control {
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+}
+.segment-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.segment-btn.active {
+  background: var(--bg-card);
+  color: var(--gold-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+/* ================= AUTH SCREEN ================= */
+#view-auth {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+}
+.auth-card {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), var(--gold-glow);
+}
+.auth-brand {
+  text-align: center;
+  margin-bottom: 22px;
+}
+.luxury-emblem {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  font-weight: 800;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  border: 2px solid var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  box-shadow: var(--gold-glow);
+}
+.auth-title {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+.auth-subtitle {
+  font-size: 11px;
+  color: var(--gold-primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+.hidden-form {
+  display: none !important;
+}
+.quick-admin-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px dashed var(--border-gold);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.quick-admin-note:hover {
+  background: rgba(212, 175, 55, 0.15);
+}
+/* ================= TURNOS & BOOKING ================= */
+.membership-alert-card {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--gold-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.membership-alert-icon {
+  font-size: 22px;
+  color: var(--gold-primary);
+}
+.membership-alert-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+.membership-alert-text strong {
+  color: var(--gold-primary);
+}
+.service-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.service-option {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.service-option input[type="radio"] {
+  accent-color: var(--gold-primary);
+  width: 16px;
+  height: 16px;
+}
+.service-option.active {
+  border-color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.08);
+}
+.service-details {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.service-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.service-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-primary);
+}
+/* Slots Grid */
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.slot-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 10px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.slot-btn:hover:not(.occupied) {
+  border-color: var(--gold-primary);
+}
+.slot-btn.selected {
+  background: var(--gold-gradient);
+  color: #000;
+  border-color: var(--gold-primary);
+  box-shadow: var(--gold-glow);
+}
+.slot-btn.occupied {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: transparent;
+  color: #444;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.empty-text {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+}
+/* Turno Item Card */
+.turno-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.turno-card.gold-highlight {
+  border-color: var(--gold-primary);
+}
+.turno-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.turno-date-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+.turno-date-time i {
+  color: var(--gold-primary);
+}
+/* Badges */
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--status-pending);
+  border: 1px solid var(--status-pending);
+}
+.badge-completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--status-completed);
+  border: 1px solid var(--status-completed);
+}
+.badge-paid {
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--status-paid);
+  border: 1px solid var(--status-paid);
+}
+.badge-cancelled {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--status-cancelled);
+  border: 1px solid var(--status-cancelled);
+}
+/* Banner Gigante PAGADO */
+.banner-pagado-giant {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  margin-top: 4px;
+}
+.banner-pagado-giant .pagado-title {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.banner-pagado-giant i {
+  font-size: 26px;
+}
+.turno-body {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.turno-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+/* ================= MEMBRESÍA VIP ================= */
+.luxury-vip-card {
+  background: linear-gradient(145deg, #181818 0%, #0d0d0d 100%);
+  border: 1px solid var(--gold-primary);
+  box-shadow: var(--gold-glow);
+}
+.vip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.vip-badge {
+  background: var(--gold-gradient);
+  color: #000;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+.vip-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold-primary);
+}
+.vip-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-top: 14px;
+}
+.vip-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+.vip-status-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.cuts-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gauge-number {
+  font-size: 42px;
+  font-weight: 800;
+  font-family: 'Cinzel', serif;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gauge-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.vip-info-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+.detail-item span {
+  color: var(--text-secondary);
+}
+.status-active {
+  color: #10b981;
+}
+.status-inactive {
+  color: var(--text-muted);
+}
+.vip-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+/* ================= ALIAS & PRECIOS ================= */
+.alias-card {
+  background: linear-gradient(135deg, #1c1917 0%, #0a0a0a 100%);
+  border: 1px solid var(--gold-primary);
+}
+.alias-icon {
+  font-size: 34px;
+  color: var(--gold-primary);
+  margin-bottom: 8px;
+}
+.alias-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+.alias-box {
+  background: var(--bg-input);
+  border: 1px dashed var(--gold-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.alias-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--gold-primary);
+  font-family: 'Cinzel', serif;
+}
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold-primary);
+  font-size: 18px;
+}
+.alias-barber {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.price-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.price-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.price-item-info strong {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.price-item-info p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.price-badge {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold-primary);
+  background: rgba(212, 175, 55, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-gold);
+}
+/* ================= ADMIN CAJA & METRICS ================= */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.metric-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+.text-gold { color: var(--gold-primary) !important; }
+.text-green { color: #10b981 !important; }
+.text-red { color: #ef4444 !important; }
+.filters-row {
+  display: flex;
+  gap: 8px;
+}
+.movements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+.movement-item {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.movement-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mov-desc {
+  font-size: 13px;
+  font-weight: 600;
+}
+.mov-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.mov-amount-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mov-amount {
+  font-size: 14px;
+  font-weight: 700;
+}
+.mov-actions {
+  display: flex;
+  gap: 6px;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+}
+.icon-btn:hover {
+  color: var(--text-primary);
+}
+.icon-btn.delete:hover {
+  color: var(--status-cancelled);
+}
+/* Clients list for admin */
+.clients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.client-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.client-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.client-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+.client-phone {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+/* ================= BOTTOM NAVIGATION BAR ================= */
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--nav-height) + env(safe-area-inset-bottom));
+  background: rgba(14, 14, 14, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-gold);
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-items-container {
+  display: flex;
+  height: var(--nav-height);
+  justify-content: space-around;
+  align-items: center;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 100%;
+}
+.nav-item i {
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+.nav-item.active {
+  color: var(--gold-primary);
+  font-weight: 700;
+}
+.nav-item.active i {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+}
+/* ================= TOAST & MODAL ================= */
+.toast {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1c1c1e;
+  border: 1px solid var(--gold-primary);
+  box-shadow: var(--gold-glow);
+  color: var(--text-primary);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { transform: translate(-50%, -20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 380px;
+  padding: 22px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8), var(--gold-glow);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
+  cursor: pointer;
+}
+/* Utility spacing */
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-3 { margin-top: 12px; }
+.mt-4 { margin-top: 16px; }
+.text-center { text-align: center; }
+.text-sm { font-size: 12px; }
+.text-muted { color: var(--text-muted); }
