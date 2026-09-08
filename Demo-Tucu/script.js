@@ -1,18 +1,18 @@
 /* ==========================================================================
-   AA BARBERÍA - ABEL ACOSTA | LOGIC & LOCALSTORAGE CONTROLLER
+   DOUBLE A BARBERÍA - ABEL ACOSTA | LOGIC & LOCALSTORAGE CONTROLLER
    ========================================================================== */
 
-// Date helper at top level
+// Date helper
 function getTodayString() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-// Initial Data Seed
+// Initial Data Seed with Admin credentials: AbelAcosta / Reydelmate123
 const DEFAULT_DATA = {
   admin: {
-    username: "admin",
-    password: "admin123"
+    username: "AbelAcosta",
+    password: "Reydelmate123"
   },
   prices: {
     corte: 18000,
@@ -101,14 +101,14 @@ const DEFAULT_DATA = {
   ]
 };
 
-// Global App State
+// Global State
 let DB = {};
 let currentUser = null;
 let selectedBookingTime = null;
 let adminTurnosFilter = "hoy";
 let editingMovId = null;
 
-// Initialize App
+// Initialize
 document.addEventListener("DOMContentLoaded", () => {
   initStorage();
   checkSession();
@@ -123,7 +123,10 @@ function initStorage() {
       saveDB();
     } else {
       DB = JSON.parse(stored);
-      if (!DB.admin) DB.admin = DEFAULT_DATA.admin;
+      // Actualizar credenciales admin si están desactualizadas
+      if (!DB.admin || DB.admin.username === "admin") {
+        DB.admin = DEFAULT_DATA.admin;
+      }
       if (!DB.prices) DB.prices = DEFAULT_DATA.prices;
       if (!DB.users) DB.users = DEFAULT_DATA.users;
       if (!DB.appointments) DB.appointments = DEFAULT_DATA.appointments;
@@ -143,7 +146,7 @@ function saveDB() {
   }
 }
 
-// Session Logic
+// Session Handlers
 function checkSession() {
   try {
     const sess = localStorage.getItem("aa_barberia_session");
@@ -221,18 +224,13 @@ function switchAuthMode(mode) {
   }
 }
 
-function fillAdminCredentials() {
-  document.getElementById("login-username").value = "admin";
-  document.getElementById("login-password").value = DB.admin.password || "admin123";
-  showToast("Credenciales de Barbero cargadas", "success");
-}
-
 function handleLogin(e) {
   e.preventDefault();
-  const userVal = document.getElementById("login-username").value.trim().toLowerCase();
+  const userVal = document.getElementById("login-username").value.trim();
   const passVal = document.getElementById("login-password").value.trim();
 
-  if (userVal === DB.admin.username.toLowerCase() && passVal === DB.admin.password) {
+  // Verificación Admin (AbelAcosta / Reydelmate123)
+  if (userVal.toLowerCase() === DB.admin.username.toLowerCase() && passVal === DB.admin.password) {
     currentUser = { id: "admin", name: "Abel Acosta", role: "admin" };
     localStorage.setItem("aa_barberia_session", JSON.stringify(currentUser));
     showToast("¡Bienvenido, Abel!", "success");
@@ -240,8 +238,9 @@ function handleLogin(e) {
     return;
   }
 
+  // Verificación Cliente
   const foundClient = DB.users.find(
-    u => (u.username.toLowerCase() === userVal || u.phone === userVal) && u.password === passVal
+    u => (u.username.toLowerCase() === userVal.toLowerCase() || u.phone === userVal) && u.password === passVal
   );
 
   if (foundClient) {
@@ -261,7 +260,7 @@ function handleRegister(e) {
   const phone = document.getElementById("reg-phone").value.trim();
   const password = document.getElementById("reg-password").value.trim();
 
-  if (username === "admin") {
+  if (username === "abelacosta" || username === "admin") {
     showToast("Ese usuario está reservado para el barbero", "error");
     return;
   }
@@ -299,7 +298,7 @@ function handleLogout() {
   showAuth();
 }
 
-// Navigation Tabs Renderer
+// Navigation Tabs
 function renderBottomNav() {
   const container = document.getElementById("nav-items-container");
   if (!container) return;
@@ -623,7 +622,7 @@ function requestMembership() {
   openModal(`
     <div class="text-center">
       <i class="fa-solid fa-crown text-gold" style="font-size:48px; margin-bottom:12px;"></i>
-      <h3 style="font-family:'Cinzel',serif; color:var(--gold-primary); font-size:20px;">Membresía Mensual VIP</h3>
+      <h3 style="font-family:'Bodoni Moda',serif; color:var(--gold-primary); font-size:20px;">Membresía Mensual VIP</h3>
       <p style="font-size:13px; color:var(--text-secondary); margin-top:8px;">
         Accede a 4 cortes de cabello al mes por un precio promocional único.
       </p>
@@ -937,34 +936,68 @@ function renderAdminTurnos() {
   });
 }
 
+// -------------------------------------------------------------
+// MODAL DE CONFIRMACIÓN AUTOMÁTICA DE PAGO: "¿Abonaste?"
+// -------------------------------------------------------------
 function adminFinalizarTurno(id) {
   const turno = DB.appointments.find(a => a.id === id);
   if (!turno) return;
 
+  openModal(`
+    <div class="text-center">
+      <i class="fa-solid fa-circle-question text-gold" style="font-size:50px; margin-bottom:14px;"></i>
+      <h3 style="font-family:'Bodoni Moda',serif; font-size:24px; color:var(--gold-primary); margin-bottom:8px;">¿Abonaste?</h3>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.4;">
+        Confirma si el cliente <strong>${turno.clientName}</strong> realizó el pago correspondiente de <strong>$${Number(turno.price).toLocaleString("es-AR")}</strong> por el servicio <strong>${turno.service}</strong>.
+      </p>
+
+      <div class="mt-4" style="display:flex; flex-direction:column; gap:10px;">
+        <button class="btn btn-gold btn-full" onclick="confirmTurnoPago('${id}', true)">
+          <i class="fa-solid fa-check-circle"></i> Aceptar (Confirmar Pago)
+        </button>
+        <button class="btn btn-outline btn-full" onclick="confirmTurnoPago('${id}', false)">
+          <i class="fa-solid fa-clock text-red"></i> Rechazar (Pendiente de Pago)
+        </button>
+      </div>
+    </div>
+  `);
+}
+
+function confirmTurnoPago(id, fueAbonado) {
+  const turno = DB.appointments.find(a => a.id === id);
+  if (!turno) return;
+
   turno.status = "Finalizado";
-  turno.paid = true;
+  turno.paid = fueAbonado;
 
   const clientUser = DB.users.find(u => u.id === turno.clientId);
-  let deductedNote = "";
-  
-  if (clientUser && clientUser.hasMembership && clientUser.membershipCutsLeft > 0) {
-    clientUser.membershipCutsLeft -= 1;
-    deductedNote = ` (Se descontó 1 corte de membresía. Restantes: ${clientUser.membershipCutsLeft})`;
-  } else if (!turno.usedMembership) {
-    DB.movements.push({
-      id: "mov_" + Date.now(),
-      date: getTodayString(),
-      type: "ingreso",
-      category: turno.service.includes("Color") ? "Colores" : "Cortes",
-      amount: turno.price,
-      description: `Pago ${turno.service} - Cliente ${turno.clientName}`,
-      createdAt: Date.now()
-    });
+  let note = "";
+
+  if (fueAbonado) {
+    if (clientUser && clientUser.hasMembership && clientUser.membershipCutsLeft > 0 && turno.service.includes("Corte")) {
+      clientUser.membershipCutsLeft -= 1;
+      note = ` (Se descontó 1 corte de membresía. Restantes: ${clientUser.membershipCutsLeft})`;
+    } else if (!turno.usedMembership) {
+      // Registrar ingreso en caja automáticamente
+      DB.movements.push({
+        id: "mov_" + Date.now(),
+        date: getTodayString(),
+        type: "ingreso",
+        category: turno.service.includes("Color") ? "Colores" : "Cortes",
+        amount: turno.price,
+        description: `Pago ${turno.service} - Cliente ${turno.clientName}`,
+        createdAt: Date.now()
+      });
+    }
+    showToast(`Turno finalizado y marcado como PAGADO${note}`, "success");
+  } else {
+    showToast(`Turno finalizado (Pendiente de Pago)`, "info");
   }
 
   saveDB();
-  showToast(`Turno finalizado y pagado${deductedNote}`, "success");
+  closeModalForce();
   renderAdminTurnos();
+  if (currentUser.role === "admin") renderAdminCaja();
 }
 
 function adminTogglePagado(id) {
@@ -1079,7 +1112,7 @@ function adminViewClientHistory(userId) {
       `).join("");
 
   openModal(`
-    <h3 style="font-family:'Cinzel',serif; color:var(--gold-primary);">Historial: ${client.name}</h3>
+    <h3 style="font-family:'Bodoni Moda',serif; color:var(--gold-primary);">Historial: ${client.name}</h3>
     <div class="mt-3" style="max-height:260px; overflow-y:auto;">
       ${turnosHTML}
     </div>
@@ -1179,4 +1212,5 @@ function closeModalForce() {
   const backdrop = document.getElementById("modal-backdrop");
   if (backdrop) backdrop.classList.add("hidden");
 }
+
 
