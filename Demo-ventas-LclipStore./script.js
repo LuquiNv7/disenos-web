@@ -1,185 +1,100 @@
-/**
- * PHŌNE - Interactive Landing Page Logic
- * Features: Mobile drawer, sticky header, category filtering, WhatsApp inquiry modal.
- */
-document.addEventListener('DOMContentLoaded', () => {
-  initStickyHeader();
-  initMobileMenu();
-  initProductFiltering();
-  initPurchaseModal();
-  initSmoothScroll();
-});
-/**
- * 1. STICKY HEADER SCROLL EFFECT
- */
-function initStickyHeader() {
-  const header = document.getElementById('header');
-  if (!header) return;
-  const handleScroll = () => {
-    if (window.scrollY > 30) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+// Lógica Interactiva LClipStore
+
+// 1. Simulador de Ojo Contador (FOMO)
+const contador = document.getElementById('contador-visitas');
+if (contador) {
+    setInterval(() => {
+        const current = parseInt(contador.innerText);
+        const change = Math.floor(Math.random() * 11) - 5; // Cambia sutilmente entre -5 y +5
+        let next = current + change;
+        if (next < 2) next = 2;
+        if (next > 200) next = 200;
+        contador.innerText = next;
+    }, 4000);
+}
+
+// 2. Cambio de Color en Tiempo Real
+function changeColor(product, imgUrl, element) {
+    // Cambiar Imagen con Fundido Suave
+    const imgElement = document.getElementById(`img-${product}`);
+    if (imgElement) {
+        imgElement.style.opacity = 0.3;
+        setTimeout(() => {
+            imgElement.src = imgUrl;
+            imgElement.style.opacity = 1;
+        }, 200);
     }
-  };
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll(); // Initial check
+    
+    // Actualizar Botón Activo
+    const dots = element.parentElement.querySelectorAll('.color-dot');
+    dots.forEach(dot => dot.classList.remove('active'));
+    element.classList.add('active');
 }
-/**
- * 2. MOBILE MENU DRAWER
- */
-function initMobileMenu() {
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileClose = document.getElementById('mobileClose');
-  const mobileOverlay = document.getElementById('mobileMenuOverlay');
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  if (!mobileToggle || !mobileOverlay) return;
-  const openMenu = () => {
-    mobileOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeMenu = () => {
-    mobileOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  };
-  mobileToggle.addEventListener('click', openMenu);
-  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
-  // Close menu when clicking backdrop
-  mobileOverlay.addEventListener('click', (e) => {
-    if (e.target === mobileOverlay) closeMenu();
-  });
-  // Close menu when clicking nav links
-  mobileNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      closeMenu();
-      const filterCat = link.getAttribute('data-filter');
-      if (filterCat) {
-        filterProducts(filterCat);
-      }
-    });
-  });
+
+// 3. Sistema de Carrito de Compras Extensible
+let cart = [];
+
+function toggleCart() {
+    document.getElementById('cart-drawer').classList.toggle('open');
+    document.getElementById('cart-overlay').classList.toggle('open');
 }
-/**
- * 3. PRODUCT CATEGORY FILTERING (TODOS / IPHONE / SAMSUNG)
- */
-function initProductFiltering() {
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const filterNavLinks = document.querySelectorAll('[data-filter]');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const category = btn.getAttribute('data-category');
-      
-      // Update active tab styling
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterProducts(category);
-    });
-  });
-  filterNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const filterVal = link.getAttribute('data-filter');
-      if (filterVal) {
-        filterProducts(filterVal);
-        // Sync main tab buttons
-        tabBtns.forEach(b => {
-          if (b.getAttribute('data-category') === filterVal) {
-            b.classList.add('active');
-          } else {
-            b.classList.remove('active');
-          }
-        });
-      }
-    });
-  });
-}
-function filterProducts(category) {
-  const productCards = document.querySelectorAll('.product-card');
-  productCards.forEach(card => {
-    const cardCat = card.getAttribute('data-category');
-    if (category === 'todos' || cardCat === category) {
-      card.style.display = 'flex';
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
+
+function addToCart(name, price) {
+    const existingProduct = cart.find(item => item.name === name);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
     } else {
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        card.style.display = 'none';
-      }, 200);
+        cart.push({ name, price, quantity: 1 });
     }
-  });
+    updateCartDOM();
+    
+    // Abrir el carrito automáticamente al agregar para mejorar la experiencia
+    toggleCart();
 }
-/**
- * 4. PURCHASE INQUIRY MODAL & WHATSAPP INTEGRATION
- */
-function initPurchaseModal() {
-  const modal = document.getElementById('purchaseModal');
-  const modalClose = document.getElementById('modalClose');
-  const modalCancelBtn = document.getElementById('modalCancelBtn');
-  const modalWhatsappBtn = document.getElementById('modalWhatsappBtn');
-  const modalName = document.getElementById('modalProductName');
-  const modalPrice = document.getElementById('modalProductPrice');
-  const modalImg = document.getElementById('modalProductImg');
-  const buyBtns = document.querySelectorAll('.buy-btn');
-  if (!modal) return;
-  let currentProductData = { name: '', price: '' };
-  const openModal = (productName, productPrice, productImg) => {
-    currentProductData = { name: productName, price: productPrice };
-    if (modalName) modalName.textContent = productName;
-    if (modalPrice) modalPrice.textContent = productPrice;
-    if (modalImg && productImg) modalImg.src = productImg;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-  const closeModal = () => {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-  buyBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pName = btn.getAttribute('data-product') || 'Equipo';
-      const pPrice = btn.getAttribute('data-price') || '$1.300.000';
-      const pImg = btn.getAttribute('data-img') || 'assets/hero-phones.png';
-      openModal(pName, pPrice, pImg);
+
+function updateCartDOM() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotalPrice = document.getElementById('cart-total-price');
+    const wppBtn = document.getElementById('wpp-checkout-btn');
+    
+    // Contar total de productos
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    cartCount.innerText = totalItems;
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-message">Tu carrito está vacío.</p>';
+        cartTotalPrice.innerText = '\$0';
+        wppBtn.href = "#";
+        return;
+    }
+    
+    cartItemsContainer.innerHTML = '';
+    let totalMoney = 0;
+    let wppText = "Hola LClipStore! Me interesa encargar los siguientes equipos:\n\n";
+    
+    cart.forEach(item => {
+        totalMoney += item.price * item.quantity;
+        wppText += `- ${item.name} (Cantidad: ${item.quantity})\n`;
+        
+        const itemElement = document.createElement('div');
+        itemElement.className = 'cart-item';
+        itemElement.innerHTML = `
+            <div>
+                <h4>${item.name}</h4>
+                <p style="font-size: 13px; color: #86868b;">$${item.price.toLocaleString('es-AR')} x ${item.quantity}</p>
+            </div>
+            <button onclick="removeFromCart('${item.name}')" style="background: none; border: none; color: #ff3b30; cursor: pointer; font-size: 13px;">Quitar</button>
+        `;
+        cartItemsContainer.appendChild(itemElement);
     });
-  });
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  // WhatsApp redirection
-  if (modalWhatsappBtn) {
-    modalWhatsappBtn.addEventListener('click', () => {
-      const textMessage = `¡Hola! Vengo de la web de PHŌNE. Quisiera consultar disponibilidad del *${currentProductData.name}* publicado a *${currentProductData.price}*.`;
-      const encodedMsg = encodeURIComponent(textMessage);
-      
-      // WhatsApp API URL (Target placeholder number - client can edit phone number)
-      const whatsappUrl = `https://wa.me/?text=${encodedMsg}`;
-      window.open(whatsappUrl, '_blank');
-      closeModal();
-    });
-  }
+    
+    wppText += `\nTotal estimado: $${totalMoney.toLocaleString('es-AR')}`;
+    cartTotalPrice.innerText = `$${totalMoney.toLocaleString('es-AR')}`;
+    wppBtn.href = `https://wa.me{encodeURIComponent(wppText)}`;
 }
-/**
- * 5. SMOOTH SCROLLING FOR NAVIGATION LINKS
- */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      const targetEl = document.querySelector(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = targetEl.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
+
+function removeFromCart(name) {
+    cart = cart.filter(item => item.name !== name);
+    updateCartDOM();
 }
