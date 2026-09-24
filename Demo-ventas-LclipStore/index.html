@@ -1,107 +1,18 @@
-@import "tailwindcss";
-@layer base {
-  :root {
-    --bg-liquid: #F2F2F7;
-    --bg-obsidian: #0A0A0B;
-    --accent-violet: #6366F1;
-    --accent-gold: #D4AF37;
-    --meli-green: #00A650;
-  }
-  body {
-    background-color: #F2F2F7;
-    color: #0A0A0B;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
-  }
-}
-/* Custom Cubic Bezier Transition Class */
-.transition-cubic {
-  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-/* Custom Glassmorphism */
-.glass-nav {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-}
-.glass-card-dark {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.glass-drawer {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-}
-/* Marquee Infinite Animation */
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marqueeScroll 28s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-/* Eye Blink Animation */
-@keyframes eyeBlink {
-  0%, 88%, 100% { opacity: 1; transform: scaleY(1); }
-  94% { opacity: 0.15; transform: scaleY(0.1); }
-}
-.animate-eye-blink {
-  animation: eyeBlink 3.8s ease-in-out infinite;
-}
-/* Clock Tick Pulse */
-@keyframes clockPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.12); }
-}
-.animate-clock {
-  animation: clockPulse 1s ease-in-out infinite;
-}
-/* MeLi Reputation Segment 5 Pulse */
-@keyframes meliRepPulse {
-  0%, 100% {
-    box-shadow: 0 0 6px rgba(0, 166, 80, 0.6);
-    transform: scaleY(1);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(0, 166, 80, 1);
-    transform: scaleY(1.18);
-  }
-}
-.animate-meli-pulse {
-  animation: meliRepPulse 1.8s ease-in-out infinite;
-}
-/* Floating animation */
-@keyframes floatY {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(0.8deg); }
-}
-.animate-float-slow {
-  animation: floatY 6s ease-in-out infinite;
-}
-/* Strikethrough for Out of Stock swatch */
-.swatch-out-of-stock {
-  position: relative;
-  cursor: not-allowed !important;
-  opacity: 0.6;
-}
-.swatch-out-of-stock::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -2px;
-  right: -2px;
-  height: 2.5px;
-  background-color: #EF4444;
-  transform: rotate(-45deg);
-  border-radius: 2px;
-  box-shadow: 0 0 4px rgba(239, 68, 68, 0.8);
-}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LClipStore | Exclusive iPhones & Ultra-Luxury Tech Flagship</title>
+    <meta name="description" content="LClipStore - E-commerce de ultra-lujo enfocado exclusivamente en iPhones de alta gama. Envíos gratis en el día, 1 año de garantía escrita y 10% OFF por transferencia." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366F1'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
 
