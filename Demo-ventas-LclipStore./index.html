@@ -1,1098 +1,147 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="LClipStore — Distribuidor premium de iPhones de alta gama en Argentina. iPhone 18, 17, 16 y 15 con garantía oficial, envío en el día y los mejores precios." />
-  <meta name="theme-color" content="#0A0A0B" />
-  <title>LClipStore — iPhones de Alta Gama | Envío en el Día</title>
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Open Graph -->
-  <meta property="og:title"       content="LClipStore — iPhones Premium | Envío en el Día" />
-  <meta property="og:description" content="Tu destino exclusivo para iPhones de alta gama en Argentina. Garantía de 1 año y envío por moto el mismo día." />
-  <meta property="og:type"        content="website" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LClipStore | Tienda Oficial iPhone</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- ============================================================
-       NAVBAR
-       ============================================================ -->
-  <header class="navbar" role="banner">
-    <a href="#" class="navbar-brand" aria-label="LClipStore inicio">
-      <div class="brand-logo-mark" aria-hidden="true">LC</div>
-      <span class="brand-name">LClip<span>Store</span></span>
-    </a>
-    <nav class="navbar-nav" role="navigation" aria-label="Navegación principal">
-      <a href="#catalogo"  class="nav-link">Catálogo</a>
-      <a href="#nosotros"  class="nav-link">Nosotros</a>
-      <a href="#reviews"   class="nav-link">Opiniones</a>
-      <a href="#contacto"  class="nav-link">Contacto</a>
+
+    <!-- Barra de Anuncios Superior con Marquesina Infinita -->
+    <div class="top-bar">
+        <div class="marquee-content">
+            <span>🔥 ¡10% OFF PAGANDO EN TRANSFERENCIA! — 🚚 ENVIOS GRATIS A TODO EL PAÍS — 🛡️ GARANTÍA ESCRITA POR 1 AÑO — 💳 HASTA 12 CUOTAS DISPONIBLES — </span>
+            <span>🔥 ¡10% OFF PAGANDO EN TRANSFERENCIA! — 🚚 ENVIOS GRATIS A TODO EL PAÍS — 🛡️ GARANTÍA ESCRITA POR 1 AÑO — 💳 HASTA 12 CUOTAS DISPONIBLES — </span>
+        </div>
+    </div>
+
+    <!-- Navbar de Cristal iOS -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">LClipStore</a>
+            <div class="nav-actions">
+                <button class="cart-toggle" onclick="toggleCart()">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
     </nav>
-    <div class="navbar-actions">
-      <a href="https://wa.me/5491159305875?text=Hola%20LClipStore!%20Quiero%20consultar%20sobre%20un%20iPhone."
-         target="_blank" rel="noopener noreferrer" class="btn-wa-nav" aria-label="Contactar por WhatsApp">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        WhatsApp
-      </a>
-      <button class="btn-cart" id="cartToggle" onclick="openCart()" aria-label="Abrir carrito de compras" type="button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
-      </button>
-    </div>
-  </header>
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
-  <section class="hero" id="inicio" aria-labelledby="heroTitle">
-    <div class="hero-noise" aria-hidden="true"></div>
-    <div class="hero-glow-1" aria-hidden="true"></div>
-    <div class="hero-glow-2" aria-hidden="true"></div>
-    <div class="hero-grid-lines" aria-hidden="true"></div>
-    <div class="container">
-      <div style="display:grid; grid-template-columns: 1fr 440px; gap: 80px; align-items: center;">
+
+    <!-- Hero Section Inmersivo Metálico -->
+    <header class="hero">
         <div class="hero-content">
-          <p class="hero-eyebrow" aria-label="Nuevo lanzamiento">
-            ✦ Nuevo: iPhone 18 Pro Max ya disponible
-          </p>
-          <h1 class="hero-title" id="heroTitle">
-            <span>El futuro</span>
-            <span class="line-accent">en tus manos</span>
-            <span class="line-ghost">Premium</span>
-          </h1>
-          <p class="hero-subtitle">
-            Distribuidores exclusivos de iPhones de alta gama en Argentina. 
-            Garantía oficial de 1 año, envío por moto en el día y los precios más competitivos del mercado.
-          </p>
-          <div class="hero-actions">
-            <a href="#catalogo" class="btn-primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-              Ver Catálogo
-            </a>
-            <a href="https://wa.me/5491159305875?text=Hola%20LClipStore!%20Quiero%20saber%20m%C3%A1s%20sobre%20los%20iPhones%20disponibles."
-               target="_blank" rel="noopener noreferrer" class="btn-outline-white">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              Consultar ahora
-            </a>
-          </div>
-          <div class="hero-stats" aria-label="Estadísticas de la tienda">
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">4.8<span>★</span></div>
-              <div class="hero-stat-label">Calificación promedio</div>
+            <span class="hero-tag">Lanzamiento Oficial</span>
+            <h1 class="hero-title">iPhones que definen tu estatus.</h1>
+            <p class="hero-subtitle">Diseñados en titanio. Equipos nuevos y sellados con el estándar premium definitivo.</p>
+            <div class="hero-cta">
+                <a href="#catalogo" class="btn btn-primary">Explorar Modelos</a>
             </div>
-            <div class="hero-stat-divider" aria-hidden="true"></div>
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">+<span>2.400</span></div>
-              <div class="hero-stat-label">iPhones vendidos</div>
-            </div>
-            <div class="hero-stat-divider" aria-hidden="true"></div>
-            <div class="hero-stat-item">
-              <div class="hero-stat-number"><span>1</span> Año</div>
-              <div class="hero-stat-label">Garantía oficial</div>
-            </div>
-          </div>
         </div>
-        <!-- Hero Visual -->
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hero-phone-stage">
-            <div class="hero-phone-back">
-              <div style="width:100%;height:100%;background:linear-gradient(145deg,#1a1a2e 0%,#0f3460 100%);display:flex;align-items:center;justify-content:center;border-radius:40px;">
-                <div style="text-align:center;color:rgba(255,255,255,0.15);">
-                  <div style="font-size:64px;margin-bottom:20px">⚫</div>
-                  <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase">Pro Camera System</div>
-                  <div style="font-size:10px;margin-top:4px;opacity:0.6">48MP · 5× Zoom</div>
+    </header>
+
+    <!-- Catálogo Asimétrico de Modelos iPhone -->
+    <main id="catalogo" class="catalog-section">
+        <h2 class="section-main-title">Elegí tu próximo iPhone</h2>
+        <div class="products-grid">
+            
+            <!-- Producto 1: iPhone 18 Pro Max -->
+            <div class="product-card highlight" data-product="iphone-18-pro-max">
+                <div class="image-container">
+                    <img id="img-18promax" src="https://mitiendanube.com" alt="iPhone 18 Pro Max" class="product-img">
                 </div>
-              </div>
-            </div>
-            <div class="hero-phone-front">
-              <div style="width:100%;height:100%;background:linear-gradient(145deg,#0d0d0d 0%,#1a1a2e 100%);display:flex;align-items:center;justify-content:center;border-radius:40px;position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 20%,rgba(99,102,241,0.3) 0%,transparent 60%);pointer-events:none;"></div>
-                <div style="text-align:center;color:rgba(255,255,255,0.9);position:relative;z-index:2;">
-                  <div style="font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px">iPhone 18 Pro Max</div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.25);font-weight:500">A19 Pro · Titanio</div>
+                <div class="product-info">
+                    <div class="card-header-flex">
+                        <h3 class="product-name">iPhone 18 Pro Max</h3>
+                        <span class="tag-premium">MÁS BUSCADO</span>
+                    </div>
+                    
+                    <div class="fomo-price-box">
+                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
+                        <div class="price-container">
+                            <span class="price-old">USD 2.400 / ARS 3.120.000</span>
+                            <span class="price-current" id="price-display-18promax">USD 1.830 / ARS 2.379.000</span>
+                        </div>
+                        <div class="fomo-eye">👁️ <span class="contador-visitas">124</span> personas están interesadas en este modelo ahora</div>
+                    </div>
+
+                    <div class="color-picker">
+                        <button class="color-dot active" style="background-color: #4a282d;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'burgundy')" title="Burgundy"></button>
+                        <button class="color-dot" style="background-color: #1c1c1e;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'black')" title="Black"></button>
+                        <button class="color-dot" style="background-color: #e3e4e5;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'silver')" title="Silver / Glacier"></button>
+                    </div>
+
+                    <div class="capacity-container">
+                        <select class="spec-select" onchange="updateVariant('18promax', this)">
+                            <option value="256_standard">256 GB (Black/Silver/Glacier) — USD 1.830</option>
+                            <option value="256_burgundy">256 GB (Burgundy Exclusive) — USD 1.860</option>
+                        </select>
+                    </div>
+
+                    <div class="dual-buttons">
+                        <button onclick="comprarAhoraDirecto('iphone-18-pro-max')" class="btn btn-checkout">Comprar Ahora</button>
+                        <button class="btn btn-cart" id="btn-cart-18promax" onclick="addToCart('iPhone 18 Pro Max 256GB', 1830)">Agregar al Carrito</button>
+                    </div>
+                    <button onclick="consultarWhatsApp('iPhone 18 Pro Max')" class="wpp-ask-link">Consultar dudas por WhatsApp</button>
                 </div>
-                <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);width:100px;height:30px;background:rgba(0,0,0,0.8);border-radius:15px;display:flex;align-items:center;justify-content:center;">
-                  <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.15);margin:0 4px"></div>
-                  <div style="width:50px;height:8px;border-radius:4px;background:rgba(255,255,255,0.06)"></div>
+            </div>
+
+            <!-- Producto 2: iPhone 18 Pro -->
+            <div class="product-card" data-product="iphone-18-pro">
+                <div class="image-container">
+                    <img id="img-18pro" src="https://mitiendanube.com" alt="iPhone 18 Pro" class="product-img">
                 </div>
-              </div>
-            </div>
-            <div class="hero-tag-badge">
-              <span class="hero-tag-icon">🚀</span>
-              <div class="hero-tag-text">
-                <strong>Envío en el día</strong>
-                <span>Buenos Aires y GBA</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ============================================================
-       MARQUEE TICKER
-       ============================================================ -->
-  <div class="marquee-section" aria-hidden="true">
-    <div class="marquee-track">
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 18 Pro Max</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Garantía 1 Año</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Envío en el Día</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>MercadoLíder Platinum</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 18 Pro</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pago con Tarjetas</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 17 Pro Max</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>+2.400 Vendidos</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Stock Disponible</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Apple Pay · Google Pay</span>
-      <!-- Duplicate for seamless loop -->
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 18 Pro Max</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Garantía 1 Año</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Envío en el Día</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>MercadoLíder Platinum</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 18 Pro</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Pago con Tarjetas</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>iPhone 17 Pro Max</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>+2.400 Vendidos</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Stock Disponible</span>
-      <span class="marquee-item"><span class="marquee-dot"></span>Apple Pay · Google Pay</span>
-    </div>
-  </div>
-  <!-- ============================================================
-       PRODUCT CATALOG
-       ============================================================ -->
-  <section class="catalog-section" id="catalogo" aria-labelledby="catalogTitle">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-header-left reveal">
-          <div class="section-tag"><span class="dot"></span>Catálogo 2025–2026</div>
-          <h2 class="section-title" id="catalogTitle">
-            Modelos <span class="accent">Disponibles</span>
-          </h2>
-          <p class="section-subtitle">
-            Stock actualizado en tiempo real. Todos los equipos con garantía oficial de 1 año y factura de compra.
-          </p>
-        </div>
-        <div class="section-header-right reveal reveal-delay-2">
-          <button class="filter-btn active" data-filter="all" type="button">Todos</button>
-          <button class="filter-btn" data-filter="18" type="button">iPhone 18</button>
-          <button class="filter-btn" data-filter="17" type="button">iPhone 17</button>
-          <button class="filter-btn" data-filter="16" type="button">iPhone 16–15</button>
-        </div>
-      </div>
-      <!-- Product Grid — Generated inline for static repo -->
-      <div class="product-grid" id="productGrid">
-        <!-- ========================
-             CARD: iPhone 18 Pro Max 256 V1
-             ======================== -->
-        <article class="product-card reveal" data-product-id="iph18pm-256-v1" data-model="iPhone 18">
-          <span class="card-badge badge-new">Nuevo 2026</span>
-          <div class="card-image-stage">
-            <div class="fomo-badge" aria-live="polite" aria-label="Personas interesadas">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">47</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#1C1C1E33 0%,#1C1C1E88 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.6);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Pro Camera</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
+                <div class="product-info">
+                    <h3 class="product-name">iPhone 18 Pro</h3>
+                    
+                    <div class="fomo-price-box">
+                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
+                        <div class="price-container">
+                            <span class="price-old">USD 2.100 / ARS 2.730.000</span>
+                            <span class="price-current" id="price-display-18pro">USD 1.590 / ARS 2.067.000</span>
+                        </div>
+                        <div class="fomo-eye">👁️ <span class="contador-visitas">94</span> personas están interesadas en este modelo ahora</div>
+                    </div>
+
+                    <div class="color-picker">
+                        <button class="color-dot active" style="background-color: #e3e4e5;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'glacier')" title="Glacier / Silver"></button>
+                        <button class="color-dot" style="background-color: #1c1c1e;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'black')" title="Black"></button>
+                        <button class="color-dot" style="background-color: #4a282d;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'burgundy')" title="Burgundy"></button>
+                    </div>
+
+                    <div class="capacity-container">
+                        <select class="spec-select" onchange="updateVariant('18pro', this)">
+                            <option value="256_glacier">256 GB (Glacier / Silver) — USD 1.590</option>
+                            <option value="256_black">256 GB (Black) — USD 1.610</option>
+                            <option value="256_burgundy">256 GB (Burgundy) — USD 1.640</option>
+                            <option value="512_glacier">512 GB (Glacier) — USD 1.830</option>
+                        </select>
+                    </div>
+
+                    <div class="dual-buttons">
+                        <button onclick="comprarAhoraDirecto('iphone-18-pro')" class="btn btn-checkout">Comprar Ahora</button>
+                        <button class="btn btn-cart" id="btn-cart-18pro" onclick="addToCart('iPhone 18 Pro 256GB', 1590)">Agregar al Carrito</button>
+                    </div>
+                    <button onclick="consultarWhatsApp('iPhone 18 Pro')" class="wpp-ask-link">Consultar dudas por WhatsApp</button>
                 </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#1C1C1E33 0%,#1C1C1E88 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.5);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.7);">18 PRO MAX</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.35);">A19 Pro · Titanio</div>
-              </div>
             </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 18 Pro Max</h3>
-            <div class="card-capacity-tag">256 GB · Titanio de Grado Aeroespacial</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Black</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Black" style="background:#1C1C1E;"
-                  onclick="selectColor('iph18pm-256-v1','Black')"
-                  onmouseenter="hoverColor('iph18pm-256-v1','Black')"
-                  onmouseleave="leaveColor('iph18pm-256-v1')"
-                  title="Black" type="button" aria-label="Color Black"></button>
-                <button class="color-swatch" data-color="Silver" style="background:#C8C8C8;"
-                  onclick="selectColor('iph18pm-256-v1','Silver')"
-                  onmouseenter="hoverColor('iph18pm-256-v1','Silver')"
-                  onmouseleave="leaveColor('iph18pm-256-v1')"
-                  title="Silver" type="button" aria-label="Color Silver"></button>
-                <button class="color-swatch" data-color="Glacier" style="background:#A8C5D0;"
-                  onclick="selectColor('iph18pm-256-v1','Glacier')"
-                  onmouseenter="hoverColor('iph18pm-256-v1','Glacier')"
-                  onmouseleave="leaveColor('iph18pm-256-v1')"
-                  title="Glacier" type="button" aria-label="Color Glacier"></button>
-                <button class="color-swatch out-of-stock" data-color="Burgundy" style="background:#6E1C2B;"
-                  onmouseenter="hoverColor('iph18pm-256-v1','Burgundy')"
-                  onmouseleave="leaveColor('iph18pm-256-v1')"
-                  title="Burgundy — Sin stock" type="button" aria-label="Color Burgundy sin stock" aria-disabled="true"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.830</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_18PROMAX_256_V1" target="_blank" rel="noopener noreferrer"
-               class="btn-buy-now" aria-label="Comprar iPhone 18 Pro Max 256 GB ahora">
-              ⚡ Comprar Ahora
-            </a>
-            <button class="btn-add-cart" onclick="addToCart('iph18pm-256-v1')" type="button" aria-label="Agregar al carrito">
-              🛒
-            </button>
-            <button class="btn-wa-card" onclick="waProduct('iph18pm-256-v1')" type="button" aria-label="Consultar por WhatsApp" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 18 Pro Max 256 Burgundy
-             ======================== -->
-        <article class="product-card reveal reveal-delay-1" data-product-id="iph18pm-256-bur" data-model="iPhone 18">
-          <span class="card-badge badge-hot">¡Popular!</span>
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#2A0A10 0%,#3D1018 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">83</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#6E1C2B44 0%,#6E1C2BAA 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.5);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Pro Camera</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
+
+            <!-- Producto 3: iPhone 17 Pro Max -->
+            <div class="product-card" data-product="iphone-17-pro-max">
+                <div class="image-container">
+                    <img id="img-17promax" src="https://mitiendanube.com" alt="iPhone 17 Pro Max" class="product-img">
                 </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#6E1C2B55 0%,#6E1C2BAA 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.5);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.8);">18 PRO MAX</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.4);">Burgundy · Titanio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 18 Pro Max</h3>
-            <div class="card-capacity-tag">256 GB · Edición Burgundy Exclusiva</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Burgundy</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Burgundy" style="background:#6E1C2B;"
-                  onclick="selectColor('iph18pm-256-bur','Burgundy')"
-                  title="Burgundy" type="button" aria-label="Color Burgundy"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.860</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_18PROMAX_256_BURGUNDY" target="_blank" rel="noopener noreferrer"
-               class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph18pm-256-bur')" type="button" aria-label="Agregar al carrito">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph18pm-256-bur')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 18 Pro Multi Storage
-             ======================== -->
-        <article class="product-card reveal reveal-delay-2" data-product-id="iph18p-multi" data-model="iPhone 18">
-          <span class="card-badge badge-new">Nuevo 2026</span>
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#F0F4F8 0%,#E8EDF2 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">62</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#1C1C1E33 0%,#1C1C1E77 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(0,0,0,0.4);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Dual Camera</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.15);border:1px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.15);border:1px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,0,0,0.15);border:1px solid rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#2A2A2E 0%,#1C1C1E 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.5);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.7);">iPhone 18 Pro</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.35);">A19 Pro · Titanio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 18 Pro</h3>
-            <div class="card-capacity-tag">Seleccioná la capacidad:</div>
-            <div class="storage-selector">
-              <button class="storage-btn active" data-storage="256 GB" onclick="selectStorage('iph18p-multi','256 GB')" type="button">256 GB</button>
-              <button class="storage-btn" data-storage="512 GB" onclick="selectStorage('iph18p-multi','512 GB')" type="button">512 GB</button>
-            </div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Black</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Black" style="background:#1C1C1E;"
-                  onclick="selectColor('iph18p-multi','Black')" onmouseenter="hoverColor('iph18p-multi','Black')" onmouseleave="leaveColor('iph18p-multi')"
-                  title="Black" type="button" aria-label="Color Black"></button>
-                <button class="color-swatch" data-color="Burgundy" style="background:#6E1C2B;"
-                  onclick="selectColor('iph18p-multi','Burgundy')" onmouseenter="hoverColor('iph18p-multi','Burgundy')" onmouseleave="leaveColor('iph18p-multi')"
-                  title="Burgundy" type="button" aria-label="Color Burgundy"></button>
-                <button class="color-swatch" data-color="Glacier" style="background:#A8C5D0;"
-                  onclick="selectColor('iph18p-multi','Glacier')" onmouseenter="hoverColor('iph18p-multi','Glacier')" onmouseleave="leaveColor('iph18p-multi')"
-                  title="Glacier" type="button" aria-label="Color Glacier"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.610</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_18PRO_MULTI" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph18p-multi')" type="button" aria-label="Agregar al carrito">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph18p-multi')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 18 Pro 256 Glacier/Silver
-             ======================== -->
-        <article class="product-card reveal reveal-delay-3" data-product-id="iph18p-256-gs" data-model="iPhone 18">
-          <span class="card-badge badge-promo">Precio Esp.</span>
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#EAF2F5 0%,#D5E8EE 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">29</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#A8C5D044 0%,#A8C5D099 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.7);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Pro Camera</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#A8C5D0 0%,#8AB5C5 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.15);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(0,0,0,0.6);">iPhone 18 Pro</div>
-                <div style="font-size:9px;color:rgba(0,0,0,0.35);">Glacier · Titanio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 18 Pro</h3>
-            <div class="card-capacity-tag">256 GB · Titanio Premium</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Glacier</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Glacier" style="background:#A8C5D0;"
-                  onclick="selectColor('iph18p-256-gs','Glacier')" onmouseenter="hoverColor('iph18p-256-gs','Glacier')" onmouseleave="leaveColor('iph18p-256-gs')"
-                  title="Glacier" type="button" aria-label="Color Glacier"></button>
-                <button class="color-swatch" data-color="Silver" style="background:#C8C8C8;"
-                  onclick="selectColor('iph18p-256-gs','Silver')" onmouseenter="hoverColor('iph18p-256-gs','Silver')" onmouseleave="leaveColor('iph18p-256-gs')"
-                  title="Silver" type="button" aria-label="Color Silver"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.590</span></div>
-                <div class="card-price-hint">Precio especial · Stock limitado</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_18PRO_256_GS" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph18p-256-gs')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph18p-256-gs')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 17 Pro Max Multi
-             ======================== -->
-        <article class="product-card reveal" data-product-id="iph17pm-multi" data-model="iPhone 17">
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#F0EDE8 0%,#E8E0D5 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">118</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#2C5F8A44 0%,#2C5F8A88 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.6);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Camera Array</div>
-                  <div style="display:flex;flex-direction:column;gap:6px;align-items:center;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#2C5F8A 0%,#1a3d5c 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.4);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.8);">17 PRO MAX</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.4);">Deep Blue · Titanio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 17 Pro Max</h3>
-            <div class="card-capacity-tag">Seleccioná la capacidad:</div>
-            <div class="storage-selector">
-              <button class="storage-btn active" data-storage="256 GB" onclick="selectStorage('iph17pm-multi','256 GB')" type="button">256 GB</button>
-              <button class="storage-btn" data-storage="512 GB" onclick="selectStorage('iph17pm-multi','512 GB')" type="button">512 GB</button>
-            </div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Blue</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Blue" style="background:#2C5F8A;"
-                  onclick="selectColor('iph17pm-multi','Blue')" onmouseenter="hoverColor('iph17pm-multi','Blue')" onmouseleave="leaveColor('iph17pm-multi')"
-                  title="Blue" type="button" aria-label="Color Blue"></button>
-                <button class="color-swatch" data-color="Orange" style="background:#C85A00;"
-                  onclick="selectColor('iph17pm-multi','Orange')" onmouseenter="hoverColor('iph17pm-multi','Orange')" onmouseleave="leaveColor('iph17pm-multi')"
-                  title="Cosmic Orange" type="button" aria-label="Color Orange"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.360</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_17PROMAX_MULTI" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph17pm-multi')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph17pm-multi')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 17 Pro Multi
-             ======================== -->
-        <article class="product-card reveal reveal-delay-1" data-product-id="iph17p-multi" data-model="iPhone 17">
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#F5EDE0 0%,#EDE0CF 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">74</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#C85A0044 0%,#C85A0088 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.5);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Pro Camera</div>
-                  <div style="display:flex;flex-direction:column;gap:6px;align-items:center;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#C85A00 0%,#9A4400 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.3);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.85);">iPhone 17 Pro</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.4);">Cosmic Orange · Ti</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 17 Pro</h3>
-            <div class="card-capacity-tag">Seleccioná la capacidad:</div>
-            <div class="storage-selector">
-              <button class="storage-btn active" data-storage="256 GB" onclick="selectStorage('iph17p-multi','256 GB')" type="button">256 GB</button>
-              <button class="storage-btn" data-storage="512 GB" onclick="selectStorage('iph17p-multi','512 GB')" type="button">512 GB</button>
-            </div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Orange</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Orange" style="background:#C85A00;"
-                  onclick="selectColor('iph17p-multi','Orange')" onmouseenter="hoverColor('iph17p-multi','Orange')" onmouseleave="leaveColor('iph17p-multi')"
-                  title="Cosmic Orange" type="button" aria-label="Color Orange"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.260</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_17PRO_MULTI" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph17p-multi')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph17p-multi')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 17 256 GB 4 Colors
-             ======================== -->
-        <article class="product-card reveal reveal-delay-2" data-product-id="iph17-256" data-model="iPhone 17">
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#F2F0F7 0%,#EAE7F5 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">156</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#9B8EC444 0%,#9B8EC488 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.6);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Dual Camera</div>
-                  <div style="display:flex;gap:8px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#9B8EC4 0%,#7A6DAA 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.3);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.85);">iPhone 17</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.4);">Lavender · Aluminio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 17</h3>
-            <div class="card-capacity-tag">256 GB · Aluminio de Alta Resistencia</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Black</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Black" style="background:#1C1C1E;"
-                  onclick="selectColor('iph17-256','Black')" onmouseenter="hoverColor('iph17-256','Black')" onmouseleave="leaveColor('iph17-256')"
-                  title="Black" type="button" aria-label="Color Black"></button>
-                <button class="color-swatch" data-color="Blue" style="background:#2C5F8A;"
-                  onclick="selectColor('iph17-256','Blue')" onmouseenter="hoverColor('iph17-256','Blue')" onmouseleave="leaveColor('iph17-256')"
-                  title="Blue" type="button" aria-label="Color Blue"></button>
-                <button class="color-swatch" data-color="Sage" style="background:#7A9E7E;"
-                  onclick="selectColor('iph17-256','Sage')" onmouseenter="hoverColor('iph17-256','Sage')" onmouseleave="leaveColor('iph17-256')"
-                  title="Sage" type="button" aria-label="Color Sage"></button>
-                <button class="color-swatch" data-color="Lavender" style="background:#9B8EC4;"
-                  onclick="selectColor('iph17-256','Lavender')" onmouseenter="hoverColor('iph17-256','Lavender')" onmouseleave="leaveColor('iph17-256')"
-                  title="Lavender" type="button" aria-label="Color Lavender"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">1.065</span></div>
-                <div class="card-price-hint">Precio final · Sin cargos ocultos</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_17_256" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph17-256')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph17-256')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 16 128 GB
-             ======================== -->
-        <article class="product-card reveal reveal-delay-3" data-product-id="iph16-128" data-model="iPhone 16">
-          <span class="card-badge badge-promo">Oferta</span>
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#F5F5F5 0%,#EBEBEB 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">38</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#DCDCDC 0%,#C8C8C8 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(0,0,0,0.3);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Camera</div>
-                  <div style="display:flex;gap:8px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#E8E8E8 0%,#D0D0D0 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.15);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(0,0,0,0.5);">iPhone 16</div>
-                <div style="font-size:9px;color:rgba(0,0,0,0.3);">Ultra · Aluminio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 16</h3>
-            <div class="card-capacity-tag">128 GB · Aluminio de Alta Resistencia</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Ultra</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Ultra" style="background:linear-gradient(135deg,#E8E8E8,#C8C8C8);"
-                  onclick="selectColor('iph16-128','Ultra')" onmouseenter="hoverColor('iph16-128','Ultra')" onmouseleave="leaveColor('iph16-128')"
-                  title="Ultra White" type="button" aria-label="Color Ultra"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">910</span></div>
-                <div class="card-price-hint">Precio especial · Oportunidad única</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_16_128" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph16-128')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph16-128')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-        <!-- ========================
-             CARD: iPhone 15 128 GB Blue
-             ======================== -->
-        <article class="product-card reveal reveal-delay-1" data-product-id="iph15-128" data-model="iPhone 15">
-          <span class="card-badge badge-promo">Oportunidad</span>
-          <div class="card-image-stage" style="background:linear-gradient(145deg,#E8F0F8 0%,#D8E8F5 100%);">
-            <div class="fomo-badge" aria-live="polite">
-              <span class="fomo-eye">👁️</span>
-              <span class="fomo-count">21</span>
-              <span>interesados ahora</span>
-            </div>
-            <div class="phone-image-container">
-              <div class="phone-img-back" style="background:linear-gradient(145deg,#2C5F8A44 0%,#2C5F8A77 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;">
-                <div style="text-align:center;color:rgba(255,255,255,0.5);">
-                  <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">Camera</div>
-                  <div style="display:flex;gap:8px;padding:12px;">
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                    <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">⊙</div>
-                  </div>
-                </div>
-              </div>
-              <div class="phone-img-front" style="background:linear-gradient(145deg,#2C5F8A 0%,#1C4F7A 100%);width:160px;height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
-                <div style="width:60px;height:10px;border-radius:5px;background:rgba(0,0,0,0.35);"></div>
-                <div style="font-size:10px;font-weight:800;letter-spacing:0.06em;color:rgba(255,255,255,0.85);">iPhone 15</div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.4);">Blue · Aluminio</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-model-name">iPhone 15</h3>
-            <div class="card-capacity-tag">128 GB · Aluminio de Alta Resistencia</div>
-            <div class="card-color-section">
-              <div class="color-label">Color: <strong class="color-active-name">Blue</strong></div>
-              <div class="color-swatches">
-                <button class="color-swatch active" data-color="Blue" style="background:#2C5F8A;"
-                  onclick="selectColor('iph15-128','Blue')" onmouseenter="hoverColor('iph15-128','Blue')" onmouseleave="leaveColor('iph15-128')"
-                  title="Blue" type="button" aria-label="Color Blue"></button>
-              </div>
-              <div class="stock-hint" role="alert">⚠️ Sin stock temporal en este color</div>
-            </div>
-            <div class="card-price-row">
-              <div>
-                <div class="card-price"><span class="currency">USD </span><span class="price-value">810</span></div>
-                <div class="card-price-hint">Precio especial · El mejor valor</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-actions">
-            <a href="https://mpago.la/LINK_MP_IPHONE_15_128" target="_blank" rel="noopener noreferrer" class="btn-buy-now">⚡ Comprar Ahora</a>
-            <button class="btn-add-cart" onclick="addToCart('iph15-128')" type="button">🛒</button>
-            <button class="btn-wa-card" onclick="waProduct('iph15-128')" type="button" title="Consultar por WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </button>
-          </div>
-        </article>
-      </div><!-- /product-grid -->
-    </div>
-  </section>
-  <!-- ============================================================
-       TRUST BAND
-       ============================================================ -->
-  <section class="trust-band" id="nosotros" aria-label="Beneficios de comprar en LClipStore">
-    <div class="container">
-      <div class="trust-band-grid">
-        <div class="trust-item reveal">
-          <div class="trust-icon" aria-hidden="true">🚀</div>
-          <div>
-            <div class="trust-text-title">Envío en el Día</div>
-            <div class="trust-text-desc">Moto en CABA y GBA. Correo Argentino para el interior del país. Rastreá tu pedido en tiempo real.</div>
-          </div>
-        </div>
-        <div class="trust-item reveal reveal-delay-1">
-          <div class="trust-icon" aria-hidden="true">🛡️</div>
-          <div>
-            <div class="trust-text-title">Garantía Oficial 1 Año</div>
-            <div class="trust-text-desc">Todos los equipos tienen garantía oficial LClipStore de 12 meses contra defectos de fábrica.</div>
-          </div>
-        </div>
-        <div class="trust-item reveal reveal-delay-2">
-          <div class="trust-icon" aria-hidden="true">💳</div>
-          <div>
-            <div class="trust-text-title">Múltiples Medios de Pago</div>
-            <div class="trust-text-desc">Tarjetas de crédito, débito, Mercado Pago, transferencia, Apple Pay y Google Pay.</div>
-          </div>
-        </div>
-        <div class="trust-item reveal reveal-delay-3">
-          <div class="trust-icon" aria-hidden="true">⭐</div>
-          <div>
-            <div class="trust-text-title">MercadoLíder Platinum</div>
-            <div class="trust-text-desc">Calificación 4.8 / 5.0 con más de 2.400 ventas exitosas. Uno de los mejores vendedores del sitio.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ============================================================
-       REVIEWS SECTION
-       ============================================================ -->
-  <section class="reviews-section" id="reviews" aria-labelledby="reviewsTitle">
-    <div class="container">
-      <div style="text-align:center; margin-bottom:56px;" class="reveal">
-        <div class="section-tag"><span class="dot"></span>Opiniones verificadas</div>
-        <h2 class="section-title" id="reviewsTitle">Lo que dicen <span class="accent">nuestros clientes</span></h2>
-      </div>
-      <div class="reviews-grid">
-        <!-- LEFT: Metrics -->
-        <div class="reveal">
-          <div class="rating-block" style="margin-bottom:20px;">
-            <div class="rating-number-big" aria-label="Calificación 4.8 de 5">4.8</div>
-            <div class="rating-stars-row" role="img" aria-label="5 estrellas">
-              <span class="star-filled">★</span>
-              <span class="star-filled">★</span>
-              <span class="star-filled">★</span>
-              <span class="star-filled">★</span>
-              <span class="star-filled">★</span>
-            </div>
-            <div class="rating-total">Basado en +2.400 calificaciones verificadas</div>
-            <div class="rating-bars" aria-label="Distribución de calificaciones">
-              <div class="rating-bar-row">
-                <span class="rating-bar-label" aria-label="5 estrellas">5</span>
-                <div class="rating-bar-track"><div class="rating-bar-fill" data-width="88%" style="width:0%"></div></div>
-                <span class="rating-bar-pct">88%</span>
-              </div>
-              <div class="rating-bar-row">
-                <span class="rating-bar-label" aria-label="4 estrellas">4</span>
-                <div class="rating-bar-track"><div class="rating-bar-fill" data-width="8%" style="width:0%;background:#86EFAC;"></div></div>
-                <span class="rating-bar-pct">8%</span>
-              </div>
-              <div class="rating-bar-row">
-                <span class="rating-bar-label" aria-label="3 estrellas">3</span>
-                <div class="rating-bar-track"><div class="rating-bar-fill" data-width="2.5%" style="width:0%;background:#BEF264;"></div></div>
-                <span class="rating-bar-pct">2.5%</span>
-              </div>
-              <div class="rating-bar-row">
-                <span class="rating-bar-label" aria-label="2 estrellas">2</span>
-                <div class="rating-bar-track"><div class="rating-bar-fill" data-width="1%" style="width:0%;background:#FDE047;"></div></div>
-                <span class="rating-bar-pct">1%</span>
-              </div>
-              <div class="rating-bar-row">
-                <span class="rating-bar-label" aria-label="1 estrella">1</span>
-                <div class="rating-bar-track"><div class="rating-bar-fill" data-width="0.5%" style="width:0%;background:#FCA5A5;"></div></div>
-                <span class="rating-bar-pct">0.5%</span>
-              </div>
-            </div>
-          </div>
-          <!-- MercadoLíder Badge -->
-          <div class="meli-badge" role="complementary" aria-label="Sello MercadoLíder Platinum">
-            <div class="meli-logo-text" aria-label="Mercado Libre">
-              <span class="meli-m">Mercado</span><span class="meli-l">Libre</span>
-            </div>
-            <div class="meli-title">MercadoLíder Platinum</div>
-            <div class="meli-subtitle">¡Uno de los mejores vendedores del sitio!</div>
-            <div class="meli-semaphore" role="img" aria-label="Reputación máxima en MercadoLibre">
-              <div class="semaphore-seg seg-1"></div>
-              <div class="semaphore-seg seg-2"></div>
-              <div class="semaphore-seg seg-3"></div>
-              <div class="semaphore-seg seg-4"></div>
-              <div class="semaphore-seg seg-5" title="Reputación Verde — Nivel Platinum"></div>
-            </div>
-          </div>
-        </div>
-        <!-- RIGHT: Reviews List -->
-        <div class="reviews-list-block">
-          <article class="review-item" style="animation-delay:0.1s;">
-            <div class="review-header">
-              <div class="reviewer-info">
-                <div class="reviewer-avatar" style="background:linear-gradient(135deg,#6366F1,#8B5CF6);" aria-hidden="true">MG</div>
-                <div>
-                  <div class="reviewer-name">Martín G.</div>
-                  <div class="reviewer-location">📍 Palermo, CABA</div>
-                </div>
-              </div>
-              <div class="review-stars" role="img" aria-label="5 estrellas">
-                <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
-              </div>
-            </div>
-            <p class="review-text">
-              Compré el <strong>iPhone 18 Pro Max Glacier</strong> y llegó en menos de 3 horas en moto. El equipo venía sellado de fábrica, con todos los accesorios y la factura. La garantía de 1 año de LClipStore es un diferencial brutal. <strong>¡Totalmente recomendable!</strong>
-            </p>
-            <span class="review-tag">✓ Compra Verificada · Envío en el Día</span>
-          </article>
-          <article class="review-item" style="animation-delay:0.25s;">
-            <div class="review-header">
-              <div class="reviewer-info">
-                <div class="reviewer-avatar" style="background:linear-gradient(135deg,#D4AF37,#E8C84A);" aria-hidden="true">LF</div>
-                <div>
-                  <div class="reviewer-name">Luciana F.</div>
-                  <div class="reviewer-location">📍 San Isidro, GBA Norte</div>
-                </div>
-              </div>
-              <div class="review-stars" role="img" aria-label="5 estrellas">
-                <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
-              </div>
-            </div>
-            <p class="review-text">
-              Vine por el <strong>iPhone 17 Pro Max en Orange</strong> después de ver la web. La atención por WhatsApp fue impecable, me respondieron al toque y me asesoraron genial. El motochero fue súper amable y el teléfono es una joya. <strong>Ya le recomendé LClipStore a toda la facu.</strong>
-            </p>
-            <span class="review-tag">✓ Compra Verificada · Asesoramiento Premium</span>
-          </article>
-          <article class="review-item" style="animation-delay:0.4s;">
-            <div class="review-header">
-              <div class="reviewer-info">
-                <div class="reviewer-avatar" style="background:linear-gradient(135deg,#10B981,#059669);" aria-hidden="true">RV</div>
-                <div>
-                  <div class="reviewer-name">Rodrigo V.</div>
-                  <div class="reviewer-location">📍 Ramos Mejía, GBA Oeste</div>
-                </div>
-              </div>
-              <div class="review-stars" role="img" aria-label="5 estrellas">
-                <span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span><span class="review-star">★</span>
-              </div>
-            </div>
-            <p class="review-text">
-              Segunda compra en LClipStore, primero un <strong>iPhone 16</strong> y ahora el <strong>18 Pro Max Burgundy</strong>. Siempre el mismo nivel de excelencia: precio justo, garantía real de 1 año y el envío en el día que cumplen al pie de la letra. <strong>Son los mejores del rubro, sin discusión.</strong>
-            </p>
-            <span class="review-tag">✓ Comprador Frecuente · Garantía 1 Año</span>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ============================================================
-       CTA SECTION
-       ============================================================ -->
-  <section class="cta-section" id="contacto" aria-labelledby="ctaTitle">
-    <div class="cta-glow" aria-hidden="true"></div>
-    <div class="container">
-      <div class="cta-content reveal">
-        <div class="section-tag" style="margin:0 auto 20px;"><span class="dot"></span>Contacto directo</div>
-        <h2 class="cta-title" id="ctaTitle">
-          ¿Tenés dudas? <span class="gold">Hablemos.</span>
-        </h2>
-        <p class="cta-subtitle">
-          Nuestro equipo está disponible de lunes a sábado de 9:00 a 20:00 hs. Respondemos en minutos y te asesoramos para que elijas el iPhone perfecto para vos.
-        </p>
-        <div class="cta-actions">
-          <a href="https://wa.me/5491159305875?text=Hola%20LClipStore!%20Quiero%20consultar%20sobre%20un%20iPhone."
-             target="_blank" rel="noopener noreferrer" class="btn-wa-cta" aria-label="Chatear con LClipStore en WhatsApp">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Escribirnos por WhatsApp
-          </a>
-          <a href="#catalogo" class="btn-outline-white">Ver todos los modelos</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="#" class="navbar-brand" aria-label="LClipStore inicio" style="display:inline-flex;gap:10px;align-items:center;margin-bottom:4px;">
-            <div class="brand-logo-mark" aria-hidden="true">LC</div>
-            <span class="brand-name" style="color:white;">LClip<span>Store</span></span>
-          </a>
-          <p class="footer-brand-desc">
-            Tu destino exclusivo para iPhones de alta gama en Argentina. MercadoLíder Platinum con +2.400 ventas exitosas y garantía de 1 año en todos los equipos.
-          </p>
-          <div class="footer-social" aria-label="Redes sociales">
-            <a href="https://wa.me/5491159305875" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            </a>
-            <a href="#" class="social-btn" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="#" class="social-btn" aria-label="TikTok">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.73a8.27 8.27 0 004.83 1.54V6.82a4.85 4.85 0 01-1.06-.13z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Productos</div>
-          <nav class="footer-links" aria-label="Productos">
-            <a href="#catalogo" class="footer-link">iPhone 18 Pro Max</a>
-            <a href="#catalogo" class="footer-link">iPhone 18 Pro</a>
-            <a href="#catalogo" class="footer-link">iPhone 17 Pro Max</a>
-            <a href="#catalogo" class="footer-link">iPhone 17 Pro</a>
-            <a href="#catalogo" class="footer-link">iPhone 17</a>
-            <a href="#catalogo" class="footer-link">iPhone 16 y 15</a>
-          </nav>
-        </div>
-        <div>
-          <div class="footer-col-title">Información</div>
-          <nav class="footer-links" aria-label="Información">
-            <a href="#nosotros" class="footer-link">Sobre LClipStore</a>
-            <a href="#reviews" class="footer-link">Opiniones</a>
-            <a href="#" class="footer-link">Política de Devoluciones</a>
-            <a href="#" class="footer-link">Garantía</a>
-            <a href="#" class="footer-link">Envíos</a>
-          </nav>
-        </div>
-        <div>
-          <div class="footer-col-title">Contacto</div>
-          <nav class="footer-links" aria-label="Contacto">
-            <a href="https://wa.me/5491159305875" target="_blank" rel="noopener noreferrer" class="footer-link">WhatsApp: +54 11 5930-5875</a>
-            <a href="#" class="footer-link">Buenos Aires, Argentina</a>
-            <a href="#" class="footer-link">Lun–Sáb: 9:00–20:00 hs</a>
-            <a href="#" class="footer-link">MercadoLibre Oficial</a>
-          </nav>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p class="footer-bottom-text">© 2025 LClipStore. Todos los derechos reservados. · Los precios están expresados en dólares estadounidenses (USD).</p>
-        <div class="footer-payment-icons" aria-label="Medios de pago aceptados">
-          <span class="payment-icon">VISA</span>
-          <span class="payment-icon">MAST</span>
-          <span class="payment-icon">AMEX</span>
-          <span class="payment-icon">MP</span>
-          <span class="payment-icon">🍎 Pay</span>
-          <span class="payment-icon">G Pay</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- ============================================================
-       CART OVERLAY & DRAWER
-       ============================================================ -->
-  <div class="cart-overlay" id="cartOverlay" role="presentation" aria-hidden="true"></div>
-  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
-    <div class="cart-drawer-header">
-      <div>
-        <h2 class="cart-drawer-title" id="cartDrawerTitle">Tu Carrito</h2>
-        <div class="cart-item-count-label" id="cartCountLabel">0 artículos</div>
-      </div>
-      <button class="btn-close-cart" onclick="closeCart()" type="button" aria-label="Cerrar carrito">✕</button>
-    </div>
-    <!-- Empty State -->
-    <div class="cart-empty-state" id="cartEmpty" role="status">
-      <div class="cart-empty-icon" aria-hidden="true">🛍️</div>
-      <div class="cart-empty-title">Tu carrito está vacío</div>
-      <div class="cart-empty-desc">Agregá un iPhone para comenzar tu compra</div>
-    </div>
-    <!-- Items List -->
-    <div class="cart-items-list" id="cartItemsList" style="display:none;" role="list" aria-label="Artículos en el carrito"></div>
-    <!-- Footer -->
-    <div class="cart-drawer-footer">
-      <div class="cart-summary" role="region" aria-label="Resumen del pedido">
-        <div class="cart-summary-row">
-          <span class="cart-summary-label">Subtotal</span>
-          <span class="cart-summary-value" id="cartSubtotal">USD 0</span>
-        </div>
-        <div class="cart-summary-row">
-          <span class="cart-summary-label">Envío</span>
-          <span class="cart-summary-value" style="color:#10B981;">A consultar</span>
-        </div>
-        <div class="cart-summary-row cart-total-row">
-          <span class="cart-total-label">Total estimado</span>
-          <span class="cart-total-value" id="cartTotal"><span class="currency">USD </span>0</span>
-        </div>
-      </div>
-      <div class="cart-checkout-btns" id="cartCheckouts" style="display:none;">
-        <button class="btn-checkout-mp" onclick="checkoutMercadoPago()" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-            <line x1="1" y1="10" x2="23" y2="10"/>
-          </svg>
-          Pagar con Mercado Pago
-        </button>
-        <button class="btn-checkout-wa" onclick="checkoutWhatsApp()" type="button">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Cerrar por WhatsApp
-        </button>
-      </div>
-      <div class="payment-methods-strip">
-        <div class="payment-methods-label">Medios de pago disponibles</div>
-        <div class="payment-pills">
-          <span class="payment-pill">💳 Visa</span>
-          <span class="payment-pill">💳 Mastercard</span>
-          <span class="payment-pill">💳 Amex</span>
-          <span class="payment-pill">🔵 Mercado Pago</span>
-          <span class="payment-pill">🍎 Apple Pay</span>
-          <span class="payment-pill">G Google Pay</span>
-          <span class="payment-pill">🏦 Débito</span>
-          <span class="payment-pill">📲 Transferencia</span>
-        </div>
-      </div>
-    </div>
-  </aside>
-  <!-- ============================================================
-       FLOATING WHATSAPP FAB
-       ============================================================ -->
-  <a href="https://wa.me/5491159305875?text=Hola%20LClipStore!%20Quiero%20consultar%20sobre%20un%20iPhone."
-     target="_blank" rel="noopener noreferrer"
-     class="fab-wa"
-     aria-label="Abrir WhatsApp con LClipStore"
-     title="Chatear por WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-  </a>
-  <!-- Script -->
-  <script src="script.js"></script>
-</body>
-</html>
+                <div class="product-info">
+                    <h3 class="product-name">iPhone 17 Pro Max</h3>
+                    
+                    <div class="fomo-price-box">
+                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
+                        <div class="price-container">
+                            <span class="price-old">USD 1.800 / ARS 2.340.000</span>
+                            <span class="price-current" id="price-display-17promax">USD 1.360 / ARS 1.768.000</span>
+                        </div>
+                        <div class="fomo-eye">👁️ <span class="contador-visitas">110</span> personas están interesadas en este modelo ahora</div>
+                    </div>
+
+                    <div class="color-picker">
