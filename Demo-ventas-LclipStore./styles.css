@@ -1717,3 +1717,65 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+/* ======================================================
+   AGREGADO PARA INTEGRACIÓN AUTOMÁTICA CON TIENDANUBE
+   ====================================================== */
+.fomo-price-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 16px;
+    margin: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-box {
+    color: #ff3b30;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.price-old {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    display: block;
+}
+
+.price-current {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff; /* Ajustado para tu fondo oscuro luxury */
+}
+
+.fomo-eye {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-top: 6px;
+}
+
+.spec-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #161618;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.spec-select:focus {
+    border-color: var(--primary-color);
+}
+
+.cart-gateways-info {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    text-align: center;
+}
