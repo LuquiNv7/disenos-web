@@ -496,3 +496,100 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('%c🍎 LClipStore — Premium iPhone Experience', 'color:#6366F1;font-weight:900;font-size:14px');
   console.log('%cDesigned with ❤️ for ultra-luxury digital commerce.', 'color:#D4AF37;font-size:12px');
 });
+// ======================================================
+// AGREGADO AL FINAL - INTEGRACIÓN AUTOMÁTICA TIENDANUBE LCLIPSTORE
+// ======================================================
+
+// Base de Redirección Global a tu Tiendanube Oficial
+const URL_BASE_TIENDANUBE = "https://mitiendanube.com";
+
+// Lógica Global de Redirección Automatizada por Producto
+function comprarAhoraDirecto(slugProducto) {
+    // Arma la URL exacta combinando tu tienda con el identificador del modelo
+    // Ejemplo: https://mitiendanube.comiphone-17-q0jmq/
+    const urlFinal = `${URL_BASE_TIENDANUBE}${slugProducto}/`;
+    window.open(urlFinal, '_blank');
+}
+
+// Redirección global de todo el carrito de compras junto
+function pagarCarritoCompleto() {
+    // Envía al cliente de forma transparente al checkout directo de tu Tiendanube
+    window.open("https://mitiendanube.com", '_blank');
+}
+
+// Consulta Particular de Dudas por WhatsApp
+function consultarWhatsApp(modeloNombre) {
+    const mensaje = `Hola LClipStore! Tengo una duda sobre el ${modeloNombre} que vi en la web.`;
+    window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
+// Controlador de Variantes de Almacenamiento y Precios Dinámicos (Moneda Dual)
+function updateVariant(productKey, selectElement) {
+    const selectedValue = selectElement.value;
+    let usdPrice = 0;
+    let slugProducto = productKey;
+
+    // Mapeo estricto de la lista de precios provista
+    if (productKey === '18promax') {
+        usdPrice = selectedValue === '256_burgundy' ? 1860 : 1830;
+        slugProducto = "iphone-18-pro-max";
+    } else if (productKey === '18pro') {
+        if (selectedValue === '256_glacier') usdPrice = 1590;
+        else if (selectedValue === '256_black') usdPrice = 1610;
+        else if (selectedValue === '256_burgundy') usdPrice = 1640;
+        else if (selectedValue === '512_glacier') usdPrice = 1830;
+        slugProducto = "iphone-18-pro";
+    } else if (productKey === '17promax') {
+        usdPrice = selectedValue === '512' ? 1600 : 1360;
+        slugProducto = "iphone-17-pro-max";
+    } else if (productKey === '17pro') {
+        usdPrice = selectedValue === '512' ? 1480 : 1260;
+        slugProducto = "iphone-17-pro";
+    } else if (productKey === '17') {
+        usdPrice = 1065;
+        slugProducto = "iphone-17-q0jmq"; // Tu link real de Tiendanube
+    }
+
+    const arsPrice = usdPrice * USD_TO_ARS;
+    
+    // Cambiar texto de moneda dual en la tarjeta correspondiente
+    const priceDisplay = document.getElementById(`price-display-${productKey}`);
+    if (priceDisplay) {
+        priceDisplay.innerText = `USD ${usdPrice.toLocaleString('en-US')} / ARS ${arsPrice.toLocaleString('es-AR')}`;
+    }
+    
+    const card = selectElement.closest('.product-card');
+    if (card) {
+        const name = card.querySelector('.product-name').innerText;
+        const capacityText = selectElement.options[selectElement.selectedIndex].text.split('—')[0];
+        
+        // Sincronizar botones de la tarjeta con la capacidad elegida dinámicamente
+        const cartBtn = card.querySelector('.btn-cart');
+        const checkoutBtn = card.querySelector('.btn-checkout');
+        
+        if (cartBtn) cartBtn.setAttribute('onclick', `addToCart('${name} ${capacityText.trim()}', ${usdPrice})`);
+        if (checkoutBtn) checkoutBtn.setAttribute('onclick', `comprarAhoraDirecto('${slugProducto}')`);
+    }
+}
+
+// Envío unificado del pedido estructurado por WhatsApp
+function enviarCarritoWhatsApp() {
+    if (typeof carrito === 'undefined' || carrito.length === 0) {
+        // Soporte por si tu estado global se llama "cart" en lugar de "carrito"
+        if (typeof cart !== 'undefined' && cart.length > 0) {
+            let itemsText = cart.map(i => `- ${i.name} (USD ${i.usd.toLocaleString('en-US')})`).join('%0A');
+            const message = `Hola LClipStore! Tengo una consulta sobre los siguientes productos que vi en la web:%0A%0A${itemsText}%0A%0AMe gustaría recibir más información. Gracias!`;
+            window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${message}`, '_blank');
+        }
+        return;
+    }
+    let mensaje = "Hola LClipStore! Quiero consultar disponibilidad de stock por este pedido:\n\n";
+    let totalUsd = 0;
+    carrito.forEach(item => {
+        mensaje += `• ${item.name} (Cant: ${item.quantity})\n`;
+        totalUsd += item.price * item.quantity;
+    });
+    mensaje += `\nTotal Estimado: USD ${totalUsd.toLocaleString('en-US')}`;
+    window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
