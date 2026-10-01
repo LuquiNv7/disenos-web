@@ -124,4 +124,3 @@ body{background:#fff;color:#171717}
 @media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.featured-grid{grid-template-columns:1fr 1fr}.mini-card .mini-img{height:185px}.mini-card img{height:175px}}
 
-
