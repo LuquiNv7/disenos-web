@@ -82,3 +82,4 @@ function bind(){renderStorageFilters();renderFeatured();renderProducts();renderC
   $('#privacyBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Privacidad</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con su política de privacidad real antes de publicar la web.</p></div>`);$('#termsBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Términos y condiciones</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con sus condiciones comerciales reales antes de publicar la web.</p></div>`);
 }
 bind();
+
