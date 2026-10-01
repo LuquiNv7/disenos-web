@@ -28,10 +28,10 @@ const products = [
   {id:'ip16',brand:'iPhone',model:'iPhone 16',variants:[{storage:'128GB',color:'Ultramarine',hex:'#4b61a0',price:910,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-ultramarine-202409?wid=1600&hei=1600&fmt=png-alpha'}]},
   {id:'ip15',brand:'iPhone',model:'iPhone 15',variants:[{storage:'128GB',color:'Blue',hex:'#6d87b5',price:810,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_901991-MLA96144091409_102025-F.webp'}]},
   {id:'s26u',brand:'Samsung',model:'Galaxy S26 Ultra',new:true,offer:true,variants:[
-    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://www.gadgetngadgetbd.com/wp-content/uploads/2026/02/Galaxy-S26-Ultracobaltviolet-8743.webp'},
-    {storage:'512GB',color:'Sky Blue',hex:'#b8d8e8',price:1185,old:1290,stock:true,img:'https://sota.store/image/cache/catalog/Samsung-3/samsung-s26-ultra-s948-blue-01-1600x1600.webp'},
-    {storage:'512GB',color:'Black',hex:'#292b30',price:1185,old:1290,stock:true,img:'https://bairesit.com.ar/Image/0/700_700-M3_Black_MIRACLE_-_STANDARD_Carrusel_1._PRODUCT_IMAGE_2400x2400.webp'},
-    {storage:'512GB',color:'White',hex:'#f4f4f4',price:1185,old:1290,stock:true,img:'https://utex.com.uy/recursos/ImagenesProductos/ImagenesPrincipales/40/SamsungGalaxyS26Ultra5G12gb512gbWhite_202608101538232997.webp'}]},
+    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_Cobalt-Violet_163x346.jpg?$LazyLoad_Home_JPG$='},
+    {storage:'512GB',color:'Sky Blue',hex:'#b8d8e8',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_Sky-Blue_163x346.jpg?$LazyLoad_Home_JPG$='},
+    {storage:'512GB',color:'Black',hex:'#292b30',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_Black_163x346.jpg?$LazyLoad_Home_JPG$='},
+    {storage:'512GB',color:'White',hex:'#f4f4f4',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_White_163x346.jpg?$LazyLoad_Home_JPG$='}]},
   {id:'s26p',brand:'Samsung',model:'Galaxy S26 Plus',new:true,variants:[
     {storage:'256GB',color:'Cobalt Violet',hex:'#77708f',price:920,stock:true,img:'https://www.i-cell.co.il/cdn/shop/files/E000000977_0-17720420482676797.jpg?v=1772090238'},
     {storage:'256GB',color:'Sky Blue',hex:'#b9d7e6',price:920,stock:true,img:'https://cuahangsamsung.net/filemanager/userfiles/hinh-san-pham/s26/x1.jpg'},
@@ -50,17 +50,17 @@ const products = [
     {storage:'256GB',color:'Titanium Black',hex:'#282a2f',price:930,stock:true,img:'https://welectronics.com/images/stories/virtuemart/product/SamsungGalaxyS25Ultrablack969.jpg'},
     {storage:'256GB',color:'Titanium Gray',hex:'#c7c5c0',price:930,stock:true,img:'https://www.nfm.com/dw/image/v2/BDFM_PRD/on/demandware.static/-/Sites-nfm-master-catalog/default/dwde76ea8e/images/067/53/67533364-1.jpg?sh=1000&sm=fit&sw=1000'},
     {storage:'256GB',color:'Titanium Silverblue',hex:'#aab7ca',price:930,stock:true,img:'https://images-na.ssl-images-amazon.com/images/I/71yUVEekQWL.jpg'}]},
-  {id:'s25',brand:'Samsung',model:'Galaxy S25',variants:[{storage:'256GB',color:'Mint',hex:'#b6cfbd',price:770,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_679792-MLA99986227831_112025-F.webp'}]},
+  {id:'s25',brand:'Samsung',model:'Galaxy S25',variants:[{storage:'256GB',color:'Mint',hex:'#b6cfbd',price:770,stock:true,img:'https://news.samsung.com/medialibrary/download/59212/large'}]},
   {id:'s25fe',brand:'Samsung',model:'Galaxy S25 FE',variants:[{storage:'256GB',color:'Black',hex:'#222',price:665,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-s731bzkmltm/gallery/mx-galaxy-s25-fe-sm-s731-sm-s731bzkmltm-thumb-549045817'}]},
   {id:'a57',brand:'Samsung',model:'Galaxy A57 5G',variants:[{storage:'256GB',color:'Awesome Gray',hex:'#777',price:525,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/br/sm-a566ezkazto/gallery/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-thumb-545718313'}]},
   {id:'a56',brand:'Samsung',model:'Galaxy A56 5G',variants:[{storage:'256GB',color:'Awesome Lime',hex:'#c4d76a',price:530,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/br/sm-a566ezkazto/gallery/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-thumb-545718313'}]},
-  {id:'a37',brand:'Samsung',model:'Galaxy A37 5G',variants:[{storage:'256GB',color:'Awesome Black',hex:'#222',price:475,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_836355-MLA109630499035_032026-F.webp'}]},
+  {id:'a37',brand:'Samsung',model:'Galaxy A37 5G',variants:[{storage:'256GB',color:'Awesome Black',hex:'#222',price:475,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/ar/sm-a376bzafaro/gallery/ar-galaxy-a37-5g-sm-a376-sm-a376bzafaro-552871768?$1164_776_PNG$='}]},
   {id:'a36',brand:'Samsung',model:'Galaxy A36 5G',variants:[
     {storage:'256GB',color:'Awesome Lavender',hex:'#c9c8df',price:435,stock:true,img:'https://castore.uz/upload/iblock/89f/q6akoicbgdjm8tm6lnjayaz1ebl7p5mz/smartfon-samsung-galaxy-a36-5g-sm-a366e-ds-128gb-awesome-lavender.png'},
     {storage:'256GB',color:'Awesome White',hex:'#f1f3f5',price:435,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_799213-MLA117701785043_092026-F.webp'},
     {storage:'256GB',color:'Awesome Black',hex:'#292a2d',price:435,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_799213-MLA117701785043_092026-F.webp'},
     {storage:'256GB',color:'Awesome Lime',hex:'#c7d86b',price:435,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a36-5g/03202026/A36_03-1_FT02-Design_MO.jpg'}]},
-  {id:'a27',brand:'Samsung',model:'Galaxy A27 5G',variants:[{storage:'256GB',color:'Awesome Blue',hex:'#45638f',price:445,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_799213-MLA117701785043_092026-F.webp'}]},
+  {id:'a27',brand:'Samsung',model:'Galaxy A27 5G',variants:[{storage:'256GB',color:'Awesome Blue',hex:'#45638f',price:445,stock:true,img:'https://samsungar.vtexassets.com/arquivos/ids/225992-600-auto?aspect=true&height=auto&width=600'}]},
   {id:'a17',brand:'Samsung',model:'Galaxy A17',variants:[{storage:'128GB',color:'Black',hex:'#222',price:280,stock:true,img:'https://assets.kmart.com.au/transform/86f0b3ac-987a-4385-a906-577db7be6796/43675838-1?io=transform:extend,width:1100,height:1100&quality=90'}]},
   {id:'a16',brand:'Samsung',model:'Galaxy A16',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a165mzkaltm/gallery/mx-galaxy-a16-sm-a165-sm-a165mzkaltm-544305569?$Q90_1248_936_F_PNG$'}]},
   {id:'a07',brand:'Samsung',model:'Galaxy A07',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a075mzkaltm/gallery/mx-galaxy-a07-sm-a075-569913-sm-a075mzkaltm-thumb-549785654'}]}
@@ -73,7 +73,7 @@ const ars=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maxi
 const usd=n=>'USD '+n.toLocaleString('en-US');
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
 const ML_PUBLICATION_ITEMS={
-  s26u:'MLA3944762654',s26p:'MLA1895852781',zflip8:'MLA3995752664',zfold8:'MLA3718056016',
+  s26p:'MLA1895852781',zflip8:'MLA3995752664',zfold8:'MLA3718056016',
   s25u:'MLA1880653513',a36:'MLA4004328896'
 };
 function normalizeText(v){return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
@@ -140,4 +140,5 @@ function bind(){renderStorageFilters();renderFeatured();renderProducts();renderC
   $('#privacyBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Privacidad</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con su política de privacidad real antes de publicar la web.</p></div>`);$('#termsBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Términos y condiciones</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con sus condiciones comerciales reales antes de publicar la web.</p></div>`);
 }
 bind();
+
 
