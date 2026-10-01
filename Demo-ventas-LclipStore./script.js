@@ -1,595 +1,86 @@
-/* ============================================================
-   LClipStore — Interactive Logic & Cart Engine
-   ============================================================ */
-'use strict';
-/* ============================================================
-   1. PRODUCT DATA CATALOG
-   ============================================================ */
-const PRODUCTS = [
-  {
-    id: 'iph18pm-256-v1',
-    model: 'iPhone 18 Pro Max',
-    storage: ['256 GB'],
-    prices: { '256 GB': 1830 },
-    badge: 'new',
-    badgeLabel: 'Nuevo 2026',
-    colors: [
-      { name: 'Black',    hex: '#1C1C1E', emoji: '📱', inStock: true },
-      { name: 'Silver',   hex: '#C8C8C8', emoji: '📱', inStock: true },
-      { name: 'Glacier',  hex: '#A8C5D0', emoji: '📱', inStock: true },
-      { name: 'Burgundy', hex: '#6E1C2B', emoji: '📱', inStock: false }
-    ],
-    mpLink: 'LINK_MP_IPHONE_18PROMAX_256_V1'
-  },
-  {
-    id: 'iph18pm-256-bur',
-    model: 'iPhone 18 Pro Max',
-    storage: ['256 GB'],
-    prices: { '256 GB': 1860 },
-    badge: 'hot',
-    badgeLabel: '¡Popular!',
-    colors: [
-      { name: 'Burgundy', hex: '#6E1C2B', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_18PROMAX_256_BURGUNDY'
-  },
-  {
-    id: 'iph18p-multi',
-    model: 'iPhone 18 Pro',
-    storage: ['256 GB', '512 GB'],
-    prices: { '256 GB': 1610, '512 GB': 1830 },
-    badge: 'new',
-    badgeLabel: 'Nuevo 2026',
-    colors: [
-      { name: 'Black',    hex: '#1C1C1E', emoji: '📱', inStock: true },
-      { name: 'Burgundy', hex: '#6E1C2B', emoji: '📱', inStock: true },
-      { name: 'Glacier',  hex: '#A8C5D0', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_18PRO_MULTI'
-  },
-  {
-    id: 'iph18p-256-gs',
-    model: 'iPhone 18 Pro',
-    storage: ['256 GB'],
-    prices: { '256 GB': 1590 },
-    badge: 'promo',
-    badgeLabel: 'Precio Esp.',
-    colors: [
-      { name: 'Glacier', hex: '#A8C5D0', emoji: '📱', inStock: true },
-      { name: 'Silver',  hex: '#C8C8C8', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_18PRO_256_GS'
-  },
-  {
-    id: 'iph17pm-multi',
-    model: 'iPhone 17 Pro Max',
-    storage: ['256 GB', '512 GB'],
-    prices: { '256 GB': 1360, '512 GB': 1600 },
-    badge: null,
-    badgeLabel: null,
-    colors: [
-      { name: 'Blue',   hex: '#2C5F8A', emoji: '📱', inStock: true },
-      { name: 'Orange', hex: '#C85A00', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_17PROMAX_MULTI'
-  },
-  {
-    id: 'iph17p-multi',
-    model: 'iPhone 17 Pro',
-    storage: ['256 GB', '512 GB'],
-    prices: { '256 GB': 1260, '512 GB': 1480 },
-    badge: null,
-    badgeLabel: null,
-    colors: [
-      { name: 'Orange', hex: '#C85A00', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_17PRO_MULTI'
-  },
-  {
-    id: 'iph17-256',
-    model: 'iPhone 17',
-    storage: ['256 GB'],
-    prices: { '256 GB': 1065 },
-    badge: null,
-    badgeLabel: null,
-    colors: [
-      { name: 'Black',   hex: '#1C1C1E', emoji: '📱', inStock: true },
-      { name: 'Blue',    hex: '#2C5F8A', emoji: '📱', inStock: true },
-      { name: 'Sage',    hex: '#7A9E7E', emoji: '📱', inStock: true },
-      { name: 'Lavender',hex: '#9B8EC4', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_17_256'
-  },
-  {
-    id: 'iph16-128',
-    model: 'iPhone 16',
-    storage: ['128 GB'],
-    prices: { '128 GB': 910 },
-    badge: 'promo',
-    badgeLabel: 'Oferta',
-    colors: [
-      { name: 'Ultra', hex: '#E0E0E0', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_16_128'
-  },
-  {
-    id: 'iph15-128',
-    model: 'iPhone 15',
-    storage: ['128 GB'],
-    prices: { '128 GB': 810 },
-    badge: 'promo',
-    badgeLabel: 'Oportunidad',
-    colors: [
-      { name: 'Blue', hex: '#2C5F8A', emoji: '📱', inStock: true }
-    ],
-    mpLink: 'LINK_MP_IPHONE_15_128'
-  }
+const USD_TO_ARS = 1590;
+const WHATSAPP_NUMBER = "5491100000000"; // Reemplazar por el número real de LclipStore.
+const products = [
+  {id:'ip18pm',brand:'iPhone',model:'iPhone 18 Pro Max',new:true,offer:true,variants:[
+    {storage:'256GB',color:'Burgundy',hex:'#6e2631',price:1860,old:1999,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-burgundy-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Black',hex:'#222',price:1830,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-black-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Silver',hex:'#ddd',price:1830,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-silver-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Glacier',hex:'#dce8ec',price:1830,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-glacier-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Burgundy Standard',hex:'#6e2631',price:1830,stock:false,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-burgundy-202609?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip18p',brand:'iPhone',model:'iPhone 18 Pro',new:true,variants:[
+    {storage:'256GB',color:'Glacier',hex:'#dce8ec',price:1590,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-glacier-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Black',hex:'#222',price:1610,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-black-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Burgundy',hex:'#6e2631',price:1640,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-burgundy-202609?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'512GB',color:'Glacier',hex:'#dce8ec',price:1830,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-glacier-202609?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip17pm',brand:'iPhone',model:'iPhone 17 Pro Max',offer:true,variants:[
+    {storage:'256GB',color:'Blue',hex:'#253c5c',price:1360,old:1450,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-deepblue-202509?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Orange',hex:'#c85b2f',price:1360,old:1450,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-cosmicorange-202509?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'512GB',color:'Blue',hex:'#253c5c',price:1600,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-deepblue-202509?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'512GB',color:'Orange',hex:'#c85b2f',price:1600,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-cosmicorange-202509?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip17p',brand:'iPhone',model:'iPhone 17 Pro',variants:[
+    {storage:'256GB',color:'Orange',hex:'#c85b2f',price:1260,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-cosmicorange-202509?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'512GB',color:'Orange',hex:'#c85b2f',price:1480,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-cosmicorange-202509?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip17',brand:'iPhone',model:'iPhone 17',new:true,variants:[
+    {storage:'256GB',color:'Black',hex:'#1f1f1f',price:1065,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-black-202509_GEO_US?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Blue',hex:'#7897ba',price:1065,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-mistblue-202509_GEO_US?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Sage',hex:'#a8b7a0',price:1065,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-sage-202509_GEO_US?wid=1600&hei=1600&fmt=png-alpha'},
+    {storage:'256GB',color:'Lavender',hex:'#cfc2df',price:1065,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip16',brand:'iPhone',model:'iPhone 16',variants:[{storage:'128GB',color:'Ultramarine',hex:'#4b61a0',price:910,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-ultramarine-202409?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'ip15',brand:'iPhone',model:'iPhone 15',variants:[{storage:'128GB',color:'Blue',hex:'#6d87b5',price:810,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=1600&hei=1600&fmt=png-alpha'}]},
+  {id:'s26u',brand:'Samsung',model:'Galaxy S26 Ultra',new:true,offer:true,variants:[{storage:'512GB',color:'Titanium Gray',hex:'#777',price:1185,old:1290,stock:true,img:'https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true'}]},
+  {id:'s26p',brand:'Samsung',model:'Galaxy S26 Plus',new:true,variants:[{storage:'256GB',color:'Icy Blue',hex:'#a8c7df',price:920,stock:true,img:'https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true'}]},
+  {id:'zflip8',brand:'Samsung',model:'Galaxy Z Flip 8',new:true,variants:[{storage:'256GB',color:'Coral',hex:'#d88d7e',price:1080,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/es/2407/mpdp/b6/galaxy-z-flip6-share-image.jpg'}]},
+  {id:'zfold8',brand:'Samsung',model:'Galaxy Z Fold 8 Ultra',new:true,variants:[{storage:'256GB',color:'Navy',hex:'#273a57',price:1800,stock:true,img:'https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true'}]},
+  {id:'s25u',brand:'Samsung',model:'Galaxy S25 Ultra',variants:[{storage:'256GB',color:'Titanium Silverblue',hex:'#8b9bad',price:930,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/ar/sm-s938bzblaro/gallery/ar-galaxy-s25-ultra-s938-sm-s938bzblaro-thumb-549045817'}]},
+  {id:'s25',brand:'Samsung',model:'Galaxy S25',variants:[{storage:'256GB',color:'Mint',hex:'#b6cfbd',price:770,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-s931blbmltm/gallery/mx-galaxy-s25-sm-s931-541005-sm-s931blbmltm-thumb-547930823'}]},
+  {id:'s25fe',brand:'Samsung',model:'Galaxy S25 FE',variants:[{storage:'256GB',color:'Black',hex:'#222',price:665,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-s731bzkmltm/gallery/mx-galaxy-s25-fe-sm-s731-sm-s731bzkmltm-thumb-549045817'}]},
+  {id:'a57',brand:'Samsung',model:'Galaxy A57 5G',variants:[{storage:'256GB',color:'Awesome Gray',hex:'#777',price:525,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a57-5g/03202026/A57_03-1_FT02-Design_MO.jpg'}]},
+  {id:'a56',brand:'Samsung',model:'Galaxy A56 5G',variants:[{storage:'256GB',color:'Awesome Lime',hex:'#c4d76a',price:530,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/br/sm-a566ezkazto/gallery/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-thumb-545718313'}]},
+  {id:'a37',brand:'Samsung',model:'Galaxy A37 5G',variants:[{storage:'256GB',color:'Awesome Black',hex:'#222',price:475,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a37-5g/03242026/A37_FT02_KV_Handriser_MO.jpg?%24ORIGIN_JPG%24='}]},
+  {id:'a36',brand:'Samsung',model:'Galaxy A36 5G',variants:[{storage:'256GB',color:'Awesome White',hex:'#eee',price:435,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a366ezsmltm/gallery/mx-galaxy-a36-5g-sm-a366-sm-a366ezsmltm-thumb-546060785'}]},
+  {id:'a27',brand:'Samsung',model:'Galaxy A27 5G',variants:[{storage:'256GB',color:'Awesome Blue',hex:'#45638f',price:445,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a37-5g/03242026/A37_FT02_KV_Handriser_MO.jpg?%24ORIGIN_JPG%24='}]},
+  {id:'a17',brand:'Samsung',model:'Galaxy A17',variants:[{storage:'128GB',color:'Black',hex:'#222',price:280,stock:true,img:'https://assets.kmart.com.au/transform/86f0b3ac-987a-4385-a906-577db7be6796/43675838-1?io=transform:extend,width:1100,height:1100&quality=90'}]},
+  {id:'a16',brand:'Samsung',model:'Galaxy A16',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a165mzkaltm/gallery/mx-galaxy-a16-sm-a165-sm-a165mzkaltm-544305569?$Q90_1248_936_F_PNG$'}]},
+  {id:'a07',brand:'Samsung',model:'Galaxy A07',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a075mzkaltm/gallery/mx-galaxy-a07-sm-a075-569913-sm-a075mzkaltm-thumb-549785654'}]}
 ];
-/* ============================================================
-   2. PRODUCT STATE (per card)
-   ============================================================ */
-const cardState = {};
-PRODUCTS.forEach(p => {
-  const firstAvail = p.colors.find(c => c.inStock) || p.colors[0];
-  cardState[p.id] = {
-    selectedColor: firstAvail.name,
-    selectedStorage: p.storage[0],
-    fomoInterval: null
-  };
-});
-/* ============================================================
-   3. CART STATE
-   ============================================================ */
-const cart = {
-  items: [],
-  add(product, color, storage) {
-    const existing = this.items.find(
-      i => i.productId === product.id && i.color === color && i.storage === storage
-    );
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      this.items.push({
-        productId: product.id,
-        model:     product.model,
-        color,
-        storage,
-        price:     product.prices[storage],
-        qty:       1,
-        colorHex:  product.colors.find(c => c.name === color)?.hex || '#333',
-        mpLink:    product.mpLink
-      });
-    }
-    this.render();
-    animateBadge();
-  },
-  remove(index) {
-    this.items.splice(index, 1);
-    this.render();
-    updateBadge();
-  },
-  get total() {
-    return this.items.reduce((sum, i) => sum + i.price * i.qty, 0);
-  },
-  get count() {
-    return this.items.reduce((sum, i) => sum + i.qty, 0);
-  },
-  render() {
-    const list      = document.getElementById('cartItemsList');
-    const emptyEl   = document.getElementById('cartEmpty');
-    const totalEl   = document.getElementById('cartTotal');
-    const subtotEl  = document.getElementById('cartSubtotal');
-    const countLbl  = document.getElementById('cartCountLabel');
-    const checkouts = document.getElementById('cartCheckouts');
-    if (!list) return;
-    countLbl.textContent = `${this.count} ${this.count === 1 ? 'artículo' : 'artículos'}`;
-    if (this.items.length === 0) {
-      emptyEl.style.display   = 'flex';
-      list.style.display      = 'none';
-      checkouts.style.display = 'none';
-      totalEl.textContent     = 'USD 0';
-      subtotEl.textContent    = 'USD 0';
-      updateBadge();
-      return;
-    }
-    emptyEl.style.display   = 'none';
-    list.style.display      = 'flex';
-    checkouts.style.display = 'block';
-    list.innerHTML = this.items.map((item, idx) => `
-      <div class="cart-item">
-        <div class="cart-item-thumb" style="background:${item.colorHex}20">
-          <span style="font-size:28px">📱</span>
-        </div>
-        <div class="cart-item-details">
-          <div class="cart-item-name">${item.model}</div>
-          <div class="cart-item-meta">${item.storage} · ${item.color} · ×${item.qty}</div>
-          <div class="cart-item-price">
-            <span class="currency">USD </span>${item.price.toLocaleString('es-AR')}
-          </div>
-        </div>
-        <button class="btn-remove-item" onclick="cart.remove(${idx})" title="Eliminar">✕</button>
-      </div>
-    `).join('');
-    const subtotal = this.total;
-    subtotEl.textContent = `USD ${subtotal.toLocaleString('es-AR')}`;
-    totalEl.innerHTML    = `<span class="currency">USD </span>${subtotal.toLocaleString('es-AR')}`;
-    updateBadge();
-  },
-  buildWhatsAppMessage() {
-    if (this.items.length === 0) return '';
-    const lines = this.items.map(
-      i => `• ${i.model} ${i.storage} – ${i.color} (USD ${i.price.toLocaleString('es-AR')}) ×${i.qty}`
-    ).join('\n');
-    const total = this.total.toLocaleString('es-AR');
-    return encodeURIComponent(
-      `Hola LClipStore! 🛒 Quiero hacer el siguiente pedido:\n\n${lines}\n\n💵 *Total: USD ${total}*\n\n¿Cómo procedo con el pago?`
-    );
-  }
-};
-/* ============================================================
-   4. NAVBAR / SCROLL BEHAVIOR
-   ============================================================ */
-function initNavbar() {
-  const navbar = document.querySelector('.navbar');
-  if (!navbar) return;
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+const fallback={iPhone:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1200&hei=1200&fmt=png-alpha',Samsung:'https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true'};
+let cart=JSON.parse(localStorage.getItem('lclip-cart')||'[]');
+let state={search:'',brands:[],storages:[],max:1900,offers:false,sort:'relevance'};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const ars=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n*USD_TO_ARS);
+const usd=n=>'USD '+n.toLocaleString('en-US');
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function imgFallback(img,brand){if(!img.dataset.failed){img.dataset.failed='1';img.src=fallback[brand]}}
+function firstAvailable(p){return p.variants.find(v=>v.stock)||p.variants[0]}
+function renderStorageFilters(){const ss=[...new Set(products.flatMap(p=>p.variants.map(v=>v.storage)))].sort((a,b)=>parseInt(a)-parseInt(b));$('#storageFilters').innerHTML=ss.map(s=>`<label class="check"><input type="checkbox" value="${s}" data-filter="storage"> ${s}</label>`).join('')}
+function filteredProducts(){let list=products.filter(p=>{const v=firstAvailable(p);if(state.brands.length&&!state.brands.includes(p.brand))return false;if(state.storages.length&&!p.variants.some(x=>state.storages.includes(x.storage)))return false;if(v.price>state.max)return false;if(state.offers&&!p.offer)return false;if(state.search&&!(`${p.brand} ${p.model}`.toLowerCase().includes(state.search.toLowerCase())))return false;return true});if(state.sort==='low')list.sort((a,b)=>firstAvailable(a).price-firstAvailable(b).price);if(state.sort==='high')list.sort((a,b)=>firstAvailable(b).price-firstAvailable(a).price);if(state.sort==='new')list.sort((a,b)=>(b.new?1:0)-(a.new?1:0));return list}
+function cardHTML(p,featured=false){const v=firstAvailable(p);const storages=[...new Set(p.variants.map(x=>x.storage))];const colors=p.variants.filter(x=>x.storage===v.storage);const interest=5+Math.floor(Math.random()*39);return `<article class="${featured?'mini-card':'product-card'}" data-id="${p.id}">${featured?`<div class="mini-img"><img src="${v.img}" alt="${p.model}" onerror="imgFallback(this,'${p.brand}')"></div><h3>${p.model}</h3><p>${v.storage} · ${v.color}</p><div class="mini-price">${usd(v.price)}</div><div class="mini-ars">${ars(v.price)}</div><button class="primary-btn" data-add="${p.id}">Agregar</button>`:`<div class="product-media"><span class="badge ${p.offer?'offer':''}">${p.offer?'OFERTA':p.new?'NUEVO':''}</span><button class="favorite" aria-label="Favorito">♡</button><img src="${v.img}" alt="${p.model} ${v.color}" onerror="imgFallback(this,'${p.brand}')"></div><div class="product-info"><span class="product-brand">${p.brand}</span><h3>${p.model}</h3><span class="meta">${v.storage} · ${v.color}</span><div class="swatches">${colors.map((c,i)=>`<button class="swatch ${i===0?'active':''}" title="${c.color}" style="background:${c.hex}" data-variant="${p.id}|${c.storage}|${c.color}"></button>`).join('')}</div><div class="storage-row">${storages.map(s=>`<button class="storage-btn ${s===v.storage?'active':''}" data-storage="${p.id}|${s}">${s}</button>`).join('')}</div><div class="price-row">${v.old?`<div class="old-price">${usd(v.old)}</div>`:''}<div class="price">${usd(v.price)}</div><div class="ars">${ars(v.price)} aprox.</div><div class="interest"><i></i>${interest} interesados recientemente</div><div class="card-actions"><button class="primary-btn" data-add="${p.id}">Agregar al carrito</button><button class="quick-btn" data-quick="${p.id}">Ver</button></div></div></div>`}</article>`}
+function renderFeatured(){const picks=products.filter(p=>p.offer||p.new).slice(0,4);$('#featuredGrid').innerHTML=picks.map(p=>cardHTML(p,true)).join('')}
+function renderProducts(){const list=filteredProducts();$('#productGrid').innerHTML=list.map(p=>cardHTML(p)).join('');$('#resultCount').textContent=`${list.length} modelos disponibles`;$('#emptyState').hidden=list.length>0}
+function selectedVariant(p,storage,color){return p.variants.find(v=>v.storage===storage&&v.color===color)||firstAvailable(p)}
+function addToCart(id,storage,color){const p=products.find(x=>x.id===id);const v=selectedVariant(p,storage,color);if(!v.stock){toast('Esta variante está sin stock');return}const key=`${id}|${v.storage}|${v.color}`;const existing=cart.find(x=>x.key===key);if(existing)existing.qty++;else cart.push({key,id,qty:1,storage:v.storage,color:v.color});saveCart();toast('Agregado al carrito ✓')}
+function saveCart(){localStorage.setItem('lclip-cart',JSON.stringify(cart));renderCart()}
+function cartLines(){return cart.map(x=>{const p=products.find(p=>p.id===x.id);const v=selectedVariant(p,x.storage,x.color);return {...x,p,v}}).filter(x=>x.p)}
+function renderCart(){const lines=cartLines();$('#cartCount').textContent=lines.reduce((s,x)=>s+x.qty,0);$('#cartItems').innerHTML=lines.length?lines.map(x=>`<div class="cart-item"><img src="${x.v.img}" alt="${x.p.model}" onerror="imgFallback(this,'${x.p.brand}')"><div><h4>${x.p.model}</h4><p>${x.v.storage} · ${x.v.color}</p><div class="qty"><button data-qty="${x.key}|-1">−</button><span>${x.qty}</span><button data-qty="${x.key}|1">+</button></div></div><div><strong>${usd(x.v.price*x.qty)}</strong><button class="remove" data-remove="${x.key}">Eliminar</button></div></div>`).join(''):`<div class="empty-state"><div style="font-size:38px">🛒</div><p>Tu carrito está vacío.</p><a class="primary-btn small" href="#catalogo" id="goCatalog">Ver celulares</a></div>`;const total=lines.reduce((s,x)=>s+x.v.price*x.qty,0);$('#cartTotalUsd').textContent=usd(total);$('#cartTotalArs').textContent=ars(total)}
+function openCart(){renderCart();$('#cartDrawer').classList.add('open');$('#drawerBackdrop').classList.add('open')}
+function closeCart(){$('#cartDrawer').classList.remove('open');$('#drawerBackdrop').classList.remove('open')}
+function openModal(html){$('#modalContent').innerHTML=`<button class="modal-close" id="modalClose">×</button>${html}`;$('#modal').classList.add('open');$('#modalClose').onclick=()=>$('#modal').classList.remove('open')}
+function quickView(id){const p=products.find(x=>x.id===id),v=firstAvailable(p);openModal(`<div class="quick-detail"><div class="visual"><img src="${v.img}" alt="${p.model}" onerror="imgFallback(this,'${p.brand}')"></div><div class="detail"><span class="product-brand">${p.brand}</span><h2>${p.model}</h2><p class="meta">${v.storage} · ${v.color}</p><div class="price">${usd(v.price)}</div><div class="ars">${ars(v.price)} aprox.</div><p style="font-size:12px;line-height:1.6;color:#777">Elegí tu variante y agregalo al carrito para coordinar la compra.</p><button class="primary-btn wide" data-add="${p.id}">Agregar al carrito</button></div></div>`)}
+function openCheckout(){const lines=cartLines();if(!lines.length){toast('Agregá al menos un producto');return}const total=lines.reduce((s,x)=>s+x.v.price*x.qty,0);openModal(`<div class="modal-inner"><span class="kicker">CHECKOUT</span><h2 style="font-size:30px;letter-spacing:-.05em;margin:8px 0 5px">Finalizá tu pedido</h2><p style="font-size:11px;color:#777;margin-bottom:20px">Completá tus datos y luego coordinamos el pago y la entrega.</p><form class="checkout-form" id="checkoutForm"><label>Nombre y apellido<input required name="name" autocomplete="name"></label><label>Celular<input required name="phone" inputmode="tel"></label><label>Email<input required type="email" name="email"></label><label>CUIT<input required name="cuit" inputmode="numeric"></label><label class="full">Dirección<input required name="address"></label><label>Número<input required name="number"></label><label>Entre calles<input name="between"></label><label>Provincia<select name="province"><option>CABA</option><option>Buenos Aires</option><option>Córdoba</option><option>Santa Fe</option><option>Mendoza</option><option>Otra</option></select></label><label>Código postal<input required name="postal"></label><div class="full" style="display:flex;justify-content:space-between;align-items:center;background:#f7f7f7;padding:14px;border-radius:12px"><span style="font-size:11px">Total del pedido</span><strong>${usd(total)} · ${ars(total)}</strong></div><button class="primary-btn wide full" type="submit">Enviar pedido por WhatsApp</button></form></div>`);$('#checkoutForm').onsubmit=e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));const text=`Hola LclipStore, quiero realizar un pedido. Nombre: ${data.name}. Celular: ${data.phone}. Email: ${data.email}. CUIT: ${data.cuit}. Dirección: ${data.address} ${data.number}, entre ${data.between||'-'}, ${data.province}, CP ${data.postal}. Total: ${usd(total)} (${ars(total)}).`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,'_blank');localStorage.removeItem('lclip-cart');cart=[];renderCart();$('#modal').classList.remove('open');closeCart();toast('Pedido preparado para WhatsApp ✓')}}
+function resetFilters(){state={search:'',brands:[],storages:[],max:1900,offers:false,sort:'relevance'};$('#searchInput').value='';$('#mobileSearchInput').value='';$$('[data-filter="brand"],[data-filter="storage"]').forEach(i=>i.checked=false);$('#priceRange').value=1900;$('#priceValue').textContent='USD 1.900';$('#offerOnly').checked=false;renderProducts()}
+function bind(){renderStorageFilters();renderFeatured();renderProducts();renderCart();$('#year').textContent=new Date().getFullYear();
+  $('#searchInput').oninput=e=>{state.search=e.target.value;$('#mobileSearchInput').value=e.target.value;renderProducts()};$('#mobileSearchInput').oninput=e=>{state.search=e.target.value;$('#searchInput').value=e.target.value;renderProducts()};$('#sortSelect').onchange=e=>{state.sort=e.target.value;renderProducts()};$('#priceRange').oninput=e=>{state.max=+e.target.value;$('#priceValue').textContent=usd(state.max);renderProducts()};$('#offerOnly').onchange=e=>{state.offers=e.target.checked;renderProducts()};$('#clearFilters').onclick=resetFilters;$('#emptyReset').onclick=resetFilters;
+  document.addEventListener('change',e=>{if(e.target.matches('[data-filter="brand"]')){state.brands=$$('[data-filter="brand"]:checked').map(x=>x.value);renderProducts()}if(e.target.matches('[data-filter="storage"]')){state.storages=$$('[data-filter="storage"]:checked').map(x=>x.value);renderProducts()}});
+  document.addEventListener('click',e=>{const add=e.target.closest('[data-add]');if(add){addToCart(add.dataset.add);return}const quick=e.target.closest('[data-quick]');if(quick){quickView(quick.dataset.quick);return}const rm=e.target.closest('[data-remove]');if(rm){cart=cart.filter(x=>x.key!==rm.dataset.remove);saveCart();return}const qty=e.target.closest('[data-qty]');if(qty){const [key,delta]=qty.dataset.qty.split('|');const line=cart.find(x=>x.key===key);if(line){line.qty+=+delta;if(line.qty<1)cart=cart.filter(x=>x!==line);saveCart()}return}const variant=e.target.closest('[data-variant]');if(variant){const [id,storage,color]=variant.dataset.variant.split('|');const p=products.find(x=>x.id===id);const v=selectedVariant(p,storage,color);const card=variant.closest('.product-card');card.querySelector('img').src=v.img;card.querySelector('.price').textContent=usd(v.price);card.querySelector('.ars').textContent=ars(v.price)+' aprox.';card.querySelector('.meta').textContent=`${v.storage} · ${v.color}`;card.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));variant.classList.add('active');card.querySelectorAll('.storage-btn').forEach(s=>s.classList.toggle('active',s.dataset.storage===`${id}|${storage}`));return}const st=e.target.closest('[data-storage]');if(st){const [id,storage]=st.dataset.storage.split('|');const p=products.find(x=>x.id===id);const v=firstAvailable({...p,variants:p.variants.filter(x=>x.storage===storage)});const card=st.closest('.product-card');card.querySelector('img').src=v.img;card.querySelector('.price').textContent=usd(v.price);card.querySelector('.ars').textContent=ars(v.price)+' aprox.';card.querySelector('.meta').textContent=`${v.storage} · ${v.color}`;card.querySelectorAll('.storage-btn').forEach(s=>s.classList.toggle('active',s===st));return}});
+  $('#cartBtn').onclick=openCart;$('#closeCart').onclick=closeCart;$('#drawerBackdrop').onclick=closeCart;$('#checkoutBtn').onclick=openCheckout;
+  $('#accountBtn').onclick=()=>$('#accountMenu').classList.toggle('open');document.addEventListener('click',e=>{if(!e.target.closest('.account-wrap'))$('#accountMenu').classList.remove('open')});$('#openLogin').onclick=()=>{openModal(`<div class="modal-inner"><span class="kicker">LCLIPSTORE</span><h2 style="font-size:28px;margin:7px 0">Iniciar sesión</h2><form id="loginForm"><label style="font-size:10px;font-weight:800">Email<input style="display:block;width:100%;margin:5px 0 12px;padding:11px;border:1px solid #ddd;border-radius:10px" type="email" required></label><label style="font-size:10px;font-weight:800">Contraseña<input style="display:block;width:100%;margin:5px 0 12px;padding:11px;border:1px solid #ddd;border-radius:10px" type="password" required></label><button class="primary-btn wide">Ingresar</button><p id="loginError" style="color:#b42318;font-size:10px"></p></form></div>`);$('#loginForm').onsubmit=e=>{e.preventDefault();$('#loginError').textContent='Usuario o contraseña no encontrados'}};$('#openRegister').onclick=()=>openModal(`<div class="modal-inner"><span class="kicker">LCLIPSTORE</span><h2 style="font-size:28px;margin:7px 0">Crear cuenta</h2><p style="font-size:11px;color:#777">Podés comprar sin crear una cuenta.</p><button class="secondary-btn wide" onclick="document.getElementById('modal').classList.remove('open')">Continuar como invitado</button></div>`);
+  $('#mobileMenuBtn').onclick=()=>$('#mainNav').classList.toggle('open');$('#filterToggle').onclick=()=>{$('#filters').classList.add('open');$('#filterBackdrop').classList.add('open')};$('#closeFilters').onclick=()=>{$('#filters').classList.remove('open');$('#filterBackdrop').classList.remove('open')};$('#filterBackdrop').onclick=()=>{$('#filters').classList.remove('open');$('#filterBackdrop').classList.remove('open')};
+  $('#calcShipping').onclick=()=>{const p=$('#province').value,cp=$('#postal').value.trim();if(!p&&!cp){$('#shippingResult').textContent='Elegí una provincia o ingresá un CP.';return}const free=p==='CABA'||p==='Buenos Aires'||/^1/.test(cp);if(free)$('#shippingResult').innerHTML='<strong>Envío estimado: GRATIS</strong><br>Zona CABA/GBA · Entrega en el día sujeta a coordinación.';else $('#shippingResult').innerHTML='<strong>Estimación: $4.500–$8.500 ARS</strong><br>Plazo orientativo: 3 a 5 días hábiles. El costo final se confirma con la tienda.'};
+  $('#whatsappBtn').onclick=()=>window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola LclipStore, quiero consultar por un celular.')}`,'_blank');
+  $('#acceptCookies').onclick=()=>{localStorage.setItem('lclip-cookies','1');$('#cookie').style.display='none'};$('#rejectCookies').onclick=()=>{localStorage.setItem('lclip-cookies','0');$('#cookie').style.display='none'};if(localStorage.getItem('lclip-cookies'))$('#cookie').style.display='none';
+  $('#regretBtn').onclick=()=>openModal(`<div class="modal-inner"><span class="kicker">GESTIÓN DE COMPRA</span><h2 style="font-size:28px">Botón de arrepentimiento</h2><p style="font-size:11px;color:#777">Completá el formulario y la tienda podrá gestionar tu solicitud conforme a la normativa aplicable.</p><form class="checkout-form"><label>Nombre<input required></label><label>Email<input type="email" required></label><label class="full">Número de pedido<input required></label><label class="full">Motivo<textarea style="width:100%;min-height:90px;border:1px solid #ddd;border-radius:10px;margin-top:5px"></textarea></label><button class="primary-btn full">Enviar solicitud</button></form></div>`);
+  $('#privacyBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Privacidad</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con su política de privacidad real antes de publicar la web.</p></div>`);$('#termsBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Términos y condiciones</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con sus condiciones comerciales reales antes de publicar la web.</p></div>`);
 }
-/* ============================================================
-   5. CART DRAWER OPEN / CLOSE
-   ============================================================ */
-function openCart() {
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function updateBadge() {
-  const badge = document.getElementById('cartBadge');
-  const count = cart.count;
-  badge.textContent = count;
-  badge.classList.toggle('visible', count > 0);
-}
-function animateBadge() {
-  updateBadge();
-  const badge = document.getElementById('cartBadge');
-  badge.classList.remove('bounce');
-  void badge.offsetWidth; // reflow
-  badge.classList.add('bounce');
-}
-/* ============================================================
-   6. FOMO COUNTERS
-   ============================================================ */
-function initFomoCounters() {
-  document.querySelectorAll('.fomo-count').forEach(el => {
-    function update() {
-      el.textContent = Math.floor(Math.random() * 199) + 2;
-    }
-    update();
-    setInterval(update, 4000 + Math.random() * 1000);
-  });
-}
-/* ============================================================
-   7. COLOR SWATCH INTERACTION
-   ============================================================ */
-function selectColor(productId, colorName) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-  const colorData = product.colors.find(c => c.name === colorName);
-  if (!colorData || !colorData.inStock) return;
-  cardState[productId].selectedColor = colorName;
-  // Update swatch UI
-  const card = document.querySelector(`[data-product-id="${productId}"]`);
-  if (!card) return;
-  card.querySelectorAll('.color-swatch').forEach(sw => {
-    sw.classList.toggle('active', sw.dataset.color === colorName);
-  });
-  // Update color label
-  const activeLabel = card.querySelector('.color-active-name');
-  if (activeLabel) activeLabel.textContent = colorName;
-  // Fade front phone image (cross-fade simulation)
-  const frontImg = card.querySelector('.phone-img-front');
-  if (frontImg) {
-    frontImg.classList.add('fading');
-    setTimeout(() => {
-      frontImg.style.background = `linear-gradient(145deg, ${colorData.hex}33 0%, ${colorData.hex}88 100%)`;
-      frontImg.classList.remove('fading');
-    }, 300);
-  }
-  const backImg = card.querySelector('.phone-img-back');
-  if (backImg) {
-    backImg.style.background = `linear-gradient(145deg, ${colorData.hex}22 0%, ${colorData.hex}55 100%)`;
-  }
-  // Stock hint
-  const hint = card.querySelector('.stock-hint');
-  if (hint) hint.classList.remove('visible');
-}
-function hoverColor(productId, colorName) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-  const colorData = product.colors.find(c => c.name === colorName);
-  if (!colorData || colorData.inStock) {
-    const card = document.querySelector(`[data-product-id="${productId}"]`);
-    const hint = card?.querySelector('.stock-hint');
-    if (hint) hint.classList.remove('visible');
-    return;
-  }
-  const card = document.querySelector(`[data-product-id="${productId}"]`);
-  const hint = card?.querySelector('.stock-hint');
-  if (hint) hint.classList.add('visible');
-}
-function leaveColor(productId) {
-  const card = document.querySelector(`[data-product-id="${productId}"]`);
-  const hint = card?.querySelector('.stock-hint');
-  if (hint) hint.classList.remove('visible');
-}
-/* ============================================================
-   8. STORAGE SELECTOR
-   ============================================================ */
-function selectStorage(productId, storage) {
-  cardState[productId].selectedStorage = storage;
-  const card = document.querySelector(`[data-product-id="${productId}"]`);
-  if (!card) return;
-  card.querySelectorAll('.storage-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.storage === storage);
-  });
-  // Update price display
-  const product = PRODUCTS.find(p => p.id === productId);
-  const priceEl = card.querySelector('.price-value');
-  if (priceEl && product) {
-    priceEl.textContent = product.prices[storage].toLocaleString('es-AR');
-  }
-}
-/* ============================================================
-   9. ADD TO CART
-   ============================================================ */
-function addToCart(productId) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-  const state   = cardState[productId];
-  const color   = state.selectedColor;
-  const storage = state.selectedStorage;
-  cart.add(product, color, storage);
-  openCart();
-}
-/* ============================================================
-   10. WHATSAPP SINGLE PRODUCT
-   ============================================================ */
-function waProduct(productId) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-  const state   = cardState[productId];
-  const color   = state.selectedColor;
-  const storage = state.selectedStorage;
-  const price   = product.prices[storage];
-  const msg = encodeURIComponent(
-    `Hola LClipStore! Tengo una duda sobre el ${product.model} ${storage} – ${color} (USD ${price.toLocaleString('es-AR')}) que vi en la web.`
-  );
-  window.open(`https://wa.me/5491159305875?text=${msg}`, '_blank');
-}
-/* ============================================================
-   11. CHECKOUT HANDLERS
-   ============================================================ */
-function checkoutMercadoPago() {
-  if (cart.items.length === 0) { alert('Tu carrito está vacío.'); return; }
-  if (cart.items.length === 1) {
-    window.open(`https://mpago.la/${cart.items[0].mpLink}`, '_blank');
-  } else {
-    alert('Para pedidos con múltiples productos, te contactaremos por WhatsApp para coordinar el pago. ¡Redirigiendo!');
-    checkoutWhatsApp();
-  }
-}
-function checkoutWhatsApp() {
-  if (cart.items.length === 0) { alert('Tu carrito está vacío.'); return; }
-  const msg = cart.buildWhatsAppMessage();
-  window.open(`https://wa.me/5491159305875?text=${msg}`, '_blank');
-}
-/* ============================================================
-   12. SCROLL REVEAL
-   ============================================================ */
-function initScrollReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-/* ============================================================
-   13. RATING BAR ANIMATION
-   ============================================================ */
-function animateRatingBars() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('.rating-bar-fill').forEach(bar => {
-        const target = bar.dataset.width;
-        bar.style.width = target;
-      });
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.3 });
-  const block = document.querySelector('.rating-bars');
-  if (block) {
-    block.querySelectorAll('.rating-bar-fill').forEach(bar => { bar.style.width = '0%'; });
-    observer.observe(block);
-  }
-}
-/* ============================================================
-   14. FILTER BUTTONS
-   ============================================================ */
-function initFilterButtons() {
-  const btns = document.querySelectorAll('.filter-btn');
-  const grid = document.getElementById('productGrid');
-  if (!btns.length || !grid) return;
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      grid.querySelectorAll('.product-card').forEach(card => {
-        const model = card.dataset.model || '';
-        const show  = filter === 'all'
-          || (filter === '18' && model.includes('18'))
-          || (filter === '17' && model.includes('17'))
-          || (filter === '16' && (model.includes('16') || model.includes('15')));
-        card.style.transition  = 'opacity 0.4s, transform 0.4s';
-        card.style.opacity     = show ? '1' : '0';
-        card.style.transform   = show ? '' : 'scale(0.95)';
-        card.style.pointerEvents = show ? '' : 'none';
-      });
-    });
-  });
-}
-/* ============================================================
-   15. MOBILE MENU
-   ============================================================ */
-function initMobileMenu() {
-  const toggle = document.getElementById('mobileMenuToggle');
-  const menu   = document.getElementById('mobileMenu');
-  if (!toggle || !menu) return;
-  toggle.addEventListener('click', () => {
-    const isOpen = menu.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-}
-/* ============================================================
-   16. SMOOTH SCROLL NAV LINKS
-   ============================================================ */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const target = document.querySelector(link.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-}
-/* ============================================================
-   17. INIT
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initFomoCounters();
-  initScrollReveal();
-  animateRatingBars();
-  initFilterButtons();
-  initMobileMenu();
-  initSmoothScroll();
-  cart.render();
-  // Cart overlay click to close
-  document.getElementById('cartOverlay')?.addEventListener('click', closeCart);
-  // Keyboard ESC to close cart
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeCart();
-  });
-  console.log('%c🍎 LClipStore — Premium iPhone Experience', 'color:#6366F1;font-weight:900;font-size:14px');
-  console.log('%cDesigned with ❤️ for ultra-luxury digital commerce.', 'color:#D4AF37;font-size:12px');
-});
-// ======================================================
-// AGREGADO AL FINAL - INTEGRACIÓN AUTOMÁTICA TIENDANUBE LCLIPSTORE
-// ======================================================
+bind();
 
-// Base de Redirección Global a tu Tiendanube Oficial
-const URL_BASE_TIENDANUBE = "https://mitiendanube.com";
-
-// Lógica Global de Redirección Automatizada por Producto
-function comprarAhoraDirecto(slugProducto) {
-    // Arma la URL exacta combinando tu tienda con el identificador del modelo
-    // Ejemplo: https://mitiendanube.comiphone-17-q0jmq/
-    const urlFinal = `${URL_BASE_TIENDANUBE}${slugProducto}/`;
-    window.open(urlFinal, '_blank');
-}
-
-// Redirección global de todo el carrito de compras junto
-function pagarCarritoCompleto() {
-    // Envía al cliente de forma transparente al checkout directo de tu Tiendanube
-    window.open("https://mitiendanube.com", '_blank');
-}
-
-// Consulta Particular de Dudas por WhatsApp
-function consultarWhatsApp(modeloNombre) {
-    const mensaje = `Hola LClipStore! Tengo una duda sobre el ${modeloNombre} que vi en la web.`;
-    window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
-}
-
-// Controlador de Variantes de Almacenamiento y Precios Dinámicos (Moneda Dual)
-function updateVariant(productKey, selectElement) {
-    const selectedValue = selectElement.value;
-    let usdPrice = 0;
-    let slugProducto = productKey;
-
-    // Mapeo estricto de la lista de precios provista
-    if (productKey === '18promax') {
-        usdPrice = selectedValue === '256_burgundy' ? 1860 : 1830;
-        slugProducto = "iphone-18-pro-max";
-    } else if (productKey === '18pro') {
-        if (selectedValue === '256_glacier') usdPrice = 1590;
-        else if (selectedValue === '256_black') usdPrice = 1610;
-        else if (selectedValue === '256_burgundy') usdPrice = 1640;
-        else if (selectedValue === '512_glacier') usdPrice = 1830;
-        slugProducto = "iphone-18-pro";
-    } else if (productKey === '17promax') {
-        usdPrice = selectedValue === '512' ? 1600 : 1360;
-        slugProducto = "iphone-17-pro-max";
-    } else if (productKey === '17pro') {
-        usdPrice = selectedValue === '512' ? 1480 : 1260;
-        slugProducto = "iphone-17-pro";
-    } else if (productKey === '17') {
-        usdPrice = 1065;
-        slugProducto = "iphone-17-q0jmq"; // Tu link real de Tiendanube
-    }
-
-    const arsPrice = usdPrice * USD_TO_ARS;
-    
-    // Cambiar texto de moneda dual en la tarjeta correspondiente
-    const priceDisplay = document.getElementById(`price-display-${productKey}`);
-    if (priceDisplay) {
-        priceDisplay.innerText = `USD ${usdPrice.toLocaleString('en-US')} / ARS ${arsPrice.toLocaleString('es-AR')}`;
-    }
-    
-    const card = selectElement.closest('.product-card');
-    if (card) {
-        const name = card.querySelector('.product-name').innerText;
-        const capacityText = selectElement.options[selectElement.selectedIndex].text.split('—')[0];
-        
-        // Sincronizar botones de la tarjeta con la capacidad elegida dinámicamente
-        const cartBtn = card.querySelector('.btn-cart');
-        const checkoutBtn = card.querySelector('.btn-checkout');
-        
-        if (cartBtn) cartBtn.setAttribute('onclick', `addToCart('${name} ${capacityText.trim()}', ${usdPrice})`);
-        if (checkoutBtn) checkoutBtn.setAttribute('onclick', `comprarAhoraDirecto('${slugProducto}')`);
-    }
-}
-
-// Envío unificado del pedido estructurado por WhatsApp
-function enviarCarritoWhatsApp() {
-    if (typeof carrito === 'undefined' || carrito.length === 0) {
-        // Soporte por si tu estado global se llama "cart" en lugar de "carrito"
-        if (typeof cart !== 'undefined' && cart.length > 0) {
-            let itemsText = cart.map(i => `- ${i.name} (USD ${i.usd.toLocaleString('en-US')})`).join('%0A');
-            const message = `Hola LClipStore! Tengo una consulta sobre los siguientes productos que vi en la web:%0A%0A${itemsText}%0A%0AMe gustaría recibir más información. Gracias!`;
-            window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${message}`, '_blank');
-        }
-        return;
-    }
-    let mensaje = "Hola LClipStore! Quiero consultar disponibilidad de stock por este pedido:\n\n";
-    let totalUsd = 0;
-    carrito.forEach(item => {
-        mensaje += `• ${item.name} (Cant: ${item.quantity})\n`;
-        totalUsd += item.price * item.quantity;
-    });
-    mensaje += `\nTotal Estimado: USD ${totalUsd.toLocaleString('en-US')}`;
-    window.open(`https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`, '_blank');
-}
 
