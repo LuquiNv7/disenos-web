@@ -24,7 +24,7 @@ body{background:#fff;color:#171717}
 .category-card{height:300px}.category-card h3{font-size:48px}.category-iphone{background:linear-gradient(135deg,#fff1e7,#ffd0b2)}.category-samsung{background:linear-gradient(135deg,#f2efff,#d9d0ff)}
 .featured{background:#f6f6f7}.mini-card,.product-card{box-shadow:0 3px 15px rgba(0,0,0,.04)}
 .catalog-section{background:#fff;padding-top:58px}.catalog-title h2{font-size:42px}.filters{box-shadow:0 4px 18px rgba(0,0,0,.035)}
-.product-media{height:330px;background:linear-gradient(180deg,#fafafa,#f4f4f4)}.product-media img{height:305px;width:92%}.product-card h3{font-size:17px}.price{font-size:22px}
+.product-media{height:330px;background:linear-gradient(180deg,#fafafa,#f4f4f4);position:relative;overflow:hidden}.product-media img{height:305px;width:92%;position:relative;z-index:1;object-fit:contain}.product-media .badge,.product-media .favorite{z-index:4}.product-media .badge{pointer-events:none}.product-card h3{font-size:17px}.price{font-size:22px}
 .product-card:hover{box-shadow:0 22px 55px rgba(0,0,0,.11)}
 .shipping-section{background:#111214;color:#fff}.shipping-section h2{font-size:42px}.shipping-section p,.shipping-points{color:#b8b8bc}.shipping-box{background:#fff;color:#171717;box-shadow:0 25px 60px rgba(0,0,0,.22)}
 .reason-grid article{border:1px solid #e9e9e9;background:#fff;border-radius:20px;box-shadow:0 6px 24px rgba(0,0,0,.035)}
@@ -123,4 +123,3 @@ body{background:#fff;color:#171717}
 .photo-review video{width:100%;height:100%;object-fit:cover;background:#f4f4f4}
 @media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.featured-grid{grid-template-columns:1fr 1fr}.mini-card .mini-img{height:185px}.mini-card img{height:175px}}
-
