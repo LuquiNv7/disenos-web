@@ -28,7 +28,7 @@ const products = [
   {id:'ip16',brand:'iPhone',model:'iPhone 16',variants:[{storage:'128GB',color:'Ultramarine',hex:'#4b61a0',price:910,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-ultramarine-202409?wid=1600&hei=1600&fmt=png-alpha'}]},
   {id:'ip15',brand:'iPhone',model:'iPhone 15',variants:[{storage:'128GB',color:'Blue',hex:'#6d87b5',price:810,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=1600&hei=1600&fmt=png-alpha'}]},
   {id:'s26u',brand:'Samsung',model:'Galaxy S26 Ultra',new:true,offer:true,variants:[
-    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://de2kqc9pq55cj.cloudfront.net/_img_productos/samsung-s26-ultra-5g-12gb-256gb-violeta-foto1.jpg'},
+    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://www.staples.ca/cdn/shop/files/ae8a8ff37f98ebda235c04a9c91b3d1b68de7f3d_square3164810_1_1000x.jpg?v=1776190556'},
     {storage:'512GB',color:'Sky Blue',hex:'#b8d8e8',price:1185,old:1290,stock:true,img:'https://www.staples.ca/cdn/shop/files/ae8a8ff37f98ebda235c04a9c91b3d1b68de7f3d_square3164810_1_1000x.jpg?v=1776190556'},
     {storage:'512GB',color:'Black',hex:'#292b30',price:1185,old:1290,stock:true,img:'https://www.mascomintl.com/themes/images/mascom/Samsung%20Galaxy%20S26%20Black%20Mascom%20International.webp'},
     {storage:'512GB',color:'White',hex:'#f4f4f4',price:1185,old:1290,stock:true,img:'https://jum3a.com/cdn/shop/files/S26-Ultra-White_g_1024x.jpg?v=1772102502'}]},
@@ -52,26 +52,62 @@ const products = [
     {storage:'256GB',color:'Titanium Silverblue',hex:'#aab7ca',price:930,stock:true,img:'https://images-na.ssl-images-amazon.com/images/I/71yUVEekQWL.jpg'}]},
   {id:'s25',brand:'Samsung',model:'Galaxy S25',variants:[{storage:'256GB',color:'Mint',hex:'#b6cfbd',price:770,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-s931blbmltm/gallery/mx-galaxy-s25-sm-s931-541005-sm-s931blbmltm-thumb-547930823'}]},
   {id:'s25fe',brand:'Samsung',model:'Galaxy S25 FE',variants:[{storage:'256GB',color:'Black',hex:'#222',price:665,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-s731bzkmltm/gallery/mx-galaxy-s25-fe-sm-s731-sm-s731bzkmltm-thumb-549045817'}]},
-  {id:'a57',brand:'Samsung',model:'Galaxy A57 5G',variants:[{storage:'256GB',color:'Awesome Gray',hex:'#777',price:525,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a57-5g/03202026/A57_03-1_FT02-Design_MO.jpg'}]},
+  {id:'a57',brand:'Samsung',model:'Galaxy A57 5G',variants:[{storage:'256GB',color:'Awesome Gray',hex:'#777',price:525,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/br/sm-a566ezkazto/gallery/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-thumb-545718313'}]},
   {id:'a56',brand:'Samsung',model:'Galaxy A56 5G',variants:[{storage:'256GB',color:'Awesome Lime',hex:'#c4d76a',price:530,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/br/sm-a566ezkazto/gallery/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-thumb-545718313'}]},
-  {id:'a37',brand:'Samsung',model:'Galaxy A37 5G',variants:[{storage:'256GB',color:'Awesome Black',hex:'#222',price:475,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a37-5g/03242026/A37_FT02_KV_Handriser_MO.jpg?%24ORIGIN_JPG%24='}]},
+  {id:'a37',brand:'Samsung',model:'Galaxy A37 5G',variants:[{storage:'256GB',color:'Awesome Black',hex:'#222',price:475,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a366ezsmltm/gallery/mx-galaxy-a36-5g-sm-a366-sm-a366ezsmltm-thumb-546060785'}]},
   {id:'a36',brand:'Samsung',model:'Galaxy A36 5G',variants:[
     {storage:'256GB',color:'Awesome Lavender',hex:'#c9c8df',price:435,stock:true,img:'https://castore.uz/upload/iblock/89f/q6akoicbgdjm8tm6lnjayaz1ebl7p5mz/smartfon-samsung-galaxy-a36-5g-sm-a366e-ds-128gb-awesome-lavender.png'},
     {storage:'256GB',color:'Awesome White',hex:'#f1f3f5',price:435,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a366ezsmltm/gallery/mx-galaxy-a36-5g-sm-a366-sm-a366ezsmltm-thumb-546060785'},
     {storage:'256GB',color:'Awesome Black',hex:'#292a2d',price:435,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a366ezsmltm/gallery/mx-galaxy-a36-5g-sm-a366-sm-a366ezsmltm-thumb-546060785'},
     {storage:'256GB',color:'Awesome Lime',hex:'#c7d86b',price:435,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a36-5g/03202026/A36_03-1_FT02-Design_MO.jpg'}]},
-  {id:'a27',brand:'Samsung',model:'Galaxy A27 5G',variants:[{storage:'256GB',color:'Awesome Blue',hex:'#45638f',price:445,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/us/smartphones/galaxy-a37-5g/03242026/A37_FT02_KV_Handriser_MO.jpg?%24ORIGIN_JPG%24='}]},
+  {id:'a27',brand:'Samsung',model:'Galaxy A27 5G',variants:[{storage:'256GB',color:'Awesome Blue',hex:'#45638f',price:445,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a366ezsmltm/gallery/mx-galaxy-a36-5g-sm-a366-sm-a366ezsmltm-thumb-546060785'}]},
   {id:'a17',brand:'Samsung',model:'Galaxy A17',variants:[{storage:'128GB',color:'Black',hex:'#222',price:280,stock:true,img:'https://assets.kmart.com.au/transform/86f0b3ac-987a-4385-a906-577db7be6796/43675838-1?io=transform:extend,width:1100,height:1100&quality=90'}]},
   {id:'a16',brand:'Samsung',model:'Galaxy A16',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a165mzkaltm/gallery/mx-galaxy-a16-sm-a165-sm-a165mzkaltm-544305569?$Q90_1248_936_F_PNG$'}]},
   {id:'a07',brand:'Samsung',model:'Galaxy A07',variants:[{storage:'128GB',color:'Black',hex:'#222',price:290,stock:true,img:'https://images.samsung.com/is/image/samsung/p6pim/mx/sm-a075mzkaltm/gallery/mx-galaxy-a07-sm-a075-569913-sm-a075mzkaltm-thumb-549785654'}]}
 ];
-const fallback={iPhone:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1200&hei=1200&fmt=png-alpha',Samsung:'https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true'};
+const fallback={iPhone:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1200&hei=1200&fmt=png-alpha',Samsung:'https://www.staples.ca/cdn/shop/files/ae8a8ff37f98ebda235c04a9c91b3d1b68de7f3d_square3164810_1_1000x.jpg?v=1776190556'};
 let cart=JSON.parse(localStorage.getItem('lclip-cart')||'[]');
 let state={search:'',brands:[],storages:[],max:1900,offers:false,sort:'relevance'};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const ars=n=>new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n*USD_TO_ARS);
 const usd=n=>'USD '+n.toLocaleString('en-US');
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+const ML_PUBLICATION_ITEMS={
+  s26u:'MLA3944762654',s26p:'MLA1895852781',zflip8:'MLA3995752664',zfold8:'MLA3718056016',
+  s25u:'MLA1880653513',a36:'MLA4004328896'
+};
+function normalizeText(v){return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+async function hydrateMercadoLibreImages(){
+  const jobs=Object.entries(ML_PUBLICATION_ITEMS).map(async([productId,itemId])=>{
+    try{
+      const res=await fetch(`https://api.mercadolibre.com/items/${itemId}`,{headers:{Accept:'application/json'}});
+      if(!res.ok) return;
+      const item=await res.json();
+      const pictures=Array.isArray(item.pictures)?item.pictures.filter(x=>x && (x.secure_url||x.url)):[];
+      if(!pictures.length) return;
+      const p=products.find(x=>x.id===productId); if(!p) return;
+      const variations=Array.isArray(item.variations)?item.variations:[];
+      p.variants.forEach((v,index)=>{
+        const wanted=normalizeText(v.color);
+        let variation=variations.find(x=>Array.isArray(x.attribute_combinations)&&x.attribute_combinations.some(a=>normalizeText(a.value_name)===wanted||normalizeText(a.value_name).includes(wanted)||wanted.includes(normalizeText(a.value_name))));
+        let pic=null;
+        if(variation && Array.isArray(variation.picture_ids)) pic=pictures.find(x=>variation.picture_ids.includes(x.id));
+        if(!pic) pic=pictures[index%pictures.length];
+        if(pic) v.img=pic.secure_url||pic.url;
+      });
+      const first=p.variants[0];
+      if(first && first.img){
+        document.querySelectorAll(`.product-card[data-id="${productId}"], .mini-card[data-id="${productId}"]`).forEach(card=>{
+          const img=card.querySelector('img'); if(img) img.src=first.img;
+        });
+      }
+    }catch(e){/* fallback local image remains */}
+  });
+  await Promise.allSettled(jobs);
+  renderFeatured();
+  renderProducts();
+  renderCart();
+}
 function imgFallback(img,brand){if(!img.dataset.failed){img.dataset.failed='1';img.src=fallback[brand]}}
 function firstAvailable(p){return p.variants.find(v=>v.stock)||p.variants[0]}
 function renderStorageFilters(){const ss=[...new Set(products.flatMap(p=>p.variants.map(v=>v.storage)))].sort((a,b)=>parseInt(a)-parseInt(b));$('#storageFilters').innerHTML=ss.map(s=>`<label class="check"><input type="checkbox" value="${s}" data-filter="storage"> ${s}</label>`).join('')}
@@ -90,7 +126,7 @@ function openModal(html){$('#modalContent').innerHTML=`<button class="modal-clos
 function quickView(id){const p=products.find(x=>x.id===id),v=firstAvailable(p);openModal(`<div class="quick-detail"><div class="visual"><img src="${v.img}" alt="${p.model}" onerror="imgFallback(this,'${p.brand}')"></div><div class="detail"><span class="product-brand">${p.brand}</span><h2>${p.model}</h2><p class="meta">${v.storage} · ${v.color}</p><div class="price">${usd(v.price)}</div><div class="ars">${ars(v.price)} aprox.</div><p style="font-size:12px;line-height:1.6;color:#777">Elegí tu variante y agregalo al carrito para coordinar la compra.</p><button class="primary-btn wide" data-add="${p.id}">Agregar al carrito</button></div></div>`)}
 function openCheckout(){const lines=cartLines();if(!lines.length){toast('Agregá al menos un producto');return}const total=lines.reduce((s,x)=>s+x.v.price*x.qty,0);openModal(`<div class="modal-inner"><span class="kicker">CHECKOUT</span><h2 style="font-size:30px;letter-spacing:-.05em;margin:8px 0 5px">Finalizá tu pedido</h2><p style="font-size:11px;color:#777;margin-bottom:20px">Completá tus datos y luego coordinamos el pago y la entrega.</p><form class="checkout-form" id="checkoutForm"><label>Nombre y apellido<input required name="name" autocomplete="name"></label><label>Celular<input required name="phone" inputmode="tel"></label><label>Email<input required type="email" name="email"></label><label>CUIT<input required name="cuit" inputmode="numeric"></label><label class="full">Dirección<input required name="address"></label><label>Número<input required name="number"></label><label>Entre calles<input name="between"></label><label>Provincia<select name="province"><option>CABA</option><option>Buenos Aires</option><option>Córdoba</option><option>Santa Fe</option><option>Mendoza</option><option>Otra</option></select></label><label>Código postal<input required name="postal"></label><div class="full" style="display:flex;justify-content:space-between;align-items:center;background:#f7f7f7;padding:14px;border-radius:12px"><span style="font-size:11px">Total del pedido</span><strong>${usd(total)} · ${ars(total)}</strong></div><button class="primary-btn wide full" type="submit">Enviar pedido por WhatsApp</button></form></div>`);$('#checkoutForm').onsubmit=e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));const text=`Hola LclipStore, quiero realizar un pedido. Nombre: ${data.name}. Celular: ${data.phone}. Email: ${data.email}. CUIT: ${data.cuit}. Dirección: ${data.address} ${data.number}, entre ${data.between||'-'}, ${data.province}, CP ${data.postal}. Total: ${usd(total)} (${ars(total)}).`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,'_blank');localStorage.removeItem('lclip-cart');cart=[];renderCart();$('#modal').classList.remove('open');closeCart();toast('Pedido preparado para WhatsApp ✓')}}
 function resetFilters(){state={search:'',brands:[],storages:[],max:1900,offers:false,sort:'relevance'};$('#searchInput').value='';$('#mobileSearchInput').value='';$$('[data-filter="brand"],[data-filter="storage"]').forEach(i=>i.checked=false);$('#priceRange').value=1900;$('#priceValue').textContent='USD 1.900';$('#offerOnly').checked=false;renderProducts()}
-function bind(){renderStorageFilters();renderFeatured();renderProducts();renderCart();$('#year').textContent=new Date().getFullYear();
+function bind(){renderStorageFilters();renderFeatured();renderProducts();renderCart();$('#year').textContent=new Date().getFullYear();hydrateMercadoLibreImages();
   $('#searchInput').oninput=e=>{state.search=e.target.value;$('#mobileSearchInput').value=e.target.value;renderProducts()};$('#mobileSearchInput').oninput=e=>{state.search=e.target.value;$('#searchInput').value=e.target.value;renderProducts()};$('#sortSelect').onchange=e=>{state.sort=e.target.value;renderProducts()};$('#priceRange').oninput=e=>{state.max=+e.target.value;$('#priceValue').textContent=usd(state.max);renderProducts()};$('#offerOnly').onchange=e=>{state.offers=e.target.checked;renderProducts()};$('#clearFilters').onclick=resetFilters;$('#emptyReset').onclick=resetFilters;
   document.addEventListener('change',e=>{if(e.target.matches('[data-filter="brand"]')){state.brands=$$('[data-filter="brand"]:checked').map(x=>x.value);renderProducts()}if(e.target.matches('[data-filter="storage"]')){state.storages=$$('[data-filter="storage"]:checked').map(x=>x.value);renderProducts()}});
   document.addEventListener('click',e=>{const add=e.target.closest('[data-add]');if(add){addToCart(add.dataset.add);return}const quick=e.target.closest('[data-quick]');if(quick){quickView(quick.dataset.quick);return}const rm=e.target.closest('[data-remove]');if(rm){cart=cart.filter(x=>x.key!==rm.dataset.remove);saveCart();return}const qty=e.target.closest('[data-qty]');if(qty){const [key,delta]=qty.dataset.qty.split('|');const line=cart.find(x=>x.key===key);if(line){line.qty+=+delta;if(line.qty<1)cart=cart.filter(x=>x!==line);saveCart()}return}const variant=e.target.closest('[data-variant]');if(variant){const [id,storage,color]=variant.dataset.variant.split('|');const p=products.find(x=>x.id===id);const v=selectedVariant(p,storage,color);const card=variant.closest('.product-card');card.querySelector('img').src=v.img;card.querySelector('.price').textContent=usd(v.price);card.querySelector('.ars').textContent=ars(v.price)+' aprox.';card.querySelector('.meta').textContent=`${v.storage} · ${v.color}`;card.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));variant.classList.add('active');card.querySelectorAll('.storage-btn').forEach(s=>s.classList.toggle('active',s.dataset.storage===`${id}|${storage}`));return}const st=e.target.closest('[data-storage]');if(st){const [id,storage]=st.dataset.storage.split('|');const p=products.find(x=>x.id===id);const v=firstAvailable({...p,variants:p.variants.filter(x=>x.storage===storage)});const card=st.closest('.product-card');card.querySelector('img').src=v.img;card.querySelector('.price').textContent=usd(v.price);card.querySelector('.ars').textContent=ars(v.price)+' aprox.';card.querySelector('.meta').textContent=`${v.storage} · ${v.color}`;card.querySelectorAll('.storage-btn').forEach(s=>s.classList.toggle('active',s===st));return}});
