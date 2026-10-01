@@ -1,147 +1,109 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="es-AR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LClipStore | Tienda Oficial iPhone</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LclipStore | iPhone y Samsung en Argentina</title>
+  <meta name="description" content="LclipStore: iPhone y Samsung. Catálogo, ofertas, envío a todo el país y atención personalizada por WhatsApp.">
+  <meta name="theme-color" content="#ff6b00">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LclipStore | iPhone y Samsung">
+  <meta property="og:description" content="Encontrá tu próximo iPhone o Samsung en LclipStore.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ff6b00'/%3E%3Cpath d='M18 14h9v27h18v9H18z' fill='white'/%3E%3Ccircle cx='48' cy='17' r='5' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://store.storeimages.cdn-apple.com">
+  <link rel="preconnect" href="https://images.samsung.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="topbar"><div class="container topbar-inner"><span>🔥 Ofertas seleccionadas por tiempo limitado</span><span class="topbar-link">Envíos a todo el país</span></div></div>
 
-    <!-- Barra de Anuncios Superior con Marquesina Infinita -->
-    <div class="top-bar">
-        <div class="marquee-content">
-            <span>🔥 ¡10% OFF PAGANDO EN TRANSFERENCIA! — 🚚 ENVIOS GRATIS A TODO EL PAÍS — 🛡️ GARANTÍA ESCRITA POR 1 AÑO — 💳 HASTA 12 CUOTAS DISPONIBLES — </span>
-            <span>🔥 ¡10% OFF PAGANDO EN TRANSFERENCIA! — 🚚 ENVIOS GRATIS A TODO EL PAÍS — 🛡️ GARANTÍA ESCRITA POR 1 AÑO — 💳 HASTA 12 CUOTAS DISPONIBLES — </span>
+  <header class="header" id="inicio">
+    <div class="container header-main">
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">☰</button>
+      <a class="brand" href="#inicio" aria-label="LclipStore inicio"><span class="brand-mark">L</span><span>Lclip<span>Store</span></span></a>
+      <nav class="main-nav" id="mainNav">
+        <a href="#inicio">Inicio</a><a href="#iphone">iPhone</a><a href="#samsung">Samsung</a><a href="#ofertas">Ofertas</a><a href="#envios">Envíos</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-wrap"><input id="searchInput" type="search" placeholder="Buscar iPhone, Samsung..." aria-label="Buscar productos"><span>⌕</span></div>
+        <div class="account-wrap">
+          <button class="account-btn" id="accountBtn"><span class="account-icon">♙</span><span><small>Hola,</small><strong>iniciá sesión</strong></span></button>
+          <div class="account-menu" id="accountMenu">
+            <strong>Ingresá a LclipStore</strong><p>Guardá tus datos y consultá tus compras.</p>
+            <button class="primary-btn small" id="openLogin">Iniciar sesión</button>
+            <button class="secondary-btn small" id="openRegister">Crear cuenta</button>
+          </div>
         </div>
+        <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">🛒<b id="cartCount">0</b></button>
+      </div>
     </div>
+    <div class="container mobile-search"><div class="search-wrap"><input id="mobileSearchInput" type="search" placeholder="¿Qué celular estás buscando?" aria-label="Buscar productos"><span>⌕</span></div></div>
+  </header>
 
-    <!-- Navbar de Cristal iOS -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">LClipStore</a>
-            <div class="nav-actions">
-                <button class="cart-toggle" onclick="toggleCart()">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                    <span id="cart-count">0</span>
-                </button>
-            </div>
+  <main>
+    <section class="hero">
+      <div class="hero-orb orb-1"></div><div class="hero-orb orb-2"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">NUEVO · IPHONE 18 PRO MAX</div>
+          <h1>Tu próximo<br><span>iPhone está acá.</span></h1>
+          <p>Elegí modelo, color y almacenamiento. Comprá online y coordiná tu entrega con atención personalizada.</p>
+          <div class="hero-actions"><a class="primary-btn hero-btn" href="#iphone">Ver iPhone</a><a class="ghost-btn" href="#ofertas">Ver ofertas →</a></div>
+          <div class="hero-notes"><span>✓ Stock sujeto a confirmación</span><span>✓ Atención por WhatsApp</span></div>
         </div>
-    </nav>
-
-    <!-- Hero Section Inmersivo Metálico -->
-    <header class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">Lanzamiento Oficial</span>
-            <h1 class="hero-title">iPhones que definen tu estatus.</h1>
-            <p class="hero-subtitle">Diseñados en titanio. Equipos nuevos y sellados con el estándar premium definitivo.</p>
-            <div class="hero-cta">
-                <a href="#catalogo" class="btn btn-primary">Explorar Modelos</a>
-            </div>
+        <div class="hero-product">
+          <div class="hero-badge"><strong>Desde</strong><b>USD 1.830</b><small>iPhone 18 Pro Max</small></div>
+          <img id="heroImage" src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-burgundy-202609?wid=1200&hei=1200&fmt=png-alpha" alt="iPhone 18 Pro Max Burgundy" onerror="this.src='https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-cosmicorange-202509?wid=1200&hei=1200&fmt=png-alpha'">
         </div>
-    </header>
+      </div>
+      <div class="hero-dots"><span class="active"></span><span></span><span></span></div>
+    </section>
 
-    <!-- Catálogo Asimétrico de Modelos iPhone -->
-    <main id="catalogo" class="catalog-section">
-        <h2 class="section-main-title">Elegí tu próximo iPhone</h2>
-        <div class="products-grid">
-            
-            <!-- Producto 1: iPhone 18 Pro Max -->
-            <div class="product-card highlight" data-product="iphone-18-pro-max">
-                <div class="image-container">
-                    <img id="img-18promax" src="https://mitiendanube.com" alt="iPhone 18 Pro Max" class="product-img">
-                </div>
-                <div class="product-info">
-                    <div class="card-header-flex">
-                        <h3 class="product-name">iPhone 18 Pro Max</h3>
-                        <span class="tag-premium">MÁS BUSCADO</span>
-                    </div>
-                    
-                    <div class="fomo-price-box">
-                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
-                        <div class="price-container">
-                            <span class="price-old">USD 2.400 / ARS 3.120.000</span>
-                            <span class="price-current" id="price-display-18promax">USD 1.830 / ARS 2.379.000</span>
-                        </div>
-                        <div class="fomo-eye">👁️ <span class="contador-visitas">124</span> personas están interesadas en este modelo ahora</div>
-                    </div>
+    <section class="trust-strip"><div class="container trust-grid">
+      <div><b>🚚 Envíos</b><span>Coordinación a todo el país</span></div><div><b>💬 Atención</b><span>WhatsApp personalizado</span></div><div><b>🔒 Compra</b><span>Checkout simple y claro</span></div><div><b>📦 Stock</b><span>Confirmación antes de despachar</span></div>
+    </div></section>
 
-                    <div class="color-picker">
-                        <button class="color-dot active" style="background-color: #4a282d;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'burgundy')" title="Burgundy"></button>
-                        <button class="color-dot" style="background-color: #1c1c1e;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'black')" title="Black"></button>
-                        <button class="color-dot" style="background-color: #e3e4e5;" onclick="changeColor('18promax', 'https://mitiendanube.com', this, 'silver')" title="Silver / Glacier"></button>
-                    </div>
+    <section class="section categories"><div class="container"><div class="section-head"><div><span class="kicker">ELEGÍ TU EQUIPO</span><h2>Encontrá el que buscás</h2></div></div><div class="category-grid">
+      <a class="category-card category-iphone" href="#iphone"><div><small>APPLE</small><h3>iPhone</h3><span>Ver catálogo →</span></div><img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-cosmicorange-202509?wid=800&hei=800&fmt=png-alpha" alt="iPhone" onerror="this.style.display='none'"></a>
+      <a class="category-card category-samsung" href="#samsung"><div><small>SAMSUNG</small><h3>Galaxy</h3><span>Ver catálogo →</span></div><img src="https://images.samsung.com/be/smartphones/galaxy-s26-ultra/images/galaxy-s26-ultra-features-kv.jpg?imbypass=true" alt="Samsung Galaxy" onerror="this.style.display='none'"></a>
+    </div></div></section>
 
-                    <div class="capacity-container">
-                        <select class="spec-select" onchange="updateVariant('18promax', this)">
-                            <option value="256_standard">256 GB (Black/Silver/Glacier) — USD 1.830</option>
-                            <option value="256_burgundy">256 GB (Burgundy Exclusive) — USD 1.860</option>
-                        </select>
-                    </div>
+    <section class="section featured" id="ofertas"><div class="container"><div class="section-head"><div><span class="kicker orange">SELECCIÓN LCLIPSTORE</span><h2>Oportunidades destacadas</h2><p>Los productos que primero conviene mirar.</p></div><a class="view-all" href="#catalogo">Ver todo →</a></div><div class="featured-grid" id="featuredGrid"></div></div></section>
 
-                    <div class="dual-buttons">
-                        <button onclick="comprarAhoraDirecto('iphone-18-pro-max')" class="btn btn-checkout">Comprar Ahora</button>
-                        <button class="btn btn-cart" id="btn-cart-18promax" onclick="addToCart('iPhone 18 Pro Max 256GB', 1830)">Agregar al Carrito</button>
-                    </div>
-                    <button onclick="consultarWhatsApp('iPhone 18 Pro Max')" class="wpp-ask-link">Consultar dudas por WhatsApp</button>
-                </div>
-            </div>
+    <section class="catalog-section" id="catalogo"><div class="container">
+      <div class="catalog-title"><div><span class="kicker">CATÁLOGO</span><h2>Celulares</h2><p id="resultCount">Mostrando productos</p></div><div class="catalog-controls"><button class="filter-toggle" id="filterToggle">☰ Filtros</button><select id="sortSelect" aria-label="Ordenar productos"><option value="relevance">Ordenar: recomendados</option><option value="low">Precio menor</option><option value="high">Precio mayor</option><option value="new">Más nuevos</option></select></div></div>
+      <div class="catalog-layout">
+        <aside class="filters" id="filters"><div class="filter-head"><strong>Filtros</strong><button id="closeFilters">×</button></div>
+          <label class="filter-label">Marca</label><label class="check"><input type="checkbox" value="iPhone" data-filter="brand"> iPhone</label><label class="check"><input type="checkbox" value="Samsung" data-filter="brand"> Samsung</label>
+          <label class="filter-label">Almacenamiento</label><div id="storageFilters"></div>
+          <label class="filter-label">Precio máximo</label><input id="priceRange" type="range" min="200" max="1900" step="10" value="1900"><div class="range-row"><span>USD 200</span><b id="priceValue">USD 1.900</b></div>
+          <label class="check offer-check"><input type="checkbox" id="offerOnly"> Solo ofertas</label><button class="clear-btn" id="clearFilters">Limpiar filtros</button>
+        </aside>
+        <div class="products-area"><div class="mobile-filter-backdrop" id="filterBackdrop"></div><div class="product-grid" id="productGrid"></div><div class="empty-state" id="emptyState" hidden>No encontramos productos con esos filtros.<button class="secondary-btn small" id="emptyReset">Ver todo</button></div></div>
+      </div>
+    </div></section>
 
-            <!-- Producto 2: iPhone 18 Pro -->
-            <div class="product-card" data-product="iphone-18-pro">
-                <div class="image-container">
-                    <img id="img-18pro" src="https://mitiendanube.com" alt="iPhone 18 Pro" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">iPhone 18 Pro</h3>
-                    
-                    <div class="fomo-price-box">
-                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
-                        <div class="price-container">
-                            <span class="price-old">USD 2.100 / ARS 2.730.000</span>
-                            <span class="price-current" id="price-display-18pro">USD 1.590 / ARS 2.067.000</span>
-                        </div>
-                        <div class="fomo-eye">👁️ <span class="contador-visitas">94</span> personas están interesadas en este modelo ahora</div>
-                    </div>
+    <section class="shipping-section" id="envios"><div class="container shipping-grid"><div><span class="kicker">ANTES DE COMPRAR</span><h2>Calculá tu entrega</h2><p>Elegí tu provincia o ingresá tu código postal para ver una estimación.</p><div class="shipping-points"><span>✓ CABA / GBA: opción de entrega en el día</span><span>✓ Interior: plazo estimado según zona</span></div></div><div class="shipping-box"><label>Provincia</label><select id="province"><option value="">Seleccioná una provincia</option><option>CABA</option><option>Buenos Aires</option><option>Córdoba</option><option>Santa Fe</option><option>Mendoza</option><option>Tucumán</option><option>Entre Ríos</option><option>Salta</option><option>Neuquén</option><option>Río Negro</option><option>Chubut</option><option>Otra</option></select><label>Código postal</label><input id="postal" inputmode="numeric" placeholder="Ej. 1704"><button class="primary-btn" id="calcShipping">Calcular envío</button><div class="shipping-result" id="shippingResult">Ingresá una provincia o CP para consultar.</div></div></div></section>
 
-                    <div class="color-picker">
-                        <button class="color-dot active" style="background-color: #e3e4e5;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'glacier')" title="Glacier / Silver"></button>
-                        <button class="color-dot" style="background-color: #1c1c1e;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'black')" title="Black"></button>
-                        <button class="color-dot" style="background-color: #4a282d;" onclick="changeColor('18pro', 'https://mitiendanube.com', this, 'burgundy')" title="Burgundy"></button>
-                    </div>
+    <section class="section reasons"><div class="container"><div class="section-head centered"><div><span class="kicker">UNA COMPRA MÁS SIMPLE</span><h2>Todo lo importante, a la vista</h2></div></div><div class="reason-grid"><article><span>01</span><h3>Fotos del producto</h3><p>Mostramos el equipo grande y limpio para que puedas reconocerlo antes de elegir.</p></article><article><span>02</span><h3>Precio transparente</h3><p>Ves USD y la conversión referencial a ARS en la misma pantalla.</p></article><article><span>03</span><h3>Consulta rápida</h3><p>Si tenés una duda de stock, color o entrega, hablás con la tienda por WhatsApp.</p></article></div></div></section>
 
-                    <div class="capacity-container">
-                        <select class="spec-select" onchange="updateVariant('18pro', this)">
-                            <option value="256_glacier">256 GB (Glacier / Silver) — USD 1.590</option>
-                            <option value="256_black">256 GB (Black) — USD 1.610</option>
-                            <option value="256_burgundy">256 GB (Burgundy) — USD 1.640</option>
-                            <option value="512_glacier">512 GB (Glacier) — USD 1.830</option>
-                        </select>
-                    </div>
+    <section class="faq-section" id="faq"><div class="container"><div class="section-head centered"><div><span class="kicker">AYUDA</span><h2>Preguntas frecuentes</h2></div></div><div class="faq-grid"><details><summary>¿Los precios están en dólares?</summary><p>Sí. También mostramos una conversión referencial a ARS utilizando la tasa configurada en el sitio.</p></details><details><summary>¿El stock está actualizado?</summary><p>El catálogo muestra la disponibilidad cargada en la tienda. Antes de confirmar el pedido se recomienda verificar stock y variante.</p></details><details><summary>¿Hacen envíos?</summary><p>La web permite consultar una estimación por provincia o código postal. El costo final se confirma con la tienda.</p></details><details><summary>¿Puedo consultar por WhatsApp?</summary><p>Sí. El botón flotante abre el canal de atención configurado por LclipStore.</p></details></div></div></section>
+  </main>
 
-                    <div class="dual-buttons">
-                        <button onclick="comprarAhoraDirecto('iphone-18-pro')" class="btn btn-checkout">Comprar Ahora</button>
-                        <button class="btn btn-cart" id="btn-cart-18pro" onclick="addToCart('iPhone 18 Pro 256GB', 1590)">Agregar al Carrito</button>
-                    </div>
-                    <button onclick="consultarWhatsApp('iPhone 18 Pro')" class="wpp-ask-link">Consultar dudas por WhatsApp</button>
-                </div>
-            </div>
+  <footer class="footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#inicio"><span class="brand-mark">L</span><span>Lclip<span>Store</span></span></a><p>Smartphones, atención personalizada y una experiencia de compra simple.</p></div><div><h4>Comprar</h4><a href="#iphone">iPhone</a><a href="#samsung">Samsung</a><a href="#ofertas">Ofertas</a></div><div><h4>Ayuda</h4><a href="#envios">Envíos</a><a href="#faq">Preguntas frecuentes</a><button id="regretBtn">Botón de arrepentimiento</button></div><div><h4>Legal</h4><button id="privacyBtn">Privacidad</button><button id="termsBtn">Términos y condiciones</button><span class="footer-note">© <span id="year"></span> LclipStore</span></div></div></footer>
 
-            <!-- Producto 3: iPhone 17 Pro Max -->
-            <div class="product-card" data-product="iphone-17-pro-max">
-                <div class="image-container">
-                    <img id="img-17promax" src="https://mitiendanube.com" alt="iPhone 17 Pro Max" class="product-img">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-name">iPhone 17 Pro Max</h3>
-                    
-                    <div class="fomo-price-box">
-                        <div class="countdown-box">⚠️ Oferta termina en: <span class="countdown-timer">59:54</span></div>
-                        <div class="price-container">
-                            <span class="price-old">USD 1.800 / ARS 2.340.000</span>
-                            <span class="price-current" id="price-display-17promax">USD 1.360 / ARS 1.768.000</span>
-                        </div>
-                        <div class="fomo-eye">👁️ <span class="contador-visitas">110</span> personas están interesadas en este modelo ahora</div>
-                    </div>
+  <button class="whatsapp" id="whatsappBtn" aria-label="Abrir WhatsApp">◉<span>¿Necesitás ayuda?</span></button>
 
-                    <div class="color-picker">
+  <div class="drawer-backdrop" id="drawerBackdrop"></div><aside class="cart-drawer" id="cartDrawer" aria-label="Carrito"><div class="drawer-head"><div><small>TU PEDIDO</small><h3>Carrito</h3></div><button id="closeCart">×</button></div><div class="cart-items" id="cartItems"></div><div class="cart-bottom"><div class="cart-totals"><span>Total</span><strong id="cartTotalUsd">USD 0</strong><small id="cartTotalArs">ARS $0</small></div><button class="primary-btn wide" id="checkoutBtn">Continuar al checkout</button><p>El stock se confirma antes de despachar.</p></div></aside>
+
+  <div class="modal" id="modal"><div class="modal-card" id="modalContent"></div></div>
+  <div class="toast" id="toast"></div>
+  <div class="cookie" id="cookie"><div><strong>Usamos cookies básicas</strong><p>Las utilizamos para recordar preferencias y el carrito.</p></div><div><button class="secondary-btn small" id="rejectCookies">Rechazar</button><button class="primary-btn small" id="acceptCookies">Aceptar</button></div></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
