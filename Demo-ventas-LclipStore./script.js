@@ -1,5 +1,5 @@
 const USD_TO_ARS = 1590;
-const WHATSAPP_NUMBER = "5491100000000"; // Reemplazar por el número real de LclipStore.
+const WHATSAPP_NUMBER = "5491159305875";
 const products = [
   {id:'ip18pm',brand:'iPhone',model:'iPhone 18 Pro Max',new:true,offer:true,variants:[
     {storage:'256GB',color:'Burgundy',hex:'#6e2631',price:1860,old:1999,stock:true,img:'https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-burgundy-202609?wid=1600&hei=1600&fmt=png-alpha'},
@@ -82,5 +82,3 @@ function bind(){renderStorageFilters();renderFeatured();renderProducts();renderC
   $('#privacyBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Privacidad</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con su política de privacidad real antes de publicar la web.</p></div>`);$('#termsBtn').onclick=()=>openModal(`<div class="modal-inner"><h2>Términos y condiciones</h2><p style="font-size:12px;color:#777;line-height:1.7">LclipStore debe completar este texto con sus condiciones comerciales reales antes de publicar la web.</p></div>`);
 }
 bind();
-
-
