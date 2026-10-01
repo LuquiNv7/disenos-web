@@ -28,7 +28,7 @@ const products = [
   {id:'ip16',brand:'iPhone',model:'iPhone 16',variants:[{storage:'128GB',color:'Ultramarine',hex:'#4b61a0',price:910,stock:true,img:'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-ultramarine-202409?wid=1600&hei=1600&fmt=png-alpha'}]},
   {id:'ip15',brand:'iPhone',model:'iPhone 15',variants:[{storage:'128GB',color:'Blue',hex:'#6d87b5',price:810,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_901991-MLA96144091409_102025-F.webp'}]},
   {id:'s26u',brand:'Samsung',model:'Galaxy S26 Ultra',new:true,offer:true,variants:[
-    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://http2.mlstatic.com/D_NQ_NP_2X_625717-CBT117428403071_092026-F.webp'},
+    {storage:'512GB',color:'Cobalt Violet',hex:'#77708f',price:1185,old:1290,stock:true,img:'https://www.jbhifi.com.au/cdn/shop/files/884055-Product-0-I-639058362004024699.jpg?v=1770239465'},
     {storage:'512GB',color:'Sky Blue',hex:'#b8d8e8',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_Sky-Blue_163x346.jpg?$LazyLoad_Home_JPG$='},
     {storage:'512GB',color:'Black',hex:'#292b30',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_Black_163x346.jpg?$LazyLoad_Home_JPG$='},
     {storage:'512GB',color:'White',hex:'#f4f4f4',price:1185,old:1290,stock:true,img:'https://images.samsung.com/is/image/samsung/assets/ar/s2602/specs/Galaxy-S26-Ultra_White_163x346.jpg?$LazyLoad_Home_JPG$='}]},
