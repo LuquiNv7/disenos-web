@@ -135,4 +135,21 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 }
 
 
+/* LclipStore - ajustes solicitados: banner Galaxy integrado */
+.category-samsung img{mix-blend-mode:multiply;background:transparent;}
+
+/* Ficha técnica / descripción tipo marketplace */
+.product-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 22px;}
+.product-spec{border:1px solid #ececec;border-radius:12px;padding:11px 12px;background:#fafafa;}
+.product-spec small{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#999;font-weight:800;margin-bottom:4px;}
+.product-spec strong{display:block;font-size:11px;line-height:1.35;color:#222;}
+.product-description{font-size:12px;line-height:1.65;color:#555;margin:14px 0 18px;}
+.product-detail-kicker{font-size:9px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--orange);}
+.product-detail-title{font-size:30px;line-height:1.05;letter-spacing:-.05em;margin:5px 0;}
+.product-detail-divider{height:1px;background:#eee;margin:18px 0;}
+.product-spec-title{font-size:14px;margin:0 0 10px;}
+@media(max-width:760px){.product-specs{grid-template-columns:1fr;}.product-detail-title{font-size:25px;}}
+
+
+
 
