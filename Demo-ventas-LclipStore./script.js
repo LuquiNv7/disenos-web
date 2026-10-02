@@ -142,3 +142,4 @@ function bind(){renderStorageFilters();renderFeatured();renderProducts();renderC
 bind();
 
 
+
