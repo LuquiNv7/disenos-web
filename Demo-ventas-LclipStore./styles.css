@@ -134,3 +134,23 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
   .main-nav a{display:block;width:100%;padding:12px 4px;color:#fff}
 }
 
+/* LclipStore - categoría Samsung igual a iPhone */
+.category-samsung img{
+  right:-12px !important;
+  bottom:-42px !important;
+  width:55% !important;
+  height:120% !important;
+  object-fit:contain !important;
+  object-position:center !important;
+  mix-blend-mode:multiply !important;
+  filter:drop-shadow(0 22px 20px #0002) !important;
+}
+@media(max-width:760px){
+  .category-samsung img{
+    width:58% !important;
+    right:-14px !important;
+    bottom:-35px !important;
+  }
+}
+
+
