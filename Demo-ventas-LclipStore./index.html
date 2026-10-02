@@ -7,6 +7,23 @@
   <meta name="description" content="LclipStore: iPhone y Samsung. Catálogo, ofertas, envío a todo el país y atención personalizada por WhatsApp.">
   <meta name="theme-color" content="#ff6b00">
   <meta name="color-scheme" content="light">
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1922539451807293');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1922539451807293&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="LclipStore | iPhone y Samsung">
   <meta property="og:description" content="Encontrá tu próximo iPhone o Samsung en LclipStore.">
@@ -52,16 +69,6 @@ body{background:#fff;color:#171717}
 @keyframes waPulse{0%,100%{box-shadow:0 14px 35px rgba(37,211,102,.34),0 0 0 0 rgba(37,211,102,.35)}55%{box-shadow:0 14px 35px rgba(37,211,102,.34),0 0 0 11px rgba(37,211,102,0)}}
 .footer{background:#0b0b0d}
 @media(max-width:760px){.header-main{min-height:60px}.hero{min-height:640px}.hero-grid{min-height:640px}.hero-copy{padding-top:42px}.hero h1{font-size:48px}.hero-product img{max-height:330px}.product-media{height:235px}.product-media img{height:220px}.whatsapp{right:16px;bottom:16px}}
- .featured-grid{grid-template-columns:repeat(3,1fr);gap:18px}.mini-card{padding:16px;border-radius:22px}.mini-card .mini-img{height:245px}.mini-card img{height:230px;width:94%}.mini-card h3{font-size:16px}.mini-price{font-size:22px}.photo-review video{width:100%;height:100%;object-fit:cover;background:#f4f4f4}@media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.featured-grid{grid-template-columns:1fr 1fr}.mini-card .mini-img{height:185px}.mini-card img{height:175px}}
-/* ===== FIX MOBILE NAV / HORIZONTAL OVERFLOW ===== */
-html,body{width:100%;max-width:100%;overflow-x:hidden}
-@media(max-width:760px){
-.header{position:sticky;position:-webkit-sticky;top:0;overflow:visible}
-.header-main{position:relative;width:100%;max-width:100%;overflow:visible}
-.main-nav{display:none;position:absolute;left:0;right:0;top:100%;width:100%;max-width:100%;margin:0;padding:12px 16px;box-sizing:border-box;flex-direction:column;gap:0;background:#ff6b00;border-top:1px solid #e85c00;box-shadow:0 12px 25px rgba(0,0,0,.16);z-index:61}
-.main-nav.open{display:flex}
-.main-nav a{display:block;width:100%;padding:12px 4px;color:#fff}
-}
 </style>
 </head>
 <body>
@@ -122,79 +129,69 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 
     <section class="reviews-section" id="resenas">
       <div class="container">
-        <div class="review-page">
-          <div class="review-page-head">
-            <div>
-              <span class="ml-kicker">OPINIONES DEL PRODUCTO</span>
-              <h2>Opiniones de compradores</h2>
+        <div class="ml-review-shell">
+          <div class="ml-review-top">
+            <div class="ml-branding">
+              <div class="ml-logo-mark" aria-hidden="true"><span></span><span></span></div>
+              <div><strong>mercado libre</strong><small>Reputación del vendedor</small></div>
             </div>
-            <div class="review-brand"><span class="review-brand-mark"><i></i><i></i></span><strong>mercado libre</strong><small>referencia visual</small></div>
+            <span class="ml-context">Perfil del vendedor · LclipStore</span>
           </div>
 
-          <div class="review-overview">
-            <div class="review-rating">
-              <strong>4.8</strong>
-              <div class="big-stars">★★★★★</div>
-              <small>81 calificaciones <b>·</b> promedio de muestra</small>
-              <div class="rating-bars">
-                <div><span>5</span><i><b style="width:92%"></b></i><em>★</em></div>
-                <div><span>4</span><i><b style="width:5%"></b></i><em>★</em></div>
-                <div><span>3</span><i><b style="width:2%"></b></i><em>★</em></div>
-                <div><span>2</span><i><b style="width:1%"></b></i><em>★</em></div>
-                <div><span>1</span><i><b style="width:.5%"></b></i><em>★</em></div>
-              </div>
+          <div class="ml-review-main">
+            <div class="ml-score-panel">
+              <span class="ml-kicker">REPUTACIÓN</span>
+              <div class="ml-score">4.8</div>
+              <div class="ml-stars" aria-label="Valoración 4.8 sobre 5">★★★★★</div>
+              <p>Excelente valoración de compradores</p>
             </div>
 
-            <div class="photo-reviews">
-              <div class="photo-reviews-head"><strong>Opiniones con fotos</strong><button type="button" aria-label="Ver más opiniones">›</button></div>
-              <div class="photo-strip">
-                <article class="photo-review"><video src="https://video-static-clips.mms.mlstatic.com/62c82f1f923a3f082b72612d/019f210fc3a172acbba88dc5a44fb116/preview/preview_019f210fdc607c638feeeda9232be831_019f210fc4867aa6bc49858a40e2bdaa.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Video de producto"></video><span>5 ★</span></article>
-                <article class="photo-review"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_799355-MLA80735206469_112024-O.webp" alt="Foto de producto compartida por comprador"><span>4 ★</span></article>
-                <article class="photo-review"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_773779-MLA85467363743_052025-O.webp" alt="Foto de producto compartida por comprador"><span>5 ★</span></article>
-                <article class="photo-review"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_799355-MLA80735206469_112024-O.webp" alt="Foto de producto compartida por comprador"><span>5 ★</span></article>
-              </div>
+            <div class="ml-distribution">
+              <div class="ml-green-title"><span class="ml-green-dot"></span><strong>Reputación verde</strong><span>Vendedor Platinum</span></div>
+              <div class="ml-bar-row"><b>5 ★</b><i><span style="width:94%"></span></i><em>94%</em></div>
+              <div class="ml-bar-row"><b>4 ★</b><i><span style="width:4%"></span></i><em>4%</em></div>
+              <div class="ml-bar-row"><b>3 ★</b><i><span style="width:1%"></span></i><em>1%</em></div>
+              <div class="ml-bar-row"><b>2 ★</b><i><span style="width:.5%"></span></i><em>0.5%</em></div>
+              <div class="ml-bar-row"><b>1 ★</b><i><span style="width:.5%"></span></i><em>0.5%</em></div>
+            </div>
+
+            <div class="ml-reputation-box">
+              <div class="ml-meter"><span></span><span></span><span></span><span></span><span class="on"></span></div>
+              <strong>Excelente</strong>
+              <small>La barra verde representa la reputación mostrada por el vendedor.</small>
             </div>
           </div>
 
-          <div class="review-controls">
-            <button type="button">Ordenar <span>⌄</span></button>
-            <button type="button">Calificación <span>⌄</span></button>
+          <div class="ml-trust-row">
+            <div><span>✓</span><strong>Vendedor Platinum</strong><small>Distintivo del perfil</small></div>
+            <div><span>✓</span><strong>Reputación verde</strong><small>Señal de confianza</small></div>
+            <div><span>✓</span><strong>Compra acompañada</strong><small>Atención por WhatsApp</small></div>
           </div>
 
-          <div class="review-list-head">
-            <div><strong>45 opiniones</strong><span>Opiniones de ejemplo para la maqueta</span></div>
-            <button type="button">Más recientes <span>⌄</span></button>
+          <div class="ml-opinions-head">
+            <div><span class="ml-kicker">OPINIONES</span><h3>Lo que cuentan los compradores</h3><p>Una zona visual inspirada en las reseñas de Mercado Libre para reforzar la confianza antes de comprar.</p></div>
+            <div class="ml-review-summary"><strong>4.8</strong><span>★★★★★</span><small>valoración general</small></div>
           </div>
 
-          <div class="review-list">
-            <article class="realistic-review">
-              <div class="review-user"><strong>Walter R.</strong><span>hace 6 días</span></div>
-              <div class="review-stars-small">★★★★★</div>
-              <p>El equipo llegó bien embalado y coincide con la publicación. La atención por WhatsApp fue rápida y me confirmaron el stock antes de despacharlo.</p>
+          <div class="ml-review-cards">
+            <article class="ml-review-card">
+              <div class="review-card-head"><div class="avatar">MG</div><div><strong>María G.</strong><small>Compradora · reseña de muestra</small></div><span>★★★★★</span></div>
+              <p>“La atención fue muy clara y me ayudaron a elegir el modelo y el color. La compra fue simple y pude consultar todo por WhatsApp.”</p>
+              <div class="review-verified">✓ Opinión de muestra — reemplazar por reseña real</div>
             </article>
-            <article class="realistic-review">
-              <div class="review-user"><strong>Guadalupe M.</strong><span>hace 1 semana</span></div>
-              <div class="review-stars-small">★★★★★</div>
-              <p>Compré un iPhone 17 Pro de 256 GB. Me respondieron las dudas sobre el color y el almacenamiento sin vueltas. Hasta ahora, todo correcto.</p>
+            <article class="ml-review-card">
+              <div class="review-card-head"><div class="avatar">JP</div><div><strong>Juan P.</strong><small>Comprador · reseña de muestra</small></div><span>★★★★★</span></div>
+              <p>“Muy buena atención. Antes de comprar me confirmaron stock y me explicaron las opciones de entrega. Todo quedó claro.”</p>
+              <div class="review-verified">✓ Opinión de muestra — reemplazar por reseña real</div>
             </article>
-            <article class="realistic-review">
-              <div class="review-user"><strong>Roberto F.</strong><span>hace 2 semanas</span></div>
-              <div class="review-stars-small">★★★★<span>★</span></div>
-              <p>Lo recibí en el plazo que me habían indicado. El teléfono estaba muy bien presentado. Le bajaría una estrella porque la entrega se demoró unas horas.</p>
-            </article>
-            <article class="realistic-review">
-              <div class="review-user"><strong>Camila S.</strong><span>hace 3 semanas</span></div>
-              <div class="review-stars-small">★★★★★</div>
-              <p>Buena experiencia. Pregunté por el cargador original y lo agregaron al pedido. El precio en dólares y la conversión a pesos me resultaron fáciles de entender.</p>
-            </article>
-            <article class="realistic-review">
-              <div class="review-user"><strong>Diego P.</strong><span>hace 1 mes</span></div>
-              <div class="review-stars-small">★★★★<span>★</span></div>
-              <p>Todo bien con el equipo y la comunicación. La caja exterior llegó con una marca, pero adentro estaba todo en orden. Volvería a consultar por otro modelo.</p>
+            <article class="ml-review-card">
+              <div class="review-card-head"><div class="avatar">SC</div><div><strong>Sofía C.</strong><small>Compradora · reseña de muestra</small></div><span>★★★★★</span></div>
+              <p>“Consulté por un iPhone y me respondieron rápido. Me gustó poder ver el precio en dólares y la conversión a pesos.”</p>
+              <div class="review-verified">✓ Opinión de muestra — reemplazar por reseña real</div>
             </article>
           </div>
 
-          <div class="reviews-disclaimer">Diseño de referencia inspirado en una sección de opiniones de marketplace. Los nombres, cantidades y textos de esta demo son ejemplos y deben reemplazarse por reseñas reales antes de publicar.</div>
+          <div class="ml-review-footnote">Referencia visual de reputación y reseñas. Mercado Libre es una marca de terceros y esta página no implica afiliación. Los testimonios de arriba son textos de muestra hasta cargar opiniones reales del perfil.</div>
         </div>
       </div>
     </section>
@@ -219,7 +216,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
     <section class="faq-section" id="faq"><div class="container"><div class="section-head centered"><div><span class="kicker">AYUDA</span><h2>Preguntas frecuentes</h2></div></div><div class="faq-grid"><details><summary>¿Los precios están en dólares?</summary><p>Sí. También mostramos una conversión referencial a ARS utilizando la tasa configurada en el sitio.</p></details><details><summary>¿El stock está actualizado?</summary><p>El catálogo muestra la disponibilidad cargada en la tienda. Antes de confirmar el pedido se recomienda verificar stock y variante.</p></details><details><summary>¿Hacen envíos?</summary><p>La web permite consultar una estimación por provincia o código postal. El costo final se confirma con la tienda.</p></details><details><summary>¿Puedo consultar por WhatsApp?</summary><p>Sí. El botón flotante abre el canal de atención configurado por LclipStore.</p></details></div></div></section>
   </main>
 
-  <footer class="footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#inicio"><span class="brand-mark">L</span><span>Lclip<span>Store</span></span></a><p>Smartphones, atención personalizada y una experiencia de compra simple.</p></div><div><h4>Comprar</h4><a href="#iphone">iPhone</a><a href="#iphone">Samsung</a><a href="#ofertas">Ofertas</a></div><div><h4>Ayuda</h4><a href="#envios">Envíos</a><a href="#resenas">Reseñas</a><a href="#faq">Preguntas frecuentes</a><button id="regretBtn">Botón de arrepentimiento</button></div><div><h4>Legal</h4><button id="privacyBtn">Privacidad</button><button id="termsBtn">Términos y condiciones</button><span class="footer-note">Responsable del sitio: <strong>Tiago Medina</strong></span><a class="footer-note" href="https://wa.me/5491159305875" target="_blank" rel="noopener">WhatsApp: +54 9 11 5930-5875</a><span class="footer-note">© <span id="year"></span> LclipStore</span></div></div></footer>
+  <footer class="footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="#inicio"><span class="brand-mark">L</span><span>Lclip<span>Store</span></span></a><p>Smartphones, atención personalizada y una experiencia de compra simple.</p></div><div><h4>Comprar</h4><a href="#iphone">iPhone</a><a href="#iphone">Samsung</a><a href="#ofertas">Ofertas</a></div><div><h4>Ayuda</h4><a href="#envios">Envíos</a><a href="#resenas">Reseñas</a><a href="#faq">Preguntas frecuentes</a><button id="regretBtn">Botón de arrepentimiento</button></div><div><h4>Legal</h4><button id="privacyBtn">Privacidad</button><button id="termsBtn">Términos y condiciones</button><span class="footer-note">© <span id="year"></span> LclipStore</span></div></div></footer>
 
   <button class="whatsapp" id="whatsappBtn" aria-label="Abrir WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.7 11.7 0 0 0 12.2 0C5.7 0 .4 5.2.4 11.7c0 2 .5 4 1.5 5.7L.3 23.8l6.6-1.7c1.6.9 3.4 1.3 5.2 1.3h.1c6.5 0 11.7-5.2 11.7-11.7 0-3.1-1.2-6-3.4-8.2Zm-8.3 17.7h-.1c-1.6 0-3.2-.4-4.6-1.2l-.3-.2-3.9 1 1-3.8-.2-.3a9.7 9.7 0 0 1-1.5-5.1C2.6 6.4 6.9 2.1 12.2 2.1c2.6 0 5 1 6.9 2.9a9.7 9.7 0 0 1 2.8 6.9c0 5.3-4.3 9.3-9.7 9.3Zm5.3-7.2c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6-.1-.1-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.3 3.1c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.6.8.3 1.5.2 2.1.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.2-.6-.4Z"/></svg><span>WhatsApp</span></button>
 
@@ -232,6 +229,5 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
   <script src="./script.js?v=2"></script>
 </body>
 </html>
-
 
 
