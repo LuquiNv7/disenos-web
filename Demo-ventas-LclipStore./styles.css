@@ -136,7 +136,7 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}
 
 
 /* LclipStore - ajustes solicitados: banner Galaxy integrado */
-.category-samsung img{mix-blend-mode:multiply;background:transparent;}
+.category-samsung img{mix-blend-mode:multiply;background:transparent;filter:drop-shadow(0 22px 20px #0002);}
 
 /* Ficha técnica / descripción tipo marketplace */
 .product-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 22px;}
