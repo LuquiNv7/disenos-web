@@ -52,7 +52,17 @@ body{background:#fff;color:#171717}
 @keyframes waPulse{0%,100%{box-shadow:0 14px 35px rgba(37,211,102,.34),0 0 0 0 rgba(37,211,102,.35)}55%{box-shadow:0 14px 35px rgba(37,211,102,.34),0 0 0 11px rgba(37,211,102,0)}}
 .footer{background:#0b0b0d}
 @media(max-width:760px){.header-main{min-height:60px}.hero{min-height:640px}.hero-grid{min-height:640px}.hero-copy{padding-top:42px}.hero h1{font-size:48px}.hero-product img{max-height:330px}.product-media{height:235px}.product-media img{height:220px}.whatsapp{right:16px;bottom:16px}}
- .featured-grid{grid-template-columns:repeat(3,1fr);gap:18px}.mini-card{padding:16px;border-radius:22px}.mini-card .mini-img{height:245px}.mini-card img{height:230px;width:94%}.mini-card h3{font-size:16px}.mini-price{font-size:22px}.photo-review video{width:100%;height:100%;object-fit:cover;background:#f4f4f4}@media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.featured-grid{grid-template-columns:1fr 1fr}.mini-card .mini-img{height:185px}.mini-card img{height:175px}}</style>
+ .featured-grid{grid-template-columns:repeat(3,1fr);gap:18px}.mini-card{padding:16px;border-radius:22px}.mini-card .mini-img{height:245px}.mini-card img{height:230px;width:94%}.mini-card h3{font-size:16px}.mini-price{font-size:22px}.photo-review video{width:100%;height:100%;object-fit:cover;background:#f4f4f4}@media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.featured-grid{grid-template-columns:1fr 1fr}.mini-card .mini-img{height:185px}.mini-card img{height:175px}}
+/* ===== FIX MOBILE NAV / HORIZONTAL OVERFLOW ===== */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+@media(max-width:760px){
+.header{position:sticky;position:-webkit-sticky;top:0;overflow:visible}
+.header-main{position:relative;width:100%;max-width:100%;overflow:visible}
+.main-nav{display:none;position:absolute;left:0;right:0;top:100%;width:100%;max-width:100%;margin:0;padding:12px 16px;box-sizing:border-box;flex-direction:column;gap:0;background:#ff6b00;border-top:1px solid #e85c00;box-shadow:0 12px 25px rgba(0,0,0,.16);z-index:61}
+.main-nav.open{display:flex}
+.main-nav a{display:block;width:100%;padding:12px 4px;color:#fff}
+}
+</style>
 </head>
 <body>
   <div class="topbar"><div class="container topbar-inner"><span>🔥 Ofertas especiales · Stock limitado</span><span class="topbar-link">Envíos a todo el país · Atención por WhatsApp</span></div></div>
